@@ -1,0 +1,61 @@
+{
+  "contract": "operator-home.v1",
+  "description": "Operator profile, platform configuration, legal text, and business identity for a Gotta Know It operator site.",
+  "fields": {
+    "analytics_owner": "string",
+    "backup_location": "string",
+
+    "billing_contact_email": "string",
+    "billing_instructions": "string",
+    "business_address": "string",
+    "business_hours": "string",
+    "business_name": "string",
+    "business_phone": "string",
+
+    "default_deposit_percentage": "number",
+    "default_labor_rate": "number",
+    "deposit_policy_text": "string",
+
+    "dns_notes": "string",
+    "dns_provider": "string",
+
+    "edge_platform": "string",
+
+    "git_provider": "string",
+
+    "handoff_brand_assets": "boolean",
+    "handoff_email_accounts": "boolean",
+    "handoff_recovery_codes": "boolean",
+    "handoff_subscriptions": "boolean",
+    "handoff_tax_docs": "boolean",
+    "handoff_vendor_access": "boolean",
+
+    "hosting_account": "string",
+
+    "notification_email": "string",
+
+    "operator_bio": "string",
+    "operator_name": "string",
+
+    "payment_instructions": "string",
+    "payout_note": "string",
+    "privacy_policy_text": "string",
+
+    "primary_domain": "string",
+    "profile_slug": "string",
+    "profile_type": "string",
+
+    "registrar": "string",
+    "registrar_login_owner": "string",
+    "repo_admin_username": "string",
+    "repository_url": "string",
+
+    "secrets_confirmed": "boolean",
+    "support_email": "string",
+
+    "terms_of_service_text": "string",
+    "transfer_notes": "string",
+
+    "updated_at": "timestamp"
+  }
+}
