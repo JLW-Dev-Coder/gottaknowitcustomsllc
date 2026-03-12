@@ -1,0 +1,42 @@
+{
+  "contract": "build-request.v1",
+  "description": "Customer vehicle build request submitted from the public site build flow.",
+  "fields": {
+    "order_number": "string, worker-generated, immutable",
+    "created_at": "timestamp",
+
+    "customer": {
+      "name": "string",
+      "email": "string",
+      "phone": "string"
+    },
+
+    "vehicle": {
+      "make": "string",
+      "model": "string",
+      "year": "number"
+    },
+
+    "services": [
+      "audio",
+      "fabrication",
+      "lighting",
+      "wraps"
+    ],
+
+    "project_notes": "string",
+
+    "uploads": [
+      {
+        "file_name": "string",
+        "r2_key": "string"
+      }
+    ],
+
+    "status": "Received",
+
+    "operator_notes": "string",
+
+    "customer_visible_notes": "string"
+  }
+}

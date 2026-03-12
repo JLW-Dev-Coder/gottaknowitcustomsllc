@@ -1,0 +1,18 @@
+{
+  "contract": "payment-request.v1",
+  "description": "Operator-generated payment request for a build order deposit or final balance, linked to a specific estimate.",
+  "fields": {
+    "order_number": "string",
+    "estimate_reference": "string",
+    "payment_type": "deposit | final",
+    "amount": "number",
+    "currency": "USD",
+    "status": "Requested | Paid | Cancelled",
+    "payment_link": "string",
+    "processor_reference": "string",
+    "requested_at": "timestamp",
+    "paid_at": "timestamp",
+    "operator_notes": "string",
+    "customer_visible_notes": "string"
+  }
+}

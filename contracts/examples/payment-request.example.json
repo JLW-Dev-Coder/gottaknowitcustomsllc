@@ -1,0 +1,15 @@
+{
+  "contract": "payment-request.v1",
+  "order_number": "GKIC-2026-00124",
+  "estimate_reference": "EST-GKIC-2026-00124-V1",
+  "payment_type": "deposit",
+  "amount": 750,
+  "currency": "USD",
+  "status": "Requested",
+  "payment_link": "/pay-deposit/GKIC-2026-00124",
+  "processor_reference": "PAY-GKIC-2026-00124-DEPOSIT-1",
+  "requested_at": "2026-03-12T19:10:00Z",
+  "paid_at": null,
+  "operator_notes": "",
+  "customer_visible_notes": "Deposit required to order wrap materials."
+}

@@ -1,0 +1,31 @@
+{
+  "contract": "status-lookup.v1",
+  "description": "Public order status lookup response returned to customers using their order number.",
+  "fields": {
+    "order_number": "string",
+
+    "vehicle": {
+      "make": "string",
+      "model": "string",
+      "year": "number"
+    },
+
+    "services": [
+      "audio",
+      "fabrication",
+      "lighting",
+      "wraps"
+    ],
+
+    "status": "string",
+
+    "last_updated": "timestamp",
+
+    "customer_visible_notes": "string",
+
+    "payment_status": {
+      "deposit": "Not Requested | Requested | Paid",
+      "final": "Not Requested | Requested | Paid"
+    }
+  }
+}

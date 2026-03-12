@@ -1,0 +1,16 @@
+{
+  "contract": "operator-settings.v1",
+  "description": "Internal operator configuration settings for the platform.",
+  "fields": {
+    "notification_email": "string",
+    "business_phone": "string",
+
+    "default_labor_rate": "number",
+
+    "deposit_policy_text": "string",
+
+    "payment_instructions": "string",
+
+    "updated_at": "timestamp"
+  }
+}

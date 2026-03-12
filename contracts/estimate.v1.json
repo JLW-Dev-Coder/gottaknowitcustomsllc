@@ -1,0 +1,27 @@
+{
+  "contract": "estimate.v1",
+  "description": "Operator-prepared estimate for a customer build request.",
+  "fields": {
+    "order_number": "string",
+
+    "labor_hours": "number",
+    "labor_rate": "number",
+    "labor_total": "number",
+
+    "materials_cost": "number",
+
+    "parts_cost": "number",
+
+    "adjustment_amount": "number",
+
+    "estimate_total": "number",
+
+    "deposit_required": "number",
+
+    "sent_at": "timestamp",
+
+    "operator_notes": "string",
+
+    "customer_visible_notes": "string"
+  }
+}
