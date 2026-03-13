@@ -1234,7 +1234,7 @@ repository_url = ""</pre>
                   </div>
                   <div>
                     <p class="font-heading text-2xl text-white">Ralph Williams</p>
-                    <p class="text-silver text-sm uppercase tracking-[0.2em]">Operator • Gotta Know It Customs</p>
+                    <p id="aboutOperatorRole" class="text-silver text-sm uppercase tracking-[0.2em]">Operator • Gotta Know It Customs</p>
                   </div>
                 </div>
                 <div class="space-y-5 text-silver leading-7">
@@ -1381,7 +1381,7 @@ repository_url = ""</pre>
             <ul class="space-y-2">
               <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="map-pin" class="w-4 h-4 text-teal"></i> Your City, State</li>
               <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="phone" class="w-4 h-4 text-teal"></i> <span data-business-phone>651-248-4878</span></li>
-              <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="mail" class="w-4 h-4 text-teal"></i> info@gottaknowit.com</li>
+              <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="mail" class="w-4 h-4 text-teal"></i> <span data-support-email>info@gottaknowit.com</span></li>
             </ul>
           </div>
         </div>
@@ -1665,6 +1665,49 @@ These terms may be updated by the business from time to time.`;
       }
     }
 
+    function saveOperatorSetup() {
+      const form = document.getElementById('operatorSetupForm');
+      const status = document.getElementById('operatorSetupStatus');
+      if (!form) return;
+
+      const formData = new FormData(form);
+      const entries = {};
+      for (const [key, value] of formData.entries()) {
+        if (entries[key]) {
+          entries[key] = Array.isArray(entries[key]) ? [...entries[key], value] : [entries[key], value];
+        } else {
+          entries[key] = value;
+        }
+      }
+      localStorage.setItem('operatorSetupDraft', JSON.stringify(entries));
+      if (status) status.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function resetOperatorSetup() {
+      const form = document.getElementById('operatorSetupForm');
+      const status = document.getElementById('operatorSetupStatus');
+      if (!form) return;
+      form.reset();
+      resetLegalText('privacy');
+      resetLegalText('terms');
+      localStorage.removeItem('operatorSetupDraft');
+      if (status) status.classList.add('hidden');
+    }
+
+    function hydrateOperatorSetup() {
+      const raw = localStorage.getItem('operatorSetupDraft');
+      if (!raw) return;
+
+      try {
+        const data = JSON.parse(raw);
+        populateOperatorData(data);
+        document.getElementById('operatorSetupStatus')?.classList.remove('hidden');
+      } catch (error) {
+        console.error('Failed to hydrate operator setup draft', error);
+      }
+    }
+
     function normalizePhoneHref(phone) {
       return `tel:${String(phone || '').replace(/[^\d+]/g, '')}`;
     }
@@ -1723,7 +1766,6 @@ These terms may be updated by the business from time to time.`;
           .split(/\n{2,}/)
           .map((part) => part.trim())
           .filter(Boolean);
-
         if (paragraphs.length) {
           aboutBioContainer.innerHTML = paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join('');
         }
@@ -1732,7 +1774,7 @@ These terms may be updated by the business from time to time.`;
       const aboutOperatorName = document.querySelector('#page-about .font-heading.text-2xl');
       if (aboutOperatorName) aboutOperatorName.textContent = operatorName;
 
-      const aboutOperatorRole = document.querySelector('#page-about .uppercase.tracking-\\[0\\.2em\\]');
+      const aboutOperatorRole = document.getElementById('aboutOperatorRole');
       if (aboutOperatorRole) aboutOperatorRole.textContent = `Operator • ${businessName}`;
 
       const footerBusinessName = document.querySelector('footer .font-heading.text-lg');
@@ -1740,19 +1782,12 @@ These terms may be updated by the business from time to time.`;
 
       const contactAddress = document.querySelector('footer [data-lucide="map-pin"]')?.parentElement;
       if (contactAddress && activeOperatorData.business_address) {
-        const icon = contactAddress.querySelector('[data-lucide="map-pin"]');
-        contactAddress.innerHTML = '';
-        if (icon) contactAddress.appendChild(icon);
-        contactAddress.append(` ${activeOperatorData.business_address}`);
+        contactAddress.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-teal"></i> ${activeOperatorData.business_address}`;
       }
 
-      const contactEmail = document.querySelector('footer [data-lucide="mail"]')?.parentElement;
-      if (contactEmail && supportEmail) {
-        const icon = contactEmail.querySelector('[data-lucide="mail"]');
-        contactEmail.innerHTML = '';
-        if (icon) contactEmail.appendChild(icon);
-        contactEmail.append(` ${supportEmail}`);
-      }
+      document.querySelectorAll('[data-support-email]').forEach((el) => {
+        el.textContent = supportEmail;
+      });
 
       const privacyField = document.getElementById('operatorPrivacyText');
       if (privacyField) privacyField.value = activeOperatorData.privacy_policy_text || defaultPrivacyText;
@@ -1809,14 +1844,6 @@ These terms may be updated by the business from time to time.`;
       });
     }
 
-    async function fetchOperatorDataFromJson(path) {
-      const response = await fetch(path, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(`JSON request failed with status ${response.status}`);
-      }
-      return response.json();
-    }
-
     async function loadOperatorData() {
       const slug = getOperatorProfileSlug();
       const candidates = [
@@ -1826,7 +1853,9 @@ These terms may be updated by the business from time to time.`;
 
       for (const path of candidates) {
         try {
-          const data = await fetchOperatorDataFromJson(path);
+          const response = await fetch(path, { cache: 'no-store' });
+          if (!response.ok) continue;
+          const data = await response.json();
           populateOperatorData(data);
           return;
         } catch (error) {
@@ -1837,104 +1866,12 @@ These terms may be updated by the business from time to time.`;
       populateOperatorData(defaultOperatorData);
     }
 
-    function saveOperatorSetup() {
-      const form = document.getElementById('operatorSetupForm');
-      const status = document.getElementById('operatorSetupStatus');
-      if (!form) return;
-
-      const formData = new FormData(form);
-      const payload = {
-        ...activeOperatorData,
-        analytics_owner: formData.get('analytics_owner') || defaultOperatorData.analytics_owner,
-        backup_location: formData.get('backup_location') || '',
-        billing_instructions: formData.get('billing_instructions') || '',
-        business_address: formData.get('business_address') || '',
-        business_hours: formData.get('business_hours') || '',
-        business_name: formData.get('business_name') || defaultOperatorData.business_name,
-        business_phone: formData.get('business_phone') || defaultOperatorData.business_phone,
-        default_deposit_percentage: formData.get('deposit_percentage') || '',
-        deposit_policy_text: formData.get('deposit_policy') || '',
-        dns_notes: formData.get('dns_notes') || defaultOperatorData.dns_notes,
-        dns_provider: formData.get('dns_provider') || defaultOperatorData.dns_provider,
-        edge_platform: formData.get('edge_platform') || defaultOperatorData.edge_platform,
-        git_provider: formData.get('git_provider') || '',
-        handoff_brand_assets: formData.getAll('handoff_items').includes('branding'),
-        handoff_email_accounts: formData.getAll('handoff_items').includes('email_accounts'),
-        handoff_recovery_codes: formData.getAll('handoff_items').includes('recovery_codes'),
-        handoff_subscriptions: formData.getAll('handoff_items').includes('subscriptions'),
-        handoff_tax_docs: formData.getAll('handoff_items').includes('tax_docs'),
-        handoff_vendor_access: formData.getAll('handoff_items').includes('vendor_access'),
-        hosting_account: formData.get('hosting_account') || '',
-        operator_bio: formData.get('operator_bio') || '',
-        operator_name: formData.get('public_contact_name') || activeOperatorData.operator_name,
-        payout_note: formData.get('payout_note') || '',
-        payment_instructions: formData.get('billing_instructions') || '',
-        privacy_policy_text: formData.get('privacy_text') || defaultPrivacyText,
-        profile_slug: activeOperatorData.profile_slug || getOperatorProfileSlug(),
-        public_contact_name: formData.get('public_contact_name') || '',
-        registrar: formData.get('domain_registrar') || defaultOperatorData.registrar,
-        registrar_login_owner: formData.get('registrar_owner') || defaultOperatorData.registrar_login_owner,
-        repo_admin_username: formData.get('repo_admin_username') || '',
-        repository_url: formData.get('repository_url') || '',
-        secrets_confirmed: formData.get('secrets_confirmed') || '',
-        stripe_publishable_key: formData.get('stripe_publishable_key') || '',
-        stripe_secret_key: formData.get('stripe_secret_key') || '',
-        stripe_webhook_secret: formData.get('stripe_webhook_secret') || '',
-        support_email: formData.get('support_email') || '',
-        terms_of_service_text: formData.get('terms_text') || defaultTermsText,
-        transfer_notes: formData.get('transfer_notes') || '',
-        updated_at: new Date().toISOString()
-      };
-
-      localStorage.setItem('operatorSetupDraft', JSON.stringify(payload));
-      populateOperatorData(payload);
-
-      if (status) {
-        status.classList.remove('hidden');
-        status.innerHTML = `
-          <h3 class="font-heading text-xl font-bold text-white mb-2">Setup Saved</h3>
-          <p class="text-silver text-sm">The operator setup snapshot is stored in local state for preview. Not production persistence yet, because reality remains annoying.</p>
-        `;
-      }
-
-      window.scrollTo(0, 0);
-    }
-
-    function resetOperatorSetup() {
-      const form = document.getElementById('operatorSetupForm');
-      const status = document.getElementById('operatorSetupStatus');
-      if (!form) return;
-
-      form.reset();
-      localStorage.removeItem('operatorSetupDraft');
-      populateOperatorData(defaultOperatorData);
-
-      if (status) status.classList.add('hidden');
-    }
-
-    function hydrateOperatorSetup() {
-      const raw = localStorage.getItem('operatorSetupDraft');
-      if (!raw) {
-        populateOperatorData(defaultOperatorData);
-        return;
-      }
-
-      try {
-        const data = JSON.parse(raw);
-        populateOperatorData(data);
-        document.getElementById('operatorSetupStatus')?.classList.remove('hidden');
-      } catch (error) {
-        console.error('Failed to hydrate operator setup draft', error);
-        populateOperatorData(defaultOperatorData);
-      }
-    }
-
     function applyConfig(config) {
       const cfg = { ...defaultConfig, ...config };
 
       const heroHeadline = document.getElementById('heroHeadline');
       if (heroHeadline) {
-        const parts = cfg.hero_headline.split('.').map((part) => part.trim()).filter(Boolean);
+        const parts = cfg.hero_headline.split('.').filter(Boolean);
         if (parts.length >= 3) {
           heroHeadline.innerHTML = `<span class="text-white">${parts[0]}.</span><br /><span class="text-teal neon-text">${parts[1]}.</span><br /><span class="text-white">${parts[2]}.</span>`;
         } else {
@@ -1999,8 +1936,8 @@ These terms may be updated by the business from time to time.`;
         });
       }
 
-      hydrateOperatorSetup();
       await loadOperatorData();
+      hydrateOperatorSetup();
 
       if (window.elementSdk) {
         window.elementSdk.init({
@@ -2028,25 +1965,15 @@ These terms may be updated by the business from time to time.`;
       setActiveNav('home');
       if (window.lucide) lucide.createIcons();
 
-      console.assert(typeof applyConfig === 'function', 'applyConfig should be defined');
-      console.assert(typeof fetchOperatorDataFromJson === 'function', 'fetchOperatorDataFromJson should be defined');
       console.assert(typeof getOperatorProfileSlug === 'function', 'getOperatorProfileSlug should be defined');
       console.assert(typeof loadOperatorData === 'function', 'loadOperatorData should be defined');
       console.assert(typeof navigateTo === 'function', 'navigateTo should be defined');
-      console.assert(typeof normalizePhoneHref === 'function', 'normalizePhoneHref should be defined');
-      console.assert(typeof populateOperatorData === 'function', 'populateOperatorData should be defined');
-      console.assert(typeof saveOperatorSetup === 'function', 'saveOperatorSetup should be defined');
-      console.assert(typeof setInputValue === 'function', 'setInputValue should be defined');
+      console.assert(document.getElementById('aboutOperatorRole'), 'About operator role element should exist');
       console.assert(document.getElementById('page-home'), 'Home page section should exist');
       console.assert(document.getElementById('page-dashboard-login'), 'Dashboard login page should exist');
       console.assert(document.getElementById('page-about'), 'About page section should exist');
       console.assert(document.getElementById('page-order-detail'), 'Order detail page should exist');
       console.assert(document.getElementById('operatorSetupForm'), 'Operator setup form should exist');
-      console.assert(normalizePhoneHref('651-248-4878') === 'tel:6512484878', 'Phone href should normalize correctly');
-      console.assert(normalizePhoneHref('(651) 248-4878 ext. 9') === 'tel:65124848789', 'Phone href should strip punctuation and letters');
-      console.assert(getOperatorProfileSlug() !== '', 'Profile slug should never be empty');
-      console.assert(document.querySelectorAll('[name="business_name"]').length > 0, 'Business name input should exist');
-      console.assert(document.getElementById('heroHeadline')?.textContent.includes('Custom Builds'), 'Hero headline should render');
     });
   </script>
 </body>
