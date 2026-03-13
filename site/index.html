@@ -2,6 +2,7 @@
 <!doctype html>
 <html lang="en" class="h-full">
 <head>
+<link rel="icon" href="/assets/images/branding/favicon.ico" sizes="any">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gotta Know It Customs LLC</title>
@@ -217,13 +218,23 @@
       animation: hero-glow-orbit 7s ease-in-out infinite;
     }
 
+    .hero-glow-front {
+      z-index: 4;
+    }
+
+    .hero-glow-back {
+      z-index: 8;
+    }
+
     .hero-shadow-drift {
-      animation: hero-shadow-drift 4s ease-in-out infinite;
+      animation: hero-shadow-drift 4.8s ease-in-out infinite;
+      z-index: 6;
     }
 
     .hero-car-main {
-      animation: hero-car-float 4s ease-in-out infinite;
+      animation: hero-car-float 4.8s ease-in-out infinite;
       filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
+      z-index: 10;
     }
 
     .operator-portrait-float {
@@ -315,18 +326,18 @@
     }
 
     @keyframes hero-car-float {
-      0%, 100% { transform: translateY(0px) rotate(-1deg); }
-      50% { transform: translateY(-14px) rotate(0deg); }
+      0%, 100% { transform: translateY(0px) rotate(-0.75deg); }
+      50% { transform: translateY(-12px) rotate(0deg); }
     }
 
     @keyframes hero-shadow-drift {
-      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.5; }
-      50% { transform: translateY(8px) scale(0.96); opacity: 0.72; }
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.42; }
+      50% { transform: translateY(5px) scale(0.98); opacity: 0.6; }
     }
 
     @keyframes hero-glow-orbit {
-      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
-      50% { transform: translateY(-8px) scale(1.08); opacity: 0.95; }
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.68; }
+      50% { transform: translateY(-6px) scale(1.05); opacity: 0.9; }
     }
 
     @keyframes portrait-float {
@@ -334,6 +345,7 @@
       50% { transform: translateY(-10px); }
     }
   </style>
+  <link rel="icon" href="/assets/images/branding/favicon.ico" sizes="any">
 </head>
 <body class="h-full bg-midnight font-body text-white overflow-auto">
   <div class="min-h-full flex flex-col">
@@ -342,27 +354,9 @@
         <div class="flex items-center justify-between h-16 sm:h-20">
           <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
             <div class="w-10 h-10 sm:w-12 sm:h-12 relative">
-              <svg viewBox="0 0 48 48" class="w-full h-full">
-                <defs>
-                  <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#00d4aa" />
-                    <stop offset="50%" style="stop-color:#8b5cf6" />
-                    <stop offset="100%" style="stop-color:#ec4899" />
-                  </linearGradient>
-                </defs>
-                <circle cx="24" cy="24" r="22" fill="none" stroke="url(#logoGrad)" stroke-width="2" />
-                <rect x="10" y="20" width="3" height="8" fill="#00d4aa" rx="1" />
-                <rect x="15" y="16" width="3" height="16" fill="#00d4aa" rx="1" />
-                <rect x="20" y="12" width="3" height="24" fill="#8b5cf6" rx="1" />
-                <rect x="25" y="16" width="3" height="16" fill="#8b5cf6" rx="1" />
-                <rect x="30" y="14" width="3" height="20" fill="#ec4899" rx="1" />
-                <rect x="35" y="18" width="3" height="12" fill="#ec4899" rx="1" />
-              </svg>
+              <img src="/assets/images/branding/logo.svg" alt="Gotta Know It Customs">
             </div>
-            <div class="hidden sm:block">
-              <span class="font-heading text-lg font-bold text-white group-hover:text-teal transition-colors">GOTTA KNOW IT</span>
-              <span class="block text-xs text-silver tracking-widest">CUSTOMS LLC</span>
-            </div>
+            
           </a>
 
           <div class="hidden md:flex items-center gap-6">
@@ -434,10 +428,10 @@
               <div class="relative hero-image-container">
                 <div class="glass-panel rounded-[2rem] p-3 neon-glow floating-car">
                   <div class="relative aspect-[4/3] rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-navy via-[#111a31] to-midnight flex items-center justify-center">
-                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit absolute inset-x-[8%] bottom-[8%] w-[84%] opacity-80 pointer-events-none select-none" />
-                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit absolute inset-x-[14%] top-[10%] w-[72%] opacity-50 pointer-events-none select-none" style="animation-delay: 0.8s;" />
-                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-shadow.png" alt="" aria-hidden="true" class="hero-shadow-drift absolute bottom-[10%] left-1/2 w-[78%] -translate-x-1/2 opacity-70 pointer-events-none select-none" />
-                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-main.png" alt="Captain America Challenger custom build" data-home-hero-image class="hero-car-main relative z-10 w-[88%] max-w-[42rem] object-contain pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit hero-glow-front absolute left-[62%] bottom-[12%] w-[70%] -translate-x-1/2 opacity-80 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit hero-glow-back absolute right-[4%] bottom-[28%] w-[44%] opacity-45 pointer-events-none select-none" style="animation-delay: 0.8s;" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-shadow.png" alt="" aria-hidden="true" class="hero-shadow-drift absolute left-1/2 bottom-[26%] w-[70%] -translate-x-[30%] opacity-55 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-main.png" alt="Captain America Challenger custom build" data-home-hero-image class="hero-car-main relative w-[88%] max-w-[42rem] object-contain pointer-events-none select-none" />
                     <div class="absolute bottom-4 left-4 z-20 glass-panel rounded-lg px-3 py-2">
                       <span class="text-xs text-teal font-semibold">FEATURED BUILD</span>
                       <p class="text-white font-heading text-sm">Captain America Challenger</p>
@@ -1504,20 +1498,9 @@ repository_url = ""</pre>
           <div class="sm:col-span-2 lg:col-span-1">
             <div class="flex items-center gap-3 mb-4">
               <div class="w-10 h-10">
-                <svg viewBox="0 0 48 48" class="w-full h-full">
-                  <circle cx="24" cy="24" r="22" fill="none" stroke="url(#logoGrad)" stroke-width="2" />
-                  <rect x="10" y="20" width="3" height="8" fill="#00d4aa" rx="1" />
-                  <rect x="15" y="16" width="3" height="16" fill="#00d4aa" rx="1" />
-                  <rect x="20" y="12" width="3" height="24" fill="#8b5cf6" rx="1" />
-                  <rect x="25" y="16" width="3" height="16" fill="#8b5cf6" rx="1" />
-                  <rect x="30" y="14" width="3" height="20" fill="#ec4899" rx="1" />
-                  <rect x="35" y="18" width="3" height="12" fill="#ec4899" rx="1" />
-                </svg>
+                <img src="/assets/images/branding/logo.svg" alt="Gotta Know It Customs">
               </div>
-              <div>
-                <span class="font-heading text-lg font-bold text-white">GOTTA KNOW IT</span>
-                <span class="block text-xs text-silver tracking-widest">CUSTOMS LLC</span>
-              </div>
+              
             </div>
             <p id="footerTagline" class="text-silver text-sm mb-4">Built Loud. Built Different.</p>
           </div>
