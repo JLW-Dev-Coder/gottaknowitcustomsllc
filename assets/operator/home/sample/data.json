@@ -1,59 +1,25 @@
 {
-  "analytics_owner": "Operator Name",
-  "backup_location": "Cloudflare R2",
-
-  "billing_contact_email": "billing@example.com",
-  "billing_instructions": "Deposits may be required before work begins. Remaining balance due upon project completion.",
-  "business_address": "City, State",
-  "business_hours": "Mon–Sat 10:00 AM – 7:00 PM",
+  "business_city": "City",
+  "business_email": "support@example.com",
   "business_name": "Sample Custom Shop",
   "business_phone": "000-000-0000",
+  "business_state": "State",
 
-  "default_deposit_percentage": 25,
-  "default_labor_rate": 100,
-  "deposit_policy_text": "Custom projects typically require a deposit before fabrication or installation begins. Deposits secure build time and cover material costs.",
-
-  "dns_notes": "Domain and DNS typically managed through Cloudflare.",
-  "dns_provider": "Cloudflare",
-
-  "edge_platform": "Cloudflare Pages + Workers",
-
-  "git_provider": "GitHub",
-
-  "handoff_brand_assets": false,
-  "handoff_email_accounts": false,
-  "handoff_recovery_codes": false,
-  "handoff_subscriptions": false,
-  "handoff_tax_docs": false,
-  "handoff_vendor_access": false,
-
-  "hosting_account": "Cloudflare",
-
-  "notification_email": "contact@example.com",
+  "hero_headline": "Custom Builds. Clean Installs. Loud Systems.",
+  "hero_tagline": "Audio, lighting, wraps, fabrication, and full custom vehicle upgrades.",
 
   "operator_bio": "This is a sample operator profile used to demonstrate how the platform populates business information, contact details, and site content from a single data file. Replace this text with the operator’s real background, experience, and shop description.",
 
+  "operator_image": "/assets/images/operator/home/sample_operator.png",
   "operator_name": "Sample Operator",
 
-  "payment_instructions": "Payments may be accepted via invoice or other agreed methods. Final payment is typically required before vehicle pickup.",
-  "payout_note": "Operator manages project billing and payment collection.",
-  "privacy_policy_text": "Customer contact information is used only for communication related to estimates, builds, and project updates. Personal data is not sold or shared except when necessary for payment processing or legal compliance.",
+  "profile_slug": "sample",
 
-  "primary_domain": "examplecustomshop.com",
-  "profile_slug": "sample_operator",
-  "profile_type": "operator",
+  "projects_featured": [],
+  "projects_gallery": [],
 
-  "registrar": "Cloudflare",
-  "registrar_login_owner": "Operator",
-  "repo_admin_username": "repo-owner",
-  "repository_url": "https://github.com/example/repository",
-
-  "secrets_confirmed": false,
   "support_email": "support@example.com",
+  "updated_at": "2026-03-12T00:00:00Z",
 
-  "terms_of_service_text": "All custom vehicle work is quoted based on project scope and materials. Estimates may change if additional work is requested or if unforeseen issues arise during installation. Deposits may be non-refundable once materials are ordered or work begins.",
-
-  "transfer_notes": "Sample configuration used for demonstration purposes.",
-
-  "updated_at": "2026-03-12T00:00:00Z"
+  "website": "https://examplecustomshop.com"
 }

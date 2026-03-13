@@ -1,0 +1,2053 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gotta Know It Customs LLC</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#0a0e1a',
+            navy: '#101729',
+            teal: '#00d4aa',
+            purple: '#8b5cf6',
+            magenta: '#ec4899',
+            silver: '#94a3b8'
+          },
+          fontFamily: {
+            body: ['Inter', 'sans-serif'],
+            heading: ['Oswald', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body { height: 100%; }
+    body { box-sizing: border-box; }
+
+    .glass-panel {
+      background: linear-gradient(135deg, rgba(16, 23, 41, 0.8) 0%, rgba(10, 14, 26, 0.92) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 170, 0.15);
+    }
+
+    .neon-glow {
+      box-shadow: 0 0 30px rgba(0, 212, 170, 0.28), 0 0 60px rgba(0, 212, 170, 0.12);
+    }
+
+    .neon-text {
+      text-shadow: 0 0 20px rgba(0, 212, 170, 0.5), 0 0 40px rgba(0, 212, 170, 0.28);
+    }
+
+    .gradient-border {
+      position: relative;
+    }
+
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, #00d4aa, #8b5cf6, #ec4899);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .waveform-bg {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 Q150,20 300,60 T600,60 T900,60 T1200,60' fill='none' stroke='rgba(0,212,170,0.1)' stroke-width='2'/%3E%3Cpath d='M0,70 Q150,30 300,70 T600,70 T900,70 T1200,70' fill='none' stroke='rgba(139,92,246,0.08)' stroke-width='2'/%3E%3Cpath d='M0,50 Q150,10 300,50 T600,50 T900,50 T1200,50' fill='none' stroke='rgba(236,72,153,0.06)' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: 100% 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00d4aa 0%, #00a88a 100%);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 30px rgba(0, 212, 170, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(0, 212, 170, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 212, 170, 0.1);
+      border-color: #00d4aa;
+      box-shadow: 0 0 20px rgba(0, 212, 170, 0.25);
+    }
+
+    .card-hover {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 212, 170, 0.18);
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(10, 14, 26, 0.96) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00d4aa, #8b5cf6);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.is-active::after {
+      width: 100%;
+    }
+
+    .nav-link.is-active,
+    .nav-link-mobile.is-active {
+      color: #00d4aa;
+    }
+
+    .page-section {
+      display: none;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    .form-input {
+      background: rgba(16, 23, 41, 0.6);
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      border-color: #00d4aa;
+      box-shadow: 0 0 20px rgba(0, 212, 170, 0.2);
+      outline: none;
+    }
+
+    .equalizer-bar {
+      animation: equalize 1s ease-in-out infinite;
+    }
+
+    .status-badge {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .hero-content {
+      animation: slide-in-left 0.8s ease-out;
+    }
+
+    .hero-image-container {
+      animation: slide-in-right 0.8s ease-out;
+    }
+
+    .floating-car {
+      animation: float-car 4s ease-in-out infinite;
+    }
+
+    .floating-particles {
+      animation: float-car 6s ease-in-out infinite;
+    }
+
+    .floating-particles:nth-child(2) { animation-delay: 0.5s; }
+    .floating-particles:nth-child(3) { animation-delay: 1s; }
+    .floating-particles:nth-child(4) { animation-delay: 1.5s; }
+
+    .service-card-animated {
+      animation: fade-in-up 0.6s ease-out both;
+    }
+
+    .service-card-animated:nth-child(1) { animation-delay: 0.2s; }
+    .service-card-animated:nth-child(2) { animation-delay: 0.4s; }
+    .service-card-animated:nth-child(3) { animation-delay: 0.6s; }
+
+    .project-card-animated {
+      animation: scale-in 0.5s ease-out both;
+    }
+
+    .project-card-animated:nth-child(1) { animation-delay: 0.1s; }
+    .project-card-animated:nth-child(2) { animation-delay: 0.2s; }
+    .project-card-animated:nth-child(3) { animation-delay: 0.3s; }
+
+    .text-glow-animate {
+      animation: text-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes equalize {
+      0%, 100% { height: 8px; }
+      50% { height: 24px; }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 10px currentColor; }
+      50% { box-shadow: 0 0 20px currentColor; }
+    }
+
+    @keyframes float-car {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+    }
+
+    @keyframes slide-in-left {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slide-in-right {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes text-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(0, 212, 170, 0.5), 0 0 40px rgba(0, 212, 170, 0.3); }
+      50% { text-shadow: 0 0 30px rgba(0, 212, 170, 0.8), 0 0 60px rgba(0, 212, 170, 0.45); }
+    }
+  </style>
+</head>
+<body class="h-full bg-midnight font-body text-white overflow-auto">
+  <div class="min-h-full flex flex-col">
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 sm:h-20">
+          <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 relative">
+              <svg viewBox="0 0 48 48" class="w-full h-full">
+                <defs>
+                  <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#00d4aa" />
+                    <stop offset="50%" style="stop-color:#8b5cf6" />
+                    <stop offset="100%" style="stop-color:#ec4899" />
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="24" r="22" fill="none" stroke="url(#logoGrad)" stroke-width="2" />
+                <rect x="10" y="20" width="3" height="8" fill="#00d4aa" rx="1" />
+                <rect x="15" y="16" width="3" height="16" fill="#00d4aa" rx="1" />
+                <rect x="20" y="12" width="3" height="24" fill="#8b5cf6" rx="1" />
+                <rect x="25" y="16" width="3" height="16" fill="#8b5cf6" rx="1" />
+                <rect x="30" y="14" width="3" height="20" fill="#ec4899" rx="1" />
+                <rect x="35" y="18" width="3" height="12" fill="#ec4899" rx="1" />
+              </svg>
+            </div>
+            <div class="hidden sm:block">
+              <span class="font-heading text-lg font-bold text-white group-hover:text-teal transition-colors">GOTTA KNOW IT</span>
+              <span class="block text-xs text-silver tracking-widest">CUSTOMS LLC</span>
+            </div>
+          </a>
+
+          <div class="hidden md:flex items-center gap-6">
+            <a href="#" data-nav="home" onclick="navigateTo('home'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">Home</a>
+            <a href="#" data-nav="about" onclick="navigateTo('about'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">About</a>
+            <a href="#" data-nav="projects" onclick="navigateTo('projects'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">Projects</a>
+            <a href="#" data-nav="build-request" onclick="navigateTo('build-request'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">Start Build</a>
+            <a href="#" data-nav="order-status" onclick="navigateTo('order-status'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">Order Status</a>
+            <a href="#" data-nav="dashboard" onclick="navigateTo('dashboard'); return false;" class="nav-link text-sm font-medium text-silver hover:text-white transition-colors">Dashboard</a>
+          </div>
+
+          <div class="hidden lg:flex items-center ml-6 gap-4">
+            <span class="text-silver text-xl">|</span>
+            <a href="tel:6512484878" class="font-heading text-xl font-bold text-white hover:text-teal transition-colors tracking-wide" data-business-phone>651-248-4878</a>
+            <button onclick="navigateTo('build-request')" class="ml-2 px-4 py-2 rounded-lg bg-teal text-midnight font-heading text-sm tracking-wider hover:bg-teal/80 transition-colors">START BUILD</button>
+          </div>
+
+          <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-silver hover:text-white" aria-label="Toggle navigation">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="md:hidden hidden glass-panel border-t border-teal/20">
+        <div class="px-4 py-4 space-y-3">
+          <a href="#" data-nav-mobile="home" onclick="navigateTo('home'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">Home</a>
+          <a href="#" data-nav-mobile="about" onclick="navigateTo('about'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">About</a>
+          <a href="#" data-nav-mobile="projects" onclick="navigateTo('projects'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">Projects</a>
+          <a href="#" data-nav-mobile="build-request" onclick="navigateTo('build-request'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">Start Build</a>
+          <a href="#" data-nav-mobile="order-status" onclick="navigateTo('order-status'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">Order Status</a>
+          <a href="#" data-nav-mobile="dashboard" onclick="navigateTo('dashboard'); toggleMobileMenu(); return false;" class="nav-link-mobile block py-2 text-silver hover:text-teal transition-colors">Dashboard</a>
+          <a href="tel:6512484878" class="block py-2 font-heading text-lg text-white hover:text-teal transition-colors" data-business-phone>651-248-4878</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-1 pt-16 sm:pt-20">
+      <section id="page-home" class="page-section active">
+        <div class="relative min-h-[90vh] flex items-center overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-midnight via-navy to-midnight"></div>
+          <div class="absolute inset-0 waveform-bg opacity-50"></div>
+          <div class="absolute inset-0 opacity-30">
+            <div class="floating-particles absolute w-96 h-96 bg-teal/10 rounded-full blur-3xl top-10 left-10"></div>
+            <div class="floating-particles absolute w-96 h-96 bg-purple/10 rounded-full blur-3xl bottom-20 right-20"></div>
+            <div class="floating-particles absolute w-96 h-96 bg-magenta/10 rounded-full blur-3xl top-1/2 left-1/3"></div>
+          </div>
+
+          <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+              <div class="space-y-8 hero-content">
+                <div class="space-y-4">
+                  <h1 id="heroHeadline" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"><span class="text-white">Custom Builds.</span><br /><span class="text-teal neon-text text-glow-animate">Sound Systems.</span><br /><span class="text-white">Vehicle Wraps.</span></h1>
+                  <h2 id="heroSubheadline" class="font-heading text-xl sm:text-2xl text-purple font-semibold tracking-wide">Gotta Know It Customs LLC</h2>
+                  <p id="heroTagline" class="text-lg sm:text-xl text-silver max-w-lg">Where Performance Meets Style.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <button onclick="navigateTo('build-request')" class="btn-primary px-8 py-4 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="wrench" class="w-5 h-5"></i> Start Your Build</button>
+                  <button onclick="navigateTo('order-status')" class="btn-secondary px-8 py-4 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Check Order Status</button>
+                </div>
+
+                <div class="flex items-center gap-6 pt-4">
+                  <div class="flex items-center gap-2"><i data-lucide="star" class="w-5 h-5 text-teal fill-teal"></i><span class="text-silver text-sm">5.0 Rating</span></div>
+                  <div class="flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-purple"></i><span class="text-silver text-sm">500+ Builds</span></div>
+                  <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-5 h-5 text-magenta"></i><span class="text-silver text-sm">Certified</span></div>
+                </div>
+              </div>
+
+              <div class="relative hero-image-container">
+                <div class="glass-panel rounded-2xl p-2 neon-glow floating-car">
+                  <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-navy to-midnight flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-magenta/10"></div>
+                    <svg viewBox="0 0 400 300" class="w-full h-full">
+                      <defs>
+                        <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style="stop-color:#101729" />
+                          <stop offset="100%" style="stop-color:#0a0e1a" />
+                        </linearGradient>
+                        <linearGradient id="carBody" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#1e40af" />
+                          <stop offset="50%" style="stop-color:#dc2626" />
+                          <stop offset="100%" style="stop-color:#1e40af" />
+                        </linearGradient>
+                        <linearGradient id="chrome" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" style="stop-color:#e2e8f0" />
+                          <stop offset="50%" style="stop-color:#94a3b8" />
+                          <stop offset="100%" style="stop-color:#e2e8f0" />
+                        </linearGradient>
+                      </defs>
+                      <rect fill="url(#heroBg)" width="400" height="300" />
+                      <ellipse cx="200" cy="260" rx="160" ry="20" fill="rgba(0,212,170,0.1)" />
+                      <path d="M60 180 Q80 140 120 130 L280 130 Q320 140 340 180 L350 200 Q350 210 340 215 L60 215 Q50 210 50 200 Z" fill="url(#carBody)" />
+                      <rect x="185" y="130" width="30" height="85" fill="#e2e8f0" opacity="0.9" />
+                      <circle cx="200" cy="170" r="20" fill="#1e40af" stroke="#e2e8f0" stroke-width="2" />
+                      <polygon points="200,155 204,165 215,165 206,172 210,182 200,175 190,182 194,172 185,165 196,165" fill="#e2e8f0" />
+                      <rect x="170" y="135" width="60" height="15" rx="3" fill="#0f172a" />
+                      <path d="M130 130 L140 100 L260 100 L270 130 Z" fill="#1e293b" opacity="0.8" />
+                      <rect x="70" y="175" width="40" height="12" rx="2" fill="#fef3c7" />
+                      <rect x="290" y="175" width="40" height="12" rx="2" fill="#fef3c7" />
+                      <rect x="150" y="185" width="100" height="20" rx="3" fill="#0f172a" />
+                      <circle cx="100" cy="215" r="30" fill="#1f2937" />
+                      <circle cx="100" cy="215" r="20" fill="#374151" />
+                      <circle cx="100" cy="215" r="8" fill="url(#chrome)" />
+                      <circle cx="300" cy="215" r="30" fill="#1f2937" />
+                      <circle cx="300" cy="215" r="20" fill="#374151" />
+                      <circle cx="300" cy="215" r="8" fill="url(#chrome)" />
+                      <rect x="80" y="240" width="240" height="4" rx="2" fill="#00d4aa" opacity="0.8" />
+                    </svg>
+                    <div class="absolute bottom-4 left-4 glass-panel rounded-lg px-3 py-2">
+                      <span class="text-xs text-teal font-semibold">FEATURED BUILD</span>
+                      <p class="text-white font-heading text-sm">Captain America Challenger</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute -bottom-6 -right-6 glass-panel rounded-xl p-4 gradient-border">
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-teal to-purple flex items-center justify-center"><i data-lucide="zap" class="w-6 h-6 text-white"></i></div>
+                    <div>
+                      <p class="text-2xl font-heading font-bold text-white">500+</p>
+                      <p class="text-xs text-silver">Completed Builds</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative py-20 lg:py-32 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-b from-midnight via-navy/50 to-midnight"></div>
+          <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">OUR SERVICES</span>
+              <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">What We <span class="text-teal">Build</span></h2>
+              <p class="text-silver max-w-2xl mx-auto">From head-turning wraps to earth-shaking sound systems, we transform vehicles into rolling works of art.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-teal/20 to-teal/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="palette" class="w-8 h-8 text-teal"></i></div>
+                <h3 id="service1Title" class="font-heading text-2xl font-bold text-white mb-3">Custom Wraps</h3>
+                <p class="text-silver mb-6">Full and partial wraps, color changes, graphics, and protective films. Premium 3M and Avery materials.</p>
+                <ul class="space-y-2 text-sm text-silver">
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Full Color Change</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Custom Graphics</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Paint Protection</li>
+                </ul>
+              </div>
+              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple/20 to-purple/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="volume-2" class="w-8 h-8 text-purple"></i></div>
+                <h3 id="service2Title" class="font-heading text-2xl font-bold text-white mb-3">Audio &amp; Electronics</h3>
+                <p class="text-silver mb-6">Competition-grade audio systems, custom enclosures, amplifiers, and full electrical upgrades.</p>
+                <ul class="space-y-2 text-sm text-silver">
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> Custom Subwoofer Boxes</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> Amplifier Installation</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> LED Lighting Systems</li>
+                </ul>
+              </div>
+              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-magenta/20 to-magenta/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="drill" class="w-8 h-8 text-magenta"></i></div>
+                <h3 id="service3Title" class="font-heading text-2xl font-bold text-white mb-3">Custom Fabrication</h3>
+                <p class="text-silver mb-6">One-of-a-kind builds, custom interior panels, trunk setups, and specialty automotive fabrication.</p>
+                <ul class="space-y-2 text-sm text-silver">
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Custom Enclosures</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Interior Builds</li>
+                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Show Vehicle Prep</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative py-20 lg:py-32 bg-midnight">
+          <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
+              <div>
+                <span class="inline-block px-4 py-1 rounded-full glass-panel text-purple text-sm font-semibold mb-4">OUR WORK</span>
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white">Completed <span class="text-purple">Projects</span></h2>
+              </div>
+              <button onclick="navigateTo('projects')" class="btn-secondary px-6 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center gap-2 mt-6 sm:mt-0">View All Projects <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('challenger')">
+                <div class="aspect-[4/3] bg-gradient-to-br from-blue-900 via-red-600 to-blue-900 relative"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">FULL BUILD</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">Captain America Challenger</h3>
+                  <p class="text-silver text-sm">Full wrap, audio system, custom lighting</p>
+                </div>
+              </div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('mustang')">
+                <div class="aspect-[4/3] bg-gradient-to-br from-violet-950 via-purple-700 to-navy relative"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO BUILD</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">Midnight Mustang</h3>
+                  <p class="text-silver text-sm">Competition audio, purple underglow</p>
+                </div>
+              </div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('camaro')">
+                <div class="aspect-[4/3] bg-gradient-to-br from-zinc-900 via-slate-800 to-pink-700 relative"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">CUSTOM WRAP</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">Neon Nights Camaro</h3>
+                  <p class="text-silver text-sm">Matte black wrap, pink accent lighting</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative py-20 lg:py-32 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-navy via-midnight to-navy"></div>
+          <div class="absolute inset-0 waveform-bg opacity-30"></div>
+          <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 lg:p-16 neon-glow">
+              <div class="flex justify-center gap-1 mb-8">
+                <div class="w-1 h-6 bg-teal rounded-full equalizer-bar" style="animation-delay:0s"></div>
+                <div class="w-1 h-10 bg-teal rounded-full equalizer-bar" style="animation-delay:0.1s"></div>
+                <div class="w-1 h-14 bg-purple rounded-full equalizer-bar" style="animation-delay:0.2s"></div>
+                <div class="w-1 h-10 bg-purple rounded-full equalizer-bar" style="animation-delay:0.3s"></div>
+                <div class="w-1 h-16 bg-magenta rounded-full equalizer-bar" style="animation-delay:0.4s"></div>
+                <div class="w-1 h-10 bg-magenta rounded-full equalizer-bar" style="animation-delay:0.5s"></div>
+                <div class="w-1 h-6 bg-teal rounded-full equalizer-bar" style="animation-delay:0.6s"></div>
+              </div>
+              <h2 id="ctaHeadline" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Ready to Transform Your Ride?</h2>
+              <p class="text-silver text-lg mb-8 max-w-2xl mx-auto">Let's create something legendary. From concept to completion, we'll make your vision a reality.</p>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="navigateTo('build-request')" class="btn-primary px-10 py-4 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="rocket" class="w-5 h-5"></i> Start Your Build</button>
+                <button onclick="navigateTo('order-status')" class="btn-secondary px-10 py-4 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Request Order Status</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-build-request" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">4-STEP WIZARD</span>
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Start Your <span class="text-teal neon-text">Build</span></h1>
+              <p class="text-silver max-w-2xl mx-auto">Follow these 4 simple steps to submit your custom build request.</p>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-6 mb-8">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <p class="text-sm text-silver">Step <span id="currentStep">1</span> of 4</p>
+                  <p class="text-2xl font-heading font-bold text-white"><span id="progressPercent">25</span>%</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-silver mb-1">Progress</p>
+                  <div class="w-48 h-2 bg-navy rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-teal via-purple to-magenta transition-all duration-300" style="width:25%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="step1" class="glass-panel rounded-2xl p-8">
+              <form id="step1Form" class="space-y-6">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="car" class="w-6 h-6 text-teal"></i> Choose Your Vehicle</h3>
+                  <p class="text-silver text-sm mb-6">Start by telling us about your vehicle</p>
+                </div>
+                <div class="grid sm:grid-cols-3 gap-6">
+                  <div>
+                    <label for="vehicleYear" class="block text-sm font-medium text-silver mb-2">Year *</label>
+                    <input type="text" id="vehicleYear" name="vehicleYear" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="2024" />
+                  </div>
+                  <div>
+                    <label for="vehicleMake" class="block text-sm font-medium text-silver mb-2">Make *</label>
+                    <input type="text" id="vehicleMake" name="vehicleMake" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="Dodge" />
+                  </div>
+                  <div>
+                    <label for="vehicleModel" class="block text-sm font-medium text-silver mb-2">Model *</label>
+                    <input type="text" id="vehicleModel" name="vehicleModel" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="Challenger" />
+                  </div>
+                </div>
+                <div>
+                  <label for="currentColor" class="block text-sm font-medium text-silver mb-2">Current Color</label>
+                  <input type="text" id="currentColor" name="currentColor" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="Black" />
+                </div>
+                <div class="flex gap-4 pt-6">
+                  <button type="button" onclick="nextStep(1)" class="btn-primary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2">Next <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+              </form>
+            </div>
+
+            <div id="step2" class="hidden glass-panel rounded-2xl p-8">
+              <form id="step2Form" class="space-y-6">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="list-checks" class="w-6 h-6 text-purple"></i> Select Services</h3>
+                  <p class="text-silver text-sm mb-6">What customizations are you interested in?</p>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="wrap" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Wrap</span><span class="text-silver text-xs">Full or partial vehicle wrap</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="audio" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Audio System</span><span class="text-silver text-xs">Custom sound installation</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="lighting" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Lighting</span><span class="text-silver text-xs">Interior &amp; exterior lighting</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="fabrication" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Fabrication</span><span class="text-silver text-xs">Panels, enclosures &amp; builds</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="tint" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Window Tint</span><span class="text-silver text-xs">Professional window tinting</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="other" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Other Services</span><span class="text-silver text-xs">Something else in mind</span></div></label>
+                </div>
+                <div class="flex gap-4 pt-6">
+                  <button type="button" onclick="previousStep(2)" class="btn-secondary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                  <button type="button" onclick="nextStep(2)" class="btn-primary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2">Next <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+              </form>
+            </div>
+
+            <div id="step3" class="hidden glass-panel rounded-2xl p-8">
+              <form id="step3Form" class="space-y-6">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="image-plus" class="w-6 h-6 text-magenta"></i> Upload Photos</h3>
+                  <p class="text-silver text-sm mb-6">Share images of your vehicle so we can assess the project</p>
+                </div>
+                <div class="group relative cursor-pointer rounded-xl border-2 border-dashed border-magenta/30 p-8 text-center transition-colors hover:border-magenta/50 glass-panel" onclick="document.getElementById('photoInput').click()">
+                  <input type="file" id="photoInput" name="photos" multiple accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
+                  <div class="flex flex-col items-center gap-3">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-magenta/20 transition-transform group-hover:scale-110"><i data-lucide="upload-cloud" class="w-6 h-6 text-magenta"></i></div>
+                    <div>
+                      <p class="font-semibold text-white">Click to upload or drag &amp; drop</p>
+                      <p class="text-sm text-silver">PNG, JPG up to 10MB each</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="photoList" class="hidden space-y-3">
+                  <p class="text-sm font-semibold text-silver">Selected Files:</p>
+                  <div id="photoItems" class="space-y-2"></div>
+                </div>
+                <div class="flex gap-4 pt-6">
+                  <button type="button" onclick="previousStep(3)" class="btn-secondary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                  <button type="button" onclick="nextStep(3)" class="btn-primary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2">Next <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+              </form>
+            </div>
+
+            <div id="step4" class="hidden glass-panel rounded-2xl p-8">
+              <form id="step4Form" class="space-y-6">
+                <div>
+                  <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="send" class="w-6 h-6 text-teal"></i> Submit Request</h3>
+                  <p class="text-silver text-sm mb-6">Tell us about your project and how to reach you</p>
+                </div>
+                <div>
+                  <h4 class="mb-4 font-semibold text-teal">Contact Information</h4>
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div><label for="firstName" class="block text-sm font-medium text-silver mb-2">First Name *</label><input type="text" id="firstName" name="firstName" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="John" /></div>
+                    <div><label for="lastName" class="block text-sm font-medium text-silver mb-2">Last Name *</label><input type="text" id="lastName" name="lastName" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="Doe" /></div>
+                    <div><label for="email" class="block text-sm font-medium text-silver mb-2">Email *</label><input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="john@example.com" /></div>
+                    <div><label for="phone" class="block text-sm font-medium text-silver mb-2">Phone *</label><input type="tel" id="phone" name="phone" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="(555) 123-4567" /></div>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="mb-4 font-semibold text-teal">Project Details</h4>
+                  <div>
+                    <label for="projectDescription" class="block text-sm font-medium text-silver mb-2">Describe Your Vision *</label>
+                    <textarea id="projectDescription" name="projectDescription" required rows="3" class="form-input w-full resize-none rounded-lg px-4 py-3 text-white placeholder-silver/50" placeholder="Tell us about your dream build..."></textarea>
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label for="budget" class="block text-sm font-medium text-silver mb-2">Budget Range</label>
+                    <select id="budget" name="budget" class="form-input w-full rounded-lg px-4 py-3 text-white">
+                      <option value="">Select budget range</option>
+                      <option value="under-1k">Under $1,000</option>
+                      <option value="1k-3k">$1,000 - $3,000</option>
+                      <option value="3k-5k">$3,000 - $5,000</option>
+                      <option value="5k-10k">$5,000 - $10,000</option>
+                      <option value="over-10k">$10,000+</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="timeline" class="block text-sm font-medium text-silver mb-2">Preferred Timeline</label>
+                    <select id="timeline" name="timeline" class="form-input w-full rounded-lg px-4 py-3 text-white">
+                      <option value="">Select timeline</option>
+                      <option value="asap">ASAP</option>
+                      <option value="1-month">Within 1 month</option>
+                      <option value="2-3-months">2-3 months</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex gap-4 pt-6">
+                  <button type="button" onclick="previousStep(4)" class="btn-secondary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back</button>
+                  <button type="submit" class="btn-primary flex-1 px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="send" class="w-4 h-4"></i> Submit Request</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-build-confirmation" class="page-section">
+        <div class="min-h-screen flex items-center justify-center py-12">
+          <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 neon-glow">
+              <div class="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-teal/20 to-teal/5 flex items-center justify-center"><i data-lucide="check-circle" class="w-12 h-12 text-teal"></i></div>
+              <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white mb-4">Build Request <span class="text-teal">Submitted!</span></h1>
+              <p class="text-silver text-lg mb-8">Thank you for choosing Gotta Know It Customs. We've received your build request and will review it shortly.</p>
+              <div class="glass-panel rounded-xl p-6 mb-8">
+                <p class="text-sm text-silver mb-2">Your Order Number</p>
+                <p id="confirmationOrderNumber" class="font-heading text-3xl font-bold text-teal neon-text">GKI-2024-0847</p>
+                <p class="text-xs text-silver mt-2">Save this number to check your order status</p>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="navigateTo('order-status')" class="btn-secondary px-6 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-4 h-4"></i> Check Status</button>
+                <button onclick="navigateTo('home')" class="btn-primary px-6 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="home" class="w-4 h-4"></i> Back to Home</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-order-status" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-purple text-sm font-semibold mb-4">TRACK ORDER</span>
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Order <span class="text-purple neon-text">Status</span></h1>
+              <p class="text-silver max-w-2xl mx-auto">Enter your order number to check the status of your build.</p>
+            </div>
+            <div class="glass-panel rounded-2xl p-8 mb-8">
+              <form id="orderSearchForm" class="flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                  <label for="orderNumber" class="sr-only">Order Number</label>
+                  <input type="text" id="orderNumber" name="orderNumber" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 text-center sm:text-left font-heading text-lg" placeholder="Enter order number (e.g., GKI-2024-0847)" />
+                </div>
+                <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Check Status</button>
+              </form>
+            </div>
+            <div id="orderStatusResult" class="hidden glass-panel rounded-2xl p-8">Order found. Typical human miracle.</div>
+            <div id="orderNotFound" class="hidden glass-panel rounded-2xl p-12 text-center">
+              <i data-lucide="search-x" class="w-16 h-16 text-silver/50 mx-auto mb-4"></i>
+              <h3 class="font-heading text-xl font-bold text-white mb-2">Order Not Found</h3>
+              <p class="text-silver mb-6">We couldn't find an order with that number. Please check the number and try again.</p>
+              <button onclick="navigateTo('build-request')" class="btn-primary px-6 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider">Start New Build</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-dashboard-login" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 neon-glow overflow-hidden relative">
+              <div class="absolute inset-0 waveform-bg opacity-30"></div>
+              <div class="relative grid lg:grid-cols-[1.2fr_.8fr] gap-8 items-center">
+                <div>
+                  <span class="inline-block px-4 py-1 rounded-full glass-panel text-purple text-sm font-semibold mb-4">OPERATOR ACCESS</span>
+                  <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Dashboard <span class="text-purple neon-text">Login</span></h1>
+                  <p class="text-silver text-base sm:text-lg mb-6">Use a magic link to access the operator dashboard. No password circus. Just email, click, and in you go.</p>
+                </div>
+                <div class="glass-panel rounded-2xl p-6 sm:p-8 gradient-border">
+                  <div class="text-center mb-6">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple/20 to-magenta/10 flex items-center justify-center"><i data-lucide="lock" class="w-8 h-8 text-purple"></i></div>
+                    <h2 class="font-heading text-2xl font-bold text-white mb-2">Operator Access</h2>
+                    <p class="text-silver text-sm">Enter your email to receive a magic link</p>
+                  </div>
+                  <form id="operatorLoginPageForm" class="space-y-4">
+                    <div>
+                      <label for="operatorEmailPage" class="sr-only">Email Address</label>
+                      <input type="email" id="operatorEmailPage" name="email" required class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50" placeholder="operator@gottaknowit.com" />
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="mail" class="w-5 h-5"></i> Send Magic Link</button>
+                    <button type="button" onclick="navigateTo('home')" class="btn-secondary w-full py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider">Back to Site</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-dashboard" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+              <div>
+                <span class="inline-block px-4 py-1 rounded-full glass-panel text-magenta text-sm font-semibold mb-2">OPERATOR</span>
+                <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white">Dashboard</h1>
+              </div>
+              <div class="flex items-center gap-4 mt-4 sm:mt-0">
+                <button onclick="navigateTo('operator-setup')" class="text-left text-silver text-sm hover:text-teal transition-colors"><span class="text-white">Welcome, Admin.</span> <span class="underline underline-offset-4">Click here to get started</span></button>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple to-magenta flex items-center justify-center"><i data-lucide="user" class="w-5 h-5 text-white"></i></div>
+                <button onclick="logoutOperator()" class="btn-secondary px-3 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="log-out" class="w-4 h-4"></i> Logout</button>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div class="glass-panel rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 rounded-lg bg-teal/20 flex items-center justify-center"><i data-lucide="inbox" class="w-6 h-6 text-teal"></i></div>
+                  <span class="text-teal text-sm font-semibold">+3 new</span>
+                </div>
+                <p class="text-3xl font-heading font-bold text-white">12</p>
+                <p class="text-silver text-sm">Pending Requests</p>
+              </div>
+              <div class="glass-panel rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 rounded-lg bg-purple/20 flex items-center justify-center"><i data-lucide="wrench" class="w-6 h-6 text-purple"></i></div>
+                </div>
+                <p class="text-3xl font-heading font-bold text-white">8</p>
+                <p class="text-silver text-sm">In Progress</p>
+              </div>
+              <div class="glass-panel rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 rounded-lg bg-magenta/20 flex items-center justify-center"><i data-lucide="check-circle" class="w-6 h-6 text-magenta"></i></div>
+                </div>
+                <p class="text-3xl font-heading font-bold text-white">547</p>
+                <p class="text-silver text-sm">Completed</p>
+              </div>
+              <div class="glass-panel rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="w-12 h-12 rounded-lg bg-silver/20 flex items-center justify-center"><i data-lucide="dollar-sign" class="w-6 h-6 text-silver"></i></div>
+                </div>
+                <p class="text-3xl font-heading font-bold text-white">$24.5K</p>
+                <p class="text-silver text-sm">This Month</p>
+              </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl overflow-hidden">
+              <div class="p-6 border-b border-teal/20">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <h2 class="font-heading text-xl font-bold text-white">Recent Orders</h2>
+                  <div class="flex items-center gap-3">
+                    <select class="form-input px-4 py-2 rounded-lg text-white text-sm">
+                      <option>All Status</option>
+                      <option>Completed</option>
+                      <option>In Progress</option>
+                      <option>Pending</option>
+                    </select>
+                    <button class="btn-secondary px-4 py-2 rounded-lg text-teal text-sm flex items-center gap-2"><i data-lucide="filter" class="w-4 h-4"></i> Filter</button>
+                  </div>
+                </div>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead>
+                    <tr class="border-b border-teal/10">
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Order</th>
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Customer</th>
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Vehicle</th>
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Services</th>
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Status</th>
+                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-teal/10">
+                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0847')">
+                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0847</span><p class="text-xs text-silver">Dec 15, 2024</p></td>
+                      <td class="px-6 py-4"><p class="text-white">John Doe</p><p class="text-xs text-silver">john@example.com</p></td>
+                      <td class="px-6 py-4"><p class="text-white">2024 Dodge Challenger</p></td>
+                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-teal/20 text-teal text-xs">Wrap</span><span class="px-2 py-0.5 rounded bg-purple/20 text-purple text-xs">Audio</span></div></td>
+                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-purple/20 text-purple text-xs"><span class="w-1.5 h-1.5 rounded-full bg-purple"></span> In Progress</span></td>
+                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
+                    </tr>
+                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0846')">
+                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0846</span><p class="text-xs text-silver">Dec 14, 2024</p></td>
+                      <td class="px-6 py-4"><p class="text-white">Sarah Johnson</p><p class="text-xs text-silver">sarah@example.com</p></td>
+                      <td class="px-6 py-4"><p class="text-white">2023 Ford Mustang</p></td>
+                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-purple/20 text-purple text-xs">Audio</span></div></td>
+                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-teal/20 text-teal text-xs"><span class="w-1.5 h-1.5 rounded-full bg-teal"></span> Pending</span></td>
+                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
+                    </tr>
+                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0845')">
+                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0845</span><p class="text-xs text-silver">Dec 12, 2024</p></td>
+                      <td class="px-6 py-4"><p class="text-white">Mike Chen</p><p class="text-xs text-silver">mike@example.com</p></td>
+                      <td class="px-6 py-4"><p class="text-white">2022 Chevy Camaro</p></td>
+                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-teal/20 text-teal text-xs">Wrap</span><span class="px-2 py-0.5 rounded bg-magenta/20 text-magenta text-xs">Lighting</span></div></td>
+                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Completed</span></td>
+                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-order-detail" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button onclick="navigateTo('dashboard')" class="flex items-center gap-2 text-silver hover:text-teal transition-colors mb-8"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to Dashboard</span></button>
+            <div class="glass-panel rounded-2xl p-8 mb-8">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                  <div class="flex items-center gap-3 mb-2"><span class="font-heading text-3xl font-bold text-teal">GKI-2024-0847</span><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/20 text-purple text-sm font-semibold"><span class="w-2 h-2 rounded-full bg-purple"></span> In Progress</span></div>
+                  <p class="text-silver">Submitted December 15, 2024</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                  <button class="btn-secondary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> Email Customer</button>
+                  <button class="btn-primary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="edit" class="w-4 h-4"></i> Update Status</button>
+                </div>
+              </div>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+              <div class="lg:col-span-2 space-y-8">
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="user" class="w-5 h-5 text-teal"></i> Customer Information</h3>
+                  <div class="grid sm:grid-cols-2 gap-4">
+                    <div><p class="text-xs text-silver mb-1">Name</p><p class="text-white font-medium">John Doe</p></div>
+                    <div><p class="text-xs text-silver mb-1">Email</p><p class="text-white font-medium">john@example.com</p></div>
+                    <div><p class="text-xs text-silver mb-1">Phone</p><p class="text-white font-medium">(555) 123-4567</p></div>
+                  </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="car" class="w-5 h-5 text-purple"></i> Vehicle Details</h3>
+                  <div class="grid sm:grid-cols-3 gap-4">
+                    <div><p class="text-xs text-silver mb-1">Year</p><p class="text-white font-medium">2024</p></div>
+                    <div><p class="text-xs text-silver mb-1">Make</p><p class="text-white font-medium">Dodge</p></div>
+                    <div><p class="text-xs text-silver mb-1">Model</p><p class="text-white font-medium">Challenger Hellcat</p></div>
+                  </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="settings" class="w-5 h-5 text-magenta"></i> Requested Services</h3>
+                  <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full bg-teal/20 text-teal text-sm">Custom Wrap</span><span class="px-3 py-1 rounded-full bg-purple/20 text-purple text-sm">Audio System</span><span class="px-3 py-1 rounded-full bg-magenta/20 text-magenta text-sm">Custom Lighting</span></div>
+                  <div>
+                    <p class="text-xs text-silver mb-2">Project Description</p>
+                    <p class="text-white">Captain America themed build. Full blue/red wrap with star graphics, competition-grade audio system with custom subwoofer enclosure, and underglow lighting with interior accent LEDs.</p>
+                  </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="message-square" class="w-5 h-5 text-teal"></i> Internal Notes</h3>
+                  <div class="space-y-4">
+                    <div class="glass-panel rounded-lg p-4">
+                      <div class="flex items-center justify-between mb-2"><span class="text-teal text-sm font-semibold">Admin</span><span class="text-silver text-xs">Dec 18, 2024</span></div>
+                      <p class="text-white text-sm">Customer approved the quote. Starting wrap installation tomorrow.</p>
+                    </div>
+                    <textarea class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 resize-none" rows="2" placeholder="Add a note..."></textarea>
+                    <button class="btn-secondary px-4 py-2 rounded-lg text-sm">Add Note</button>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-6">
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4">Update Status</h3>
+                  <select class="form-input w-full px-4 py-3 rounded-lg text-white mb-4">
+                    <option>Pending Review</option>
+                    <option>Quote Sent</option>
+                    <option>Quote Approved</option>
+                    <option selected>In Progress</option>
+                    <option>Final Details</option>
+                    <option>Ready for Pickup</option>
+                    <option>Completed</option>
+                  </select>
+                  <button class="btn-primary w-full py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider">Update</button>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4">Project Info</h3>
+                  <div class="space-y-4">
+                    <div class="flex justify-between"><span class="text-silver text-sm">Budget</span><span class="text-white font-semibold">$5,000 - $10,000</span></div>
+                    <div class="flex justify-between"><span class="text-silver text-sm">Timeline</span><span class="text-white font-semibold">2-3 months</span></div>
+                    <div class="flex justify-between"><span class="text-silver text-sm">Days in Queue</span><span class="text-white font-semibold">12 days</span></div>
+                  </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-lg font-bold text-white mb-4">Activity Log</h3>
+                  <div class="space-y-3">
+                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-purple mt-2"></div><div><p class="text-white text-sm">Status changed to In Progress</p><p class="text-silver text-xs">Dec 20, 2024</p></div></div>
+                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-teal mt-2"></div><div><p class="text-white text-sm">Quote approved by customer</p><p class="text-silver text-xs">Dec 18, 2024</p></div></div>
+                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-teal mt-2"></div><div><p class="text-white text-sm">Build request received</p><p class="text-silver text-xs">Dec 15, 2024</p></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-operator-setup" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div>
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-3">OPERATOR SETUP</span>
+              <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white mb-3">Transfer &amp; Setup <span class="text-teal neon-text">Checklist</span></h1>
+              <p class="text-silver max-w-3xl">Business identity, billing, legal text, domain control, repo ownership, and all the little transfer details people forget until it hurts.</p>
+            </div>
+
+            <div class="grid xl:grid-cols-[1.25fr_.75fr] gap-8">
+              <div class="space-y-8">
+                <form id="operatorSetupForm" class="space-y-8">
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">A. Business Identity</h2>
+                        <p class="text-silver text-sm mt-1">Basic contact details, public-facing profile fields, and the stuff customers actually need.</p>
+                      </div>
+                      <span class="px-3 py-1 rounded-full bg-teal/15 text-teal text-xs font-semibold">Required</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                      <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-silver mb-2">Business Name</label>
+                        <input type="text" name="business_name" class="form-input w-full px-4 py-3 rounded-lg text-white" value="Gotta Know It Customs LLC" />
+                      </div>
+                      <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-silver mb-2">Business Address</label>
+                        <textarea name="business_address" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="3" placeholder="Street, City, State, ZIP"></textarea>
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Phone Number</label>
+                        <input type="tel" name="business_phone" class="form-input w-full px-4 py-3 rounded-lg text-white" value="651-248-4878" placeholder="(555) 123-4567" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Support Email</label>
+                        <input type="email" name="support_email" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="info@gottaknowit.com" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Public Contact Name</label>
+                        <input type="text" name="public_contact_name" class="form-input w-full px-4 py-3 rounded-lg text-white" value="Ralph Williams" placeholder="Owner or manager name" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Hours / Availability</label>
+                        <input type="text" name="business_hours" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Mon-Fri 9am-6pm" />
+                      </div>
+                      <div class="sm:col-span-2">
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                          <label class="block text-sm font-medium text-silver">Operator Bio</label>
+                          <span class="text-xs text-silver">300 words max</span>
+                        </div>
+                        <textarea name="operator_bio" maxlength="1800" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="6" placeholder="Ralph Williams is the operator behind Gotta Know It Customs, bringing a hands-on, style-first approach to custom vehicle work in Minneapolis. He is drawn to builds that stand out, sound right, and feel personal to the owner. His focus leans toward bold presentation, clean execution, and helping customers shape a build that reflects their taste without losing sight of quality. Through Gotta Know It Customs, he is building a brand centered on individuality, consistency, and real-world customer connection."></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">B. Billing &amp; Payments</h2>
+                        <p class="text-silver text-sm mt-1">Stripe, payout, pricing, and deposit settings. Because getting paid is usually considered important.</p>
+                      </div>
+                      <span class="px-3 py-1 rounded-full bg-purple/15 text-purple text-xs font-semibold">Payments</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Stripe Publishable Key</label>
+                        <input type="text" name="stripe_publishable_key" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="pk_live_..." />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Stripe Secret Key</label>
+                        <input type="password" name="stripe_secret_key" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="sk_live_..." />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Stripe Webhook Secret</label>
+                        <input type="password" name="stripe_webhook_secret" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="whsec_..." />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Deposit Policy</label>
+                        <input type="text" name="deposit_policy" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="50% deposit required before work begins" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Default Deposit Percentage</label>
+                        <input type="number" min="0" max="100" name="deposit_percentage" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="50" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Payout Bank / Account Note</label>
+                        <input type="text" name="payout_note" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Bank account verified in Stripe" />
+                      </div>
+                      <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-silver mb-2">Billing Instructions</label>
+                        <textarea name="billing_instructions" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="3" placeholder="Add internal notes for invoicing, deposits, refunds, taxes, or manual payment follow-up."></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">C. Legal Text</h2>
+                        <p class="text-silver text-sm mt-1">Editable privacy and terms content with reset buttons so nobody permanently wrecks the defaults in a burst of confidence.</p>
+                      </div>
+                      <span class="px-3 py-1 rounded-full bg-magenta/15 text-magenta text-xs font-semibold">Legal</span>
+                    </div>
+                    <div class="space-y-6">
+                      <div>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                          <label class="block text-sm font-medium text-silver">Privacy Policy Text</label>
+                          <button type="button" onclick="resetLegalText('privacy')" class="text-xs text-teal hover:text-white transition-colors underline underline-offset-4">Reset to default privacy</button>
+                        </div>
+                        <textarea id="operatorPrivacyText" name="privacy_text" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="10"></textarea>
+                      </div>
+                      <div>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                          <label class="block text-sm font-medium text-silver">Terms of Service Text</label>
+                          <button type="button" onclick="resetLegalText('terms')" class="text-xs text-teal hover:text-white transition-colors underline underline-offset-4">Reset to default terms</button>
+                        </div>
+                        <textarea id="operatorTermsText" name="terms_text" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="10"></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">D. Domain, DNS &amp; Platform Control</h2>
+                        <p class="text-silver text-sm mt-1">The ownership handoff section people always underestimate right up until the registrar account is tied to someone's ancient email.</p>
+                      </div>
+                      <span class="px-3 py-1 rounded-full bg-teal/15 text-teal text-xs font-semibold">Transfer</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Primary Domain</label>
+                        <input type="text" name="primary_domain" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Registrar</label>
+                        <input type="text" name="domain_registrar" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Registrar Login Owner</label>
+                        <input type="text" name="registrar_owner" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">DNS Provider</label>
+                        <input type="text" name="dns_provider" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">SSL / Edge Platform</label>
+                        <input type="text" name="edge_platform" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Analytics / Tag Manager Owner</label>
+                        <input type="text" name="analytics_owner" readonly class="form-input w-full px-4 py-3 rounded-lg text-white opacity-80 cursor-not-allowed" value="Cloudflare-managed" />
+                      </div>
+                      <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-silver mb-2">DNS &amp; Access Notes</label>
+                        <textarea name="dns_notes" readonly class="form-input w-full px-4 py-3 rounded-lg text-white resize-none opacity-80 cursor-not-allowed" rows="3">Cloudflare-side settings are hardcoded and must be changed in Cloudflare by the platform owner.</textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">E. Repo, Hosting &amp; Ownership Transfer</h2>
+                        <p class="text-silver text-sm mt-1">Git, deploy access, hosting accounts, secrets, and the awkward practical bits of handing the keys to your brother.</p>
+                      </div>
+                      <span class="px-3 py-1 rounded-full bg-purple/15 text-purple text-xs font-semibold">Ops</span>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Git Provider</label>
+                        <input type="text" name="git_provider" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="GitHub" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Repository URL</label>
+                        <input type="text" name="repository_url" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="https://github.com/..." />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Primary Admin Username</label>
+                        <input type="text" name="repo_admin_username" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="new owner username" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Hosting / Deploy Account</label>
+                        <input type="text" name="hosting_account" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="Cloudflare account email" />
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Secrets / Env Vars Confirmed</label>
+                        <select name="secrets_confirmed" class="form-input w-full px-4 py-3 rounded-lg text-white">
+                          <option value="">Select status</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                          <option value="partial">Partial</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-silver mb-2">Cloud Storage / Backups</label>
+                        <input type="text" name="backup_location" class="form-input w-full px-4 py-3 rounded-lg text-white" placeholder="R2, Drive, local archive" />
+                      </div>
+                      <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-silver mb-2">Transfer Notes</label>
+                        <textarea name="transfer_notes" class="form-input w-full px-4 py-3 rounded-lg text-white resize-none" rows="4" placeholder="List repo collaborators, branch protection, deployment tokens, webhook ownership, email accounts, invoices, and any subscriptions that must be transferred."></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                      <div>
+                        <h2 class="font-heading text-2xl font-bold text-white">F. Final Transfer Checklist</h2>
+                        <p class="text-silver text-sm mt-1">The tiny annoying items that turn into real problems when nobody writes them down.</p>
+                      </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4 text-sm text-silver">
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="branding" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>Brand assets transferred: logos, fonts, social graphics, and editable source files</span></label>
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="email_accounts" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>Email inboxes and forwarding rules documented and reassigned</span></label>
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="subscriptions" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>All subscriptions listed: Stripe, Canva, domains, hosting, analytics, and plugins</span></label>
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="tax_docs" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>Business registration, EIN, tax notices, and banking docs handed off securely</span></label>
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="vendor_access" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>Vendor relationships and installer contacts documented</span></label>
+                      <label class="flex items-start gap-3 glass-panel p-4 rounded-lg"><input type="checkbox" name="handoff_items" value="recovery_codes" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><span>Recovery codes and 2FA backup methods stored somewhere sane</span></label>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="button" onclick="saveOperatorSetup()" class="btn-primary px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="save" class="w-4 h-4"></i> Save Setup</button>
+                    <button type="button" onclick="resetOperatorSetup()" class="btn-secondary px-8 py-3 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset Form</button>
+                  </div>
+                </form>
+              </div>
+
+              <aside class="space-y-6">
+                <div class="glass-panel rounded-2xl p-6 gradient-border">
+                  <h3 class="font-heading text-xl font-bold text-white mb-4">Recommended TOML Keys</h3>
+                  <p class="text-silver text-sm mb-4">Use these values in your config so the setup page maps to something real instead of becoming decorative bureaucracy.</p>
+                  <pre class="text-xs text-teal whitespace-pre-wrap leading-6">business_name = "Gotta Know It Customs LLC"
+business_address = ""
+business_phone = ""
+support_email = ""
+stripe_publishable_key = ""
+stripe_secret_key = ""
+stripe_webhook_secret = ""
+primary_domain = ""
+repository_url = ""</pre>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6">
+                  <h3 class="font-heading text-xl font-bold text-white mb-4">Transfer Reminders</h3>
+                  <ul class="space-y-3 text-sm text-silver">
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Move billing ownership before changing deploy access.</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Confirm who owns DNS before touching SSL or email records.</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Export a backup of repo secrets and legal text before edits.</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Make one person clearly responsible for registrar, hosting, and Git admin roles.</span></li>
+                  </ul>
+                </div>
+
+                <div id="operatorSetupStatus" class="glass-panel rounded-2xl p-6 hidden">
+                  <h3 class="font-heading text-xl font-bold text-white mb-2">Setup Saved</h3>
+                  <p class="text-silver text-sm">The operator setup snapshot is stored in local state for preview. Not production persistence yet, because reality remains annoying.</p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-about" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="text-center">
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">ABOUT THE OPERATOR</span>
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Meet <span class="text-teal neon-text">Ralph Williams</span></h1>
+              <p class="text-silver max-w-3xl mx-auto">The operator behind Gotta Know It Customs, focused on bold custom work, clean presentation, and helping customers build something that feels personal instead of off-the-shelf.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-start">
+              <div class="glass-panel rounded-3xl p-8 sm:p-10 neon-glow">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal/20 via-purple/20 to-magenta/20 flex items-center justify-center">
+                    <i data-lucide="user-circle-2" class="w-9 h-9 text-teal"></i>
+                  </div>
+                  <div>
+                    <p class="font-heading text-2xl text-white">Ralph Williams</p>
+                    <p class="text-silver text-sm uppercase tracking-[0.2em]">Operator • Gotta Know It Customs</p>
+                  </div>
+                </div>
+                <div class="space-y-5 text-silver leading-7">
+                  <p>Ralph Williams is building Gotta Know It Customs around the kind of custom work people actually remember. His approach leans into strong visual identity, customer connection, and builds that are meant to stand out on sight and hold attention when they pull up.</p>
+                  <p>Based in Minneapolis, he is shaping the brand with a practical operator mindset and an eye for presentation. The focus is not just on getting work done, but on helping customers create a ride that feels like theirs, from wraps and lighting to audio-driven upgrades and full custom direction.</p>
+                  <p>At the center of it is a straightforward idea: make the process easier to start, make the result worth talking about, and keep the business personal enough that customers feel like they are dealing with a real operator instead of a generic shop account.</p>
+                </div>
+              </div>
+
+              <div class="space-y-6">
+                <div class="glass-panel rounded-3xl p-8 gradient-border">
+                  <h2 class="font-heading text-2xl font-bold text-white mb-4">What Drives the Brand</h2>
+                  <ul class="space-y-3 text-silver text-sm">
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Bold, customer-facing custom work that looks intentional and marketable</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Builds that balance style, sound, and overall visual presence</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>A hands-on operator voice instead of generic shop language</span></li>
+                    <li class="flex gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-teal mt-0.5"></i><span>Clear communication from first contact through project follow-up</span></li>
+                  </ul>
+                </div>
+
+                <div class="glass-panel rounded-3xl p-8">
+                  <span class="inline-block px-4 py-1 rounded-full bg-teal/15 text-teal text-sm font-semibold mb-4">CONTACT ME</span>
+                  <h2 class="font-heading text-3xl font-bold text-white mb-3">Talk with Ralph</h2>
+                  <p class="text-silver mb-6">Questions about a build, pricing, or next steps? Reach out directly and start the conversation.</p>
+                  <a href="tel:6512484878" class="btn-primary w-full px-8 py-4 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-3" data-business-phone>
+                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                    651-248-4878
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-projects" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+              <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">PORTFOLIO</span>
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Completed <span class="text-teal neon-text">Projects</span></h1>
+              <p class="text-silver max-w-2xl mx-auto">Browse our gallery of completed builds. Every project represents our commitment to quality and craftsmanship.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+              <button class="px-6 py-2 rounded-full glass-panel text-teal font-semibold text-sm border border-teal/50">All Projects</button>
+              <button class="px-6 py-2 rounded-full glass-panel text-silver hover:text-teal font-semibold text-sm transition-colors">Audio</button>
+              <button class="px-6 py-2 rounded-full glass-panel text-silver hover:text-teal font-semibold text-sm transition-colors">Fabrication</button>
+              <button class="px-6 py-2 rounded-full glass-panel text-silver hover:text-teal font-semibold text-sm transition-colors">Lighting</button>
+              <button class="px-6 py-2 rounded-full glass-panel text-silver hover:text-teal font-semibold text-sm transition-colors">Wraps</button>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('challenger')"><div class="aspect-[4/3] bg-gradient-to-br from-blue-900 via-red-600 to-blue-900"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Captain America Challenger</h3><p class="text-silver text-sm">2024 Dodge Challenger • Full wrap, audio, lighting</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('mustang')"><div class="aspect-[4/3] bg-gradient-to-br from-violet-950 via-purple-700 to-navy"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Midnight Mustang</h3><p class="text-silver text-sm">2023 Ford Mustang • Competition audio, underglow</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('camaro')"><div class="aspect-[4/3] bg-gradient-to-br from-zinc-900 via-slate-800 to-pink-700"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">CUSTOM WRAP</span><h3 class="font-heading text-xl font-bold text-white mb-1">Neon Nights Camaro</h3><p class="text-silver text-sm">2022 Chevy Camaro • Matte wrap, accent lighting</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('charger')"><div class="aspect-[4/3] bg-gradient-to-br from-teal-950 via-slate-800 to-navy"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">LIGHTING</span><h3 class="font-heading text-xl font-bold text-white mb-1">Teal Terror Charger</h3><p class="text-silver text-sm">2023 Dodge Charger • Full lighting package</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('truck')"><div class="aspect-[4/3] bg-gradient-to-br from-slate-800 via-gray-700 to-purple-800"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">FABRICATION</span><h3 class="font-heading text-xl font-bold text-white mb-1">Custom Show Truck</h3><p class="text-silver text-sm">2024 Ram 1500 • Custom fabrication, show build</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('corvette')"><div class="aspect-[4/3] bg-gradient-to-br from-red-800 via-rose-700 to-slate-900"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Red Rocket Corvette</h3><p class="text-silver text-sm">2024 Chevy Corvette • Full custom package</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-project-detail" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button onclick="navigateTo('projects')" class="flex items-center gap-2 text-silver hover:text-teal transition-colors mb-8"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to Projects</span></button>
+            <div class="glass-panel rounded-2xl p-8">
+              <h1 id="projectDetailTitle" class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Captain America <span class="text-teal neon-text">Challenger</span></h1>
+              <p class="text-silver text-lg">Project detail preview.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-privacy" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button onclick="navigateTo('home')" class="flex items-center gap-2 text-silver hover:text-teal transition-colors mb-8"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to Home</span></button>
+            <div class="glass-panel rounded-2xl p-8">
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Privacy <span class="text-teal neon-text">Policy</span></h1>
+              <p class="text-silver">Legal content placeholder.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-terms" class="page-section">
+        <div class="min-h-screen py-12">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button onclick="navigateTo('home')" class="flex items-center gap-2 text-silver hover:text-teal transition-colors mb-8"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to Home</span></button>
+            <div class="glass-panel rounded-2xl p-8">
+              <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Terms of <span class="text-teal neon-text">Service</span></h1>
+              <p class="text-silver">Legal content placeholder.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="glass-panel border-t border-teal/20 mt-auto">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <div class="sm:col-span-2 lg:col-span-1">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10">
+                <svg viewBox="0 0 48 48" class="w-full h-full">
+                  <circle cx="24" cy="24" r="22" fill="none" stroke="url(#logoGrad)" stroke-width="2" />
+                  <rect x="10" y="20" width="3" height="8" fill="#00d4aa" rx="1" />
+                  <rect x="15" y="16" width="3" height="16" fill="#00d4aa" rx="1" />
+                  <rect x="20" y="12" width="3" height="24" fill="#8b5cf6" rx="1" />
+                  <rect x="25" y="16" width="3" height="16" fill="#8b5cf6" rx="1" />
+                  <rect x="30" y="14" width="3" height="20" fill="#ec4899" rx="1" />
+                  <rect x="35" y="18" width="3" height="12" fill="#ec4899" rx="1" />
+                </svg>
+              </div>
+              <div>
+                <span class="font-heading text-lg font-bold text-white">GOTTA KNOW IT</span>
+                <span class="block text-xs text-silver tracking-widest">CUSTOMS LLC</span>
+              </div>
+            </div>
+            <p id="footerTagline" class="text-silver text-sm mb-4">Built Loud. Built Different.</p>
+          </div>
+          <div>
+            <h4 class="font-heading text-sm font-bold text-white mb-4">QUICK LINKS</h4>
+            <ul class="space-y-2">
+              <li><a href="#" onclick="navigateTo('home'); return false;" class="text-silver hover:text-teal transition-colors text-sm">Home</a></li>
+              <li><a href="#" onclick="navigateTo('about'); return false;" class="text-silver hover:text-teal transition-colors text-sm">About</a></li>
+              <li><a href="#" onclick="navigateTo('projects'); return false;" class="text-silver hover:text-teal transition-colors text-sm">Completed Projects</a></li>
+              <li><a href="#" onclick="navigateTo('build-request'); return false;" class="text-silver hover:text-teal transition-colors text-sm">Build Request</a></li>
+              <li><a href="#" onclick="navigateTo('order-status'); return false;" class="text-silver hover:text-teal transition-colors text-sm">Order Status</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-heading text-sm font-bold text-white mb-4">SERVICES</h4>
+            <ul class="space-y-2 text-silver text-sm">
+              <li>Custom Wraps</li>
+              <li>Audio &amp; Electronics</li>
+              <li>Custom Lighting</li>
+              <li>Custom Fabrication</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-heading text-sm font-bold text-white mb-4">CONTACT</h4>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="map-pin" class="w-4 h-4 text-teal"></i> Your City, State</li>
+              <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="phone" class="w-4 h-4 text-teal"></i> <span data-business-phone>651-248-4878</span></li>
+              <li class="flex items-center gap-2 text-silver text-sm"><i data-lucide="mail" class="w-4 h-4 text-teal"></i> info@gottaknowit.com</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-teal/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p class="text-silver text-xs">© 2024 Gotta Know It Customs LLC. All rights reserved.</p>
+          <div class="flex gap-6">
+            <a href="#" onclick="navigateTo('about'); return false;" class="text-silver hover:text-teal transition-colors text-xs">About</a>
+            <a href="#" onclick="navigateTo('privacy'); return false;" class="text-silver hover:text-teal transition-colors text-xs">Privacy Policy</a>
+            <a href="#" onclick="navigateTo('terms'); return false;" class="text-silver hover:text-teal transition-colors text-xs">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const defaultPrivacyText = `Introduction
+
+Gotta Know It Customs LLC ("we", "us", or "our") collects and uses customer information to respond to inquiries, provide quotes, schedule work, process payments, and maintain service records.
+
+Information We Collect
+
+We may collect contact details, vehicle details, project notes, uploaded images, payment-related records, and website usage data.
+
+How We Use Information
+
+We use this information to communicate with customers, review build requests, manage projects, process deposits or invoices, provide support, and improve operations.
+
+Sharing
+
+We do not sell personal information. We may share information with payment processors, hosting providers, analytics services, or contractors strictly as needed to operate the business.
+
+Security
+
+We use reasonable administrative and technical safeguards, but no system is completely secure.
+
+Contact
+
+Customers may contact the business using the support email or phone number listed on the site for privacy-related questions.`;
+
+    const defaultTermsText = `Agreement
+
+By using this site or requesting service from Gotta Know It Customs LLC, you agree to the terms posted here.
+
+Quotes and Scheduling
+
+Quotes are estimates until approved. Scheduling depends on parts availability, shop capacity, vehicle condition, and customer responsiveness.
+
+Deposits and Payments
+
+Deposits may be required before work begins. Final payment terms, refund treatment, and change-order handling should be stated in the approved quote or invoice.
+
+Customer Responsibilities
+
+Customers must provide accurate vehicle and contact information, disclose known issues that affect the build, and approve material decisions when requested.
+
+Limitations
+
+Build timelines are estimates. The business is not responsible for delays caused by vendors, shipping carriers, hidden vehicle conditions, force majeure, or customer delays.
+
+Website Use
+
+Users may not misuse the site, interfere with services, or attempt unauthorized access.
+
+Changes
+
+These terms may be updated by the business from time to time.`;
+
+    const defaultConfig = {
+      hero_headline: 'Custom Builds. Sound Systems. Vehicle Wraps.',
+      hero_subheadline: 'Gotta Know It Customs LLC',
+      hero_tagline: 'Where Performance Meets Style.',
+      service_1_title: 'Custom Wraps',
+      service_2_title: 'Audio & Electronics',
+      service_3_title: 'Custom Fabrication',
+      cta_headline: 'Ready to Transform Your Ride?',
+      footer_tagline: 'Built Loud. Built Different.',
+      background_color: '#0a0e1a',
+      surface_color: '#101729',
+      text_color: '#94a3b8',
+      primary_action_color: '#00d4aa',
+      secondary_action_color: '#8b5cf6',
+      font_family: 'Oswald',
+      font_size: 16
+    };
+
+    const defaultOperatorData = {
+      analytics_owner: 'Cloudflare-managed',
+      backup_location: '',
+      billing_contact_email: '',
+      billing_instructions: '',
+      business_address: '',
+      business_hours: '',
+      business_name: 'Gotta Know It Customs LLC',
+      business_phone: '651-248-4878',
+      default_deposit_percentage: '',
+      default_labor_rate: '',
+      deposit_policy_text: '',
+      dns_notes: 'Cloudflare-side settings are hardcoded and must be changed in Cloudflare by the platform owner.',
+      dns_provider: 'Cloudflare-managed',
+      edge_platform: 'Cloudflare-managed',
+      git_provider: '',
+      handoff_brand_assets: false,
+      handoff_email_accounts: false,
+      handoff_recovery_codes: false,
+      handoff_subscriptions: false,
+      handoff_tax_docs: false,
+      handoff_vendor_access: false,
+      hosting_account: '',
+      notification_email: '',
+      operator_bio: '',
+      operator_name: 'Ralph Williams',
+      payment_instructions: '',
+      payout_note: '',
+      privacy_policy_text: defaultPrivacyText,
+      primary_domain: 'Cloudflare-managed',
+      profile_slug: 'sample',
+      profile_type: 'operator',
+      public_contact_name: 'Ralph Williams',
+      registrar: 'Cloudflare-managed',
+      registrar_login_owner: 'Cloudflare-managed',
+      repo_admin_username: '',
+      repository_url: '',
+      secrets_confirmed: '',
+      support_email: 'info@gottaknowit.com',
+      terms_of_service_text: defaultTermsText,
+      transfer_notes: '',
+      updated_at: ''
+    };
+
+    let activeOperatorData = { ...defaultOperatorData };
+
+    function setActiveNav(page) {
+      const navTargets = {
+        'build-confirmation': 'build-request',
+        'dashboard-login': 'dashboard',
+        'operator-setup': 'dashboard',
+        'project-detail': 'projects'
+      };
+
+      const activePage = navTargets[page] || page;
+
+      document.querySelectorAll('[data-nav]').forEach((link) => {
+        link.classList.toggle('is-active', link.dataset.nav === activePage);
+      });
+
+      document.querySelectorAll('[data-nav-mobile]').forEach((link) => {
+        link.classList.toggle('is-active', link.dataset.navMobile === activePage);
+      });
+    }
+
+    function isOperatorLoggedIn() {
+      return localStorage.getItem('operatorLoggedIn') === 'true';
+    }
+
+    function navigateTo(page) {
+      if (page === 'dashboard' && !isOperatorLoggedIn()) {
+        page = 'dashboard-login';
+      }
+
+      document.querySelectorAll('.page-section').forEach((section) => {
+        section.classList.remove('active');
+      });
+
+      const targetPage = document.getElementById(`page-${page}`);
+      if (!targetPage) return;
+
+      targetPage.classList.add('active');
+      setActiveNav(page);
+      window.scrollTo(0, 0);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function logoutOperator() {
+      localStorage.removeItem('operatorLoggedIn');
+      localStorage.removeItem('operatorMagicLinkEmail');
+      navigateTo('home');
+    }
+
+    function nextStep(currentStep) {
+      const form = document.getElementById(`step${currentStep}Form`);
+      if (form && !form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (currentStep >= 4) return;
+
+      document.getElementById(`step${currentStep}`)?.classList.add('hidden');
+      const nextStepNum = currentStep + 1;
+      document.getElementById(`step${nextStepNum}`)?.classList.remove('hidden');
+      updateProgress(nextStepNum);
+      window.scrollTo(0, 0);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function previousStep(currentStep) {
+      if (currentStep <= 1) return;
+
+      document.getElementById(`step${currentStep}`)?.classList.add('hidden');
+      const prevStepNum = currentStep - 1;
+      document.getElementById(`step${prevStepNum}`)?.classList.remove('hidden');
+      updateProgress(prevStepNum);
+      window.scrollTo(0, 0);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function updateProgress(stepNum) {
+      const percentage = (stepNum / 4) * 100;
+      const currentStep = document.getElementById('currentStep');
+      const progressPercent = document.getElementById('progressPercent');
+      const progressBar = document.getElementById('progressBar');
+
+      if (currentStep) currentStep.textContent = String(stepNum);
+      if (progressPercent) progressPercent.textContent = String(Math.round(percentage));
+      if (progressBar) progressBar.style.width = `${percentage}%`;
+    }
+
+    function handlePhotoUpload(event) {
+      const files = event.target.files;
+      const photoList = document.getElementById('photoList');
+      const photoItems = document.getElementById('photoItems');
+      if (!photoList || !photoItems || !files?.length) return;
+
+      photoList.classList.remove('hidden');
+      photoItems.innerHTML = '';
+
+      Array.from(files).forEach((file) => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between glass-panel p-3 rounded-lg';
+        item.innerHTML = `
+          <div class="flex items-center gap-2">
+            <i data-lucide="file-image" class="w-4 h-4 text-teal"></i>
+            <span class="text-white text-sm">${file.name}</span>
+          </div>
+          <span class="text-silver text-xs">${(file.size / 1024).toFixed(1)} KB</span>
+        `;
+        photoItems.appendChild(item);
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function viewProject(projectId) {
+      const projectData = {
+        camaro: 'Neon Nights Camaro',
+        challenger: 'Captain America Challenger',
+        charger: 'Teal Terror Charger',
+        corvette: 'Red Rocket Corvette',
+        mustang: 'Midnight Mustang',
+        truck: 'Custom Show Truck'
+      };
+
+      const title = projectData[projectId] || projectData.challenger;
+      const target = document.getElementById('projectDetailTitle');
+      if (target) {
+        target.innerHTML = title.replace(/(Challenger|Mustang|Camaro|Charger|Corvette|Truck)/, '<span class="text-teal neon-text">$1</span>');
+      }
+      navigateTo('project-detail');
+    }
+
+    function viewOrderDetail(orderId) {
+      const titleTarget = document.querySelector('#page-order-detail .font-heading.text-3xl');
+      if (titleTarget) titleTarget.textContent = orderId;
+      navigateTo('order-detail');
+    }
+
+    function resetLegalText(type) {
+      if (type === 'privacy') {
+        const field = document.getElementById('operatorPrivacyText');
+        if (field) field.value = defaultPrivacyText;
+      }
+      if (type === 'terms') {
+        const field = document.getElementById('operatorTermsText');
+        if (field) field.value = defaultTermsText;
+      }
+    }
+
+    function normalizePhoneHref(phone) {
+      return `tel:${String(phone || '').replace(/[^\d+]/g, '')}`;
+    }
+
+    function getOperatorProfileSlug() {
+      const params = new URLSearchParams(window.location.search);
+      const requestedSlug = params.get('operator') || params.get('profile');
+      return (requestedSlug || '').trim() || 'sample';
+    }
+
+    function setInputValue(name, value) {
+      document.querySelectorAll(`[name="${name}"]`).forEach((field) => {
+        if (field.type === 'checkbox') {
+          field.checked = Boolean(value);
+          return;
+        }
+        field.value = value ?? '';
+      });
+    }
+
+    function populateOperatorData(operatorData) {
+      activeOperatorData = { ...defaultOperatorData, ...operatorData };
+
+      const phone = activeOperatorData.business_phone || defaultOperatorData.business_phone;
+      const phoneHref = normalizePhoneHref(phone);
+      const supportEmail = activeOperatorData.support_email || activeOperatorData.notification_email || defaultOperatorData.support_email;
+      const operatorName = activeOperatorData.operator_name || activeOperatorData.public_contact_name || defaultOperatorData.operator_name;
+      const businessName = activeOperatorData.business_name || defaultOperatorData.business_name;
+      const operatorBio = activeOperatorData.operator_bio || '';
+      const aboutIntro = operatorBio || 'The operator behind this shop brings a hands-on approach to custom builds, customer communication, and presentation-focused work.';
+
+      document.querySelectorAll('[data-business-phone]').forEach((el) => {
+        el.textContent = phone;
+        if (el.tagName === 'A') {
+          el.setAttribute('href', phoneHref);
+        }
+      });
+
+      const heroSubheadline = document.getElementById('heroSubheadline');
+      if (heroSubheadline) heroSubheadline.textContent = businessName;
+
+      const aboutTitle = document.querySelector('#page-about h1');
+      if (aboutTitle) {
+        const nameParts = operatorName.split(' ');
+        const lastWord = nameParts.pop() || operatorName;
+        const firstWords = nameParts.join(' ');
+        aboutTitle.innerHTML = `Meet ${firstWords ? `${firstWords} ` : ''}<span class="text-teal neon-text">${lastWord}</span>`;
+      }
+
+      const aboutIntroTarget = document.querySelector('#page-about .text-center p');
+      if (aboutIntroTarget) aboutIntroTarget.textContent = aboutIntro;
+
+      const aboutBioContainer = document.querySelector('#page-about .space-y-5');
+      if (aboutBioContainer) {
+        const paragraphs = operatorBio
+          .split(/\n{2,}/)
+          .map((part) => part.trim())
+          .filter(Boolean);
+
+        if (paragraphs.length) {
+          aboutBioContainer.innerHTML = paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join('');
+        }
+      }
+
+      const aboutOperatorName = document.querySelector('#page-about .font-heading.text-2xl');
+      if (aboutOperatorName) aboutOperatorName.textContent = operatorName;
+
+      const aboutOperatorRole = document.querySelector('#page-about .uppercase.tracking-\\[0\\.2em\\]');
+      if (aboutOperatorRole) aboutOperatorRole.textContent = `Operator • ${businessName}`;
+
+      const footerBusinessName = document.querySelector('footer .font-heading.text-lg');
+      if (footerBusinessName) footerBusinessName.textContent = businessName.toUpperCase();
+
+      const contactAddress = document.querySelector('footer [data-lucide="map-pin"]')?.parentElement;
+      if (contactAddress && activeOperatorData.business_address) {
+        const icon = contactAddress.querySelector('[data-lucide="map-pin"]');
+        contactAddress.innerHTML = '';
+        if (icon) contactAddress.appendChild(icon);
+        contactAddress.append(` ${activeOperatorData.business_address}`);
+      }
+
+      const contactEmail = document.querySelector('footer [data-lucide="mail"]')?.parentElement;
+      if (contactEmail && supportEmail) {
+        const icon = contactEmail.querySelector('[data-lucide="mail"]');
+        contactEmail.innerHTML = '';
+        if (icon) contactEmail.appendChild(icon);
+        contactEmail.append(` ${supportEmail}`);
+      }
+
+      const privacyField = document.getElementById('operatorPrivacyText');
+      if (privacyField) privacyField.value = activeOperatorData.privacy_policy_text || defaultPrivacyText;
+
+      const termsField = document.getElementById('operatorTermsText');
+      if (termsField) termsField.value = activeOperatorData.terms_of_service_text || defaultTermsText;
+
+      const privacyPageText = document.querySelector('#page-privacy p.text-silver');
+      if (privacyPageText) privacyPageText.textContent = activeOperatorData.privacy_policy_text || defaultPrivacyText;
+
+      const termsPageText = document.querySelector('#page-terms p.text-silver');
+      if (termsPageText) termsPageText.textContent = activeOperatorData.terms_of_service_text || defaultTermsText;
+
+      setInputValue('business_name', businessName);
+      setInputValue('business_address', activeOperatorData.business_address || '');
+      setInputValue('business_phone', phone);
+      setInputValue('support_email', supportEmail || '');
+      setInputValue('public_contact_name', activeOperatorData.public_contact_name || operatorName);
+      setInputValue('business_hours', activeOperatorData.business_hours || '');
+      setInputValue('operator_bio', operatorBio);
+      setInputValue('stripe_publishable_key', activeOperatorData.stripe_publishable_key || '');
+      setInputValue('stripe_secret_key', activeOperatorData.stripe_secret_key || '');
+      setInputValue('stripe_webhook_secret', activeOperatorData.stripe_webhook_secret || '');
+      setInputValue('deposit_policy', activeOperatorData.deposit_policy_text || '');
+      setInputValue('deposit_percentage', activeOperatorData.default_deposit_percentage || '');
+      setInputValue('payout_note', activeOperatorData.payout_note || '');
+      setInputValue('billing_instructions', activeOperatorData.billing_instructions || activeOperatorData.payment_instructions || '');
+      setInputValue('primary_domain', activeOperatorData.primary_domain || defaultOperatorData.primary_domain);
+      setInputValue('domain_registrar', activeOperatorData.registrar || defaultOperatorData.registrar);
+      setInputValue('registrar_owner', activeOperatorData.registrar_login_owner || defaultOperatorData.registrar_login_owner);
+      setInputValue('dns_provider', activeOperatorData.dns_provider || defaultOperatorData.dns_provider);
+      setInputValue('edge_platform', activeOperatorData.edge_platform || defaultOperatorData.edge_platform);
+      setInputValue('analytics_owner', activeOperatorData.analytics_owner || defaultOperatorData.analytics_owner);
+      setInputValue('dns_notes', activeOperatorData.dns_notes || defaultOperatorData.dns_notes);
+      setInputValue('git_provider', activeOperatorData.git_provider || '');
+      setInputValue('repository_url', activeOperatorData.repository_url || '');
+      setInputValue('repo_admin_username', activeOperatorData.repo_admin_username || '');
+      setInputValue('hosting_account', activeOperatorData.hosting_account || '');
+      setInputValue('secrets_confirmed', activeOperatorData.secrets_confirmed || '');
+      setInputValue('backup_location', activeOperatorData.backup_location || '');
+      setInputValue('transfer_notes', activeOperatorData.transfer_notes || '');
+
+      const handoffMap = {
+        branding: activeOperatorData.handoff_brand_assets,
+        email_accounts: activeOperatorData.handoff_email_accounts,
+        recovery_codes: activeOperatorData.handoff_recovery_codes,
+        subscriptions: activeOperatorData.handoff_subscriptions,
+        tax_docs: activeOperatorData.handoff_tax_docs,
+        vendor_access: activeOperatorData.handoff_vendor_access
+      };
+
+      document.querySelectorAll('input[name="handoff_items"]').forEach((field) => {
+        field.checked = Boolean(handoffMap[field.value]);
+      });
+    }
+
+    async function fetchOperatorDataFromJson(path) {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`JSON request failed with status ${response.status}`);
+      }
+      return response.json();
+    }
+
+    async function loadOperatorData() {
+      const slug = getOperatorProfileSlug();
+      const candidates = [
+        `/assets/operator/home/${slug}/data.json`,
+        '/assets/operator/home/sample/data.json'
+      ];
+
+      for (const path of candidates) {
+        try {
+          const data = await fetchOperatorDataFromJson(path);
+          populateOperatorData(data);
+          return;
+        } catch (error) {
+          console.warn(`Failed to load operator data from ${path}`, error);
+        }
+      }
+
+      populateOperatorData(defaultOperatorData);
+    }
+
+    function saveOperatorSetup() {
+      const form = document.getElementById('operatorSetupForm');
+      const status = document.getElementById('operatorSetupStatus');
+      if (!form) return;
+
+      const formData = new FormData(form);
+      const payload = {
+        ...activeOperatorData,
+        analytics_owner: formData.get('analytics_owner') || defaultOperatorData.analytics_owner,
+        backup_location: formData.get('backup_location') || '',
+        billing_instructions: formData.get('billing_instructions') || '',
+        business_address: formData.get('business_address') || '',
+        business_hours: formData.get('business_hours') || '',
+        business_name: formData.get('business_name') || defaultOperatorData.business_name,
+        business_phone: formData.get('business_phone') || defaultOperatorData.business_phone,
+        default_deposit_percentage: formData.get('deposit_percentage') || '',
+        deposit_policy_text: formData.get('deposit_policy') || '',
+        dns_notes: formData.get('dns_notes') || defaultOperatorData.dns_notes,
+        dns_provider: formData.get('dns_provider') || defaultOperatorData.dns_provider,
+        edge_platform: formData.get('edge_platform') || defaultOperatorData.edge_platform,
+        git_provider: formData.get('git_provider') || '',
+        handoff_brand_assets: formData.getAll('handoff_items').includes('branding'),
+        handoff_email_accounts: formData.getAll('handoff_items').includes('email_accounts'),
+        handoff_recovery_codes: formData.getAll('handoff_items').includes('recovery_codes'),
+        handoff_subscriptions: formData.getAll('handoff_items').includes('subscriptions'),
+        handoff_tax_docs: formData.getAll('handoff_items').includes('tax_docs'),
+        handoff_vendor_access: formData.getAll('handoff_items').includes('vendor_access'),
+        hosting_account: formData.get('hosting_account') || '',
+        operator_bio: formData.get('operator_bio') || '',
+        operator_name: formData.get('public_contact_name') || activeOperatorData.operator_name,
+        payout_note: formData.get('payout_note') || '',
+        payment_instructions: formData.get('billing_instructions') || '',
+        privacy_policy_text: formData.get('privacy_text') || defaultPrivacyText,
+        profile_slug: activeOperatorData.profile_slug || getOperatorProfileSlug(),
+        public_contact_name: formData.get('public_contact_name') || '',
+        registrar: formData.get('domain_registrar') || defaultOperatorData.registrar,
+        registrar_login_owner: formData.get('registrar_owner') || defaultOperatorData.registrar_login_owner,
+        repo_admin_username: formData.get('repo_admin_username') || '',
+        repository_url: formData.get('repository_url') || '',
+        secrets_confirmed: formData.get('secrets_confirmed') || '',
+        stripe_publishable_key: formData.get('stripe_publishable_key') || '',
+        stripe_secret_key: formData.get('stripe_secret_key') || '',
+        stripe_webhook_secret: formData.get('stripe_webhook_secret') || '',
+        support_email: formData.get('support_email') || '',
+        terms_of_service_text: formData.get('terms_text') || defaultTermsText,
+        transfer_notes: formData.get('transfer_notes') || '',
+        updated_at: new Date().toISOString()
+      };
+
+      localStorage.setItem('operatorSetupDraft', JSON.stringify(payload));
+      populateOperatorData(payload);
+
+      if (status) {
+        status.classList.remove('hidden');
+        status.innerHTML = `
+          <h3 class="font-heading text-xl font-bold text-white mb-2">Setup Saved</h3>
+          <p class="text-silver text-sm">The operator setup snapshot is stored in local state for preview. Not production persistence yet, because reality remains annoying.</p>
+        `;
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    function resetOperatorSetup() {
+      const form = document.getElementById('operatorSetupForm');
+      const status = document.getElementById('operatorSetupStatus');
+      if (!form) return;
+
+      form.reset();
+      localStorage.removeItem('operatorSetupDraft');
+      populateOperatorData(defaultOperatorData);
+
+      if (status) status.classList.add('hidden');
+    }
+
+    function hydrateOperatorSetup() {
+      const raw = localStorage.getItem('operatorSetupDraft');
+      if (!raw) {
+        populateOperatorData(defaultOperatorData);
+        return;
+      }
+
+      try {
+        const data = JSON.parse(raw);
+        populateOperatorData(data);
+        document.getElementById('operatorSetupStatus')?.classList.remove('hidden');
+      } catch (error) {
+        console.error('Failed to hydrate operator setup draft', error);
+        populateOperatorData(defaultOperatorData);
+      }
+    }
+
+    function applyConfig(config) {
+      const cfg = { ...defaultConfig, ...config };
+
+      const heroHeadline = document.getElementById('heroHeadline');
+      if (heroHeadline) {
+        const parts = cfg.hero_headline.split('.').map((part) => part.trim()).filter(Boolean);
+        if (parts.length >= 3) {
+          heroHeadline.innerHTML = `<span class="text-white">${parts[0]}.</span><br /><span class="text-teal neon-text">${parts[1]}.</span><br /><span class="text-white">${parts[2]}.</span>`;
+        } else {
+          heroHeadline.textContent = cfg.hero_headline;
+        }
+      }
+
+      const updates = {
+        ctaHeadline: cfg.cta_headline,
+        footerTagline: cfg.footer_tagline,
+        heroSubheadline: cfg.hero_subheadline,
+        heroTagline: cfg.hero_tagline,
+        service1Title: cfg.service_1_title,
+        service2Title: cfg.service_2_title,
+        service3Title: cfg.service_3_title
+      };
+
+      Object.entries(updates).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = value;
+      });
+
+      document.body.style.fontSize = `${cfg.font_size}px`;
+      document.querySelectorAll('.font-heading').forEach((el) => {
+        el.style.fontFamily = `${cfg.font_family}, sans-serif`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const operatorLoginPageForm = document.getElementById('operatorLoginPageForm');
+      const orderSearchForm = document.getElementById('orderSearchForm');
+      const step4Form = document.getElementById('step4Form');
+
+      if (operatorLoginPageForm) {
+        operatorLoginPageForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailInput = document.getElementById('operatorEmailPage');
+          const email = emailInput ? emailInput.value.trim() : '';
+          localStorage.setItem('operatorMagicLinkEmail', email);
+          localStorage.setItem('operatorLoggedIn', 'true');
+          navigateTo('dashboard');
+        });
+      }
+
+      if (orderSearchForm) {
+        orderSearchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const orderNumber = document.getElementById('orderNumber')?.value.trim().toUpperCase() || '';
+          const found = orderNumber.includes('GKI');
+          document.getElementById('orderStatusResult')?.classList.toggle('hidden', !found);
+          document.getElementById('orderNotFound')?.classList.toggle('hidden', found);
+        });
+      }
+
+      if (step4Form) {
+        step4Form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const orderNumber = `GKI-2024-${String(Math.floor(Math.random() * 9000) + 1000)}`;
+          const target = document.getElementById('confirmationOrderNumber');
+          if (target) target.textContent = orderNumber;
+          navigateTo('build-confirmation');
+        });
+      }
+
+      hydrateOperatorSetup();
+      await loadOperatorData();
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => applyConfig(config),
+          mapToCapabilities: () => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['cta_headline', config.cta_headline || defaultConfig.cta_headline],
+            ['footer_tagline', config.footer_tagline || defaultConfig.footer_tagline],
+            ['hero_headline', config.hero_headline || defaultConfig.hero_headline],
+            ['hero_subheadline', config.hero_subheadline || defaultConfig.hero_subheadline],
+            ['hero_tagline', config.hero_tagline || defaultConfig.hero_tagline],
+            ['service_1_title', config.service_1_title || defaultConfig.service_1_title],
+            ['service_2_title', config.service_2_title || defaultConfig.service_2_title],
+            ['service_3_title', config.service_3_title || defaultConfig.service_3_title]
+          ])
+        });
+      }
+
+      setActiveNav('home');
+      if (window.lucide) lucide.createIcons();
+
+      console.assert(typeof applyConfig === 'function', 'applyConfig should be defined');
+      console.assert(typeof fetchOperatorDataFromJson === 'function', 'fetchOperatorDataFromJson should be defined');
+      console.assert(typeof getOperatorProfileSlug === 'function', 'getOperatorProfileSlug should be defined');
+      console.assert(typeof loadOperatorData === 'function', 'loadOperatorData should be defined');
+      console.assert(typeof navigateTo === 'function', 'navigateTo should be defined');
+      console.assert(typeof normalizePhoneHref === 'function', 'normalizePhoneHref should be defined');
+      console.assert(typeof populateOperatorData === 'function', 'populateOperatorData should be defined');
+      console.assert(typeof saveOperatorSetup === 'function', 'saveOperatorSetup should be defined');
+      console.assert(typeof setInputValue === 'function', 'setInputValue should be defined');
+      console.assert(document.getElementById('page-home'), 'Home page section should exist');
+      console.assert(document.getElementById('page-dashboard-login'), 'Dashboard login page should exist');
+      console.assert(document.getElementById('page-about'), 'About page section should exist');
+      console.assert(document.getElementById('page-order-detail'), 'Order detail page should exist');
+      console.assert(document.getElementById('operatorSetupForm'), 'Operator setup form should exist');
+      console.assert(normalizePhoneHref('651-248-4878') === 'tel:6512484878', 'Phone href should normalize correctly');
+      console.assert(normalizePhoneHref('(651) 248-4878 ext. 9') === 'tel:65124848789', 'Phone href should strip punctuation and letters');
+      console.assert(getOperatorProfileSlug() !== '', 'Profile slug should never be empty');
+      console.assert(document.querySelectorAll('[name="business_name"]').length > 0, 'Business name input should exist');
+      console.assert(document.getElementById('heroHeadline')?.textContent.includes('Custom Builds'), 'Hero headline should render');
+    });
+  </script>
+</body>
+</html>

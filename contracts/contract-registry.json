@@ -1,0 +1,78 @@
+{
+  "contracts": [
+    {
+      "contract": "operator-public-profile.v1",
+      "notes": "Public site rendering contract for operator-specific content.",
+      "read_from": [
+        "/assets/operator/home/{profile_slug}/data.json",
+        "GET /api/operator-profile?profile_slug={profile_slug}"
+      ],
+      "static_fallback": "/assets/operator/home/{profile_slug}/data.json",
+      "storage_authority": [
+        "Static JSON for current deploy",
+        "Worker API later"
+      ],
+      "used_by": [
+        "/site/index.html#about",
+        "/site/index.html#footer",
+        "/site/index.html#header",
+        "/site/index.html#home"
+      ],
+      "version": "v1",
+      "visibility": "public",
+      "worker_endpoints": [
+        "GET /api/operator-profile"
+      ],
+      "write_to": []
+    },
+    {
+      "contract": "operator-settings.v1",
+      "notes": "Private business, billing, legal, and operator admin settings.",
+      "read_from": [
+        "GET /api/operator-settings"
+      ],
+      "static_fallback": null,
+      "storage_authority": [
+        "D1 structured fields",
+        "R2 JSON snapshot backup"
+      ],
+      "used_by": [
+        "/site/index.html#dashboard",
+        "/site/index.html#operator-setup"
+      ],
+      "version": "v1",
+      "visibility": "private",
+      "worker_endpoints": [
+        "GET /api/operator-settings",
+        "POST /api/operator-settings"
+      ],
+      "write_to": [
+        "POST /api/operator-settings"
+      ]
+    },
+    {
+      "contract": "operator-platform-control.v1",
+      "notes": "Private infrastructure, repo, domain, hosting, and transfer-control settings.",
+      "read_from": [
+        "GET /api/operator-platform-control"
+      ],
+      "static_fallback": null,
+      "storage_authority": [
+        "D1 structured fields",
+        "R2 JSON snapshot backup"
+      ],
+      "used_by": [
+        "/site/index.html#operator-setup"
+      ],
+      "version": "v1",
+      "visibility": "private",
+      "worker_endpoints": [
+        "GET /api/operator-platform-control",
+        "POST /api/operator-platform-control"
+      ],
+      "write_to": [
+        "POST /api/operator-platform-control"
+      ]
+    }
+  ]
+}

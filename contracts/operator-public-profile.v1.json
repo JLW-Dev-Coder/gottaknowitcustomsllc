@@ -1,0 +1,22 @@
+{
+  "contract": "operator-public-profile.v1",
+  "description": "Public operator profile used for site rendering.",
+  "fields": {
+    "business_city": "string",
+    "business_email": "string",
+    "business_name": "string",
+    "business_phone": "string",
+    "business_state": "string",
+    "hero_headline": "string",
+    "hero_tagline": "string",
+    "operator_bio": "string",
+    "operator_image": "string",
+    "operator_name": "string",
+    "profile_slug": "string",
+    "projects_featured": "array",
+    "projects_gallery": "array",
+    "support_email": "string",
+    "updated_at": "timestamp",
+    "website": "string"
+  }
+}
