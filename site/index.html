@@ -1448,8 +1448,8 @@ repository_url = ""</pre>
       <div>
         <h4 class="text-white font-semibold mb-4">Contact</h4>
         <ul class="space-y-2 text-slate-400 text-sm">
-          <li>651-248-4878</li>
-          <li>info@gottaknowitcustoms.com</li>
+          <li><a href="tel:6512484878" class="hover:text-teal transition" data-footer-phone>651-248-4878</a></li>
+          <li><a href="mailto:info@gottaknowitcustoms.com" class="hover:text-teal transition" data-support-email>info@gottaknowitcustoms.com</a></li>
           <li>Mon-Fri • 9am-6pm</li>
         </ul>
       </div>
@@ -1833,7 +1833,15 @@ These terms may be updated by the business from time to time.`;
     function populateOperatorData(operatorData) {
       activeOperatorData = { ...defaultOperatorData, ...operatorData };
 
-      const phone = activeOperatorData.business_phone || defaultOperatorData.business_phone;
+      const rawPhone = String(activeOperatorData.business_phone || '').trim();
+      const invalidPhonePatterns = [
+        /^0{3}[-\s]?0{3}[-\s]?0{4}$/,
+        /^\(0{3}\)\s*0{3}-0{4}$/,
+        /^0000000000$/
+      ];
+      const phone = rawPhone && !invalidPhonePatterns.some((pattern) => pattern.test(rawPhone))
+        ? rawPhone
+        : defaultOperatorData.business_phone;
       const phoneHref = normalizePhoneHref(phone);
       const supportEmail = activeOperatorData.support_email || activeOperatorData.notification_email || defaultOperatorData.support_email;
       const operatorName = activeOperatorData.operator_name || activeOperatorData.public_contact_name || defaultOperatorData.operator_name;
@@ -1879,16 +1887,23 @@ These terms may be updated by the business from time to time.`;
       const aboutOperatorRole = document.getElementById('aboutOperatorRole');
       if (aboutOperatorRole) aboutOperatorRole.textContent = `Operator • ${businessName}`;
 
-      const footerBusinessName = document.querySelector('footer .font-heading.text-lg');
-      if (footerBusinessName) footerBusinessName.textContent = businessName.toUpperCase();
-
       const contactAddress = document.querySelector('footer [data-lucide="map-pin"]')?.parentElement;
       if (contactAddress && activeOperatorData.business_address) {
         contactAddress.innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-teal"></i> ${activeOperatorData.business_address}`;
       }
 
+      document.querySelectorAll('[data-footer-phone]').forEach((el) => {
+        el.textContent = phone;
+        if (el.tagName === 'A') {
+          el.setAttribute('href', phoneHref);
+        }
+      });
+
       document.querySelectorAll('[data-support-email]').forEach((el) => {
         el.textContent = supportEmail;
+        if (el.tagName === 'A') {
+          el.setAttribute('href', `mailto:${supportEmail}`);
+        }
       });
 
       const privacyField = document.getElementById('operatorPrivacyText');
