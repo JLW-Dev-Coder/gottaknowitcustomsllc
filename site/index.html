@@ -1567,7 +1567,7 @@ These terms may be updated by the business from time to time.`;
       payout_note: '',
       privacy_policy_text: defaultPrivacyText,
       primary_domain: 'Cloudflare-managed',
-      profile_slug: 'sample',
+      profile_slug: 'williams_ralph',
       profile_type: 'operator',
       public_contact_name: 'Ralph Williams',
       registrar: 'Cloudflare-managed',
@@ -1823,7 +1823,7 @@ These terms may be updated by the business from time to time.`;
     function getOperatorProfileSlug() {
       const params = new URLSearchParams(window.location.search);
       const requestedSlug = params.get('operator') || params.get('profile');
-      return (requestedSlug || '').trim() || 'sample';
+      return (requestedSlug || '').trim() || 'williams_ralph';
     }
 
     function setInputValue(name, value) {
