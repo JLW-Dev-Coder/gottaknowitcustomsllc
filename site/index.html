@@ -242,6 +242,7 @@
     }
 
     .project-image {
+      animation: project-car-float 6s ease-in-out infinite;
       filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.45));
       transition: transform 0.45s ease;
     }
@@ -338,6 +339,26 @@
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
+
+    @keyframes project-car-float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.01); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .floating-car,
+      .floating-particles,
+      .hero-car-main,
+      .hero-glow-orbit,
+      .hero-shadow-drift,
+      .operator-portrait-float,
+      .project-image,
+      .service-card-animated,
+      .project-card-animated,
+      .text-glow-animate {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body class="h-full bg-midnight font-body text-white overflow-auto">
@@ -420,30 +441,30 @@
               </div>
 
               <div class="relative hero-image-container mx-auto flex items-center justify-center">
-                <div class="relative w-full max-w-[520px] aspect-[4/3] flex items-center justify-center">
+                <div class="relative w-full max-w-[520px] aspect-[4/3] flex items-center justify-center floating-car">
                   <img
                     src="/assets/images/cars/shared/glow-purple-underlay.png"
                     alt=""
                     aria-hidden="true"
-                    class="absolute w-[75%] opacity-40 blur-[6px] pointer-events-none select-none"
+                    class="hero-glow-orbit absolute w-[75%] opacity-40 blur-[6px] pointer-events-none select-none"
                   />
                   <img
                     src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png"
                     alt=""
                     aria-hidden="true"
-                    class="absolute bottom-[8%] w-[70%] opacity-80 pointer-events-none select-none"
+                    class="hero-glow-orbit absolute bottom-[8%] w-[70%] opacity-80 pointer-events-none select-none"
                   />
                   <img
                     src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-shadow.png"
                     alt=""
                     aria-hidden="true"
-                    class="absolute w-[92%] opacity-60 scale-[0.96] blur-[2px] pointer-events-none select-none"
+                    class="hero-shadow-drift absolute top-[-3rem] w-[95%] opacity-55 scale-[0.98] blur-[1.5px] pointer-events-none select-none z-10"
                   />
                   <img
                     src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-main.png"
                     alt="Captain America Challenger custom build"
                     data-home-hero-image
-                    class="relative w-full object-contain pointer-events-none select-none"
+                    class="hero-car-main relative w-full object-contain pointer-events-none select-none z-20"
                   />
                 </div>
                 <div class="absolute -bottom-6 -right-6 glass-panel rounded-xl p-4 gradient-border">
