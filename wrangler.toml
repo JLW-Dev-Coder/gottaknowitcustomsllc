@@ -1,5 +1,17 @@
 name = "gottaknowitcustomsllc"
+main = "./workers/api-worker.js"
 compatibility_date = "2026-03-12"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gki-operator-db"
+database_id = "c28e41aa-6259-44ce-8ed6-374a4ee0b45f"
+
+[[r2_buckets]]
+binding = "OPERATOR_BLOBS"
+bucket_name = "gki-operator-data"
