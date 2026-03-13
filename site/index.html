@@ -345,7 +345,6 @@
       50% { transform: translateY(-10px); }
     }
   </style>
-  <link rel="icon" href="/assets/images/branding/favicon.ico" sizes="any">
 </head>
 <body class="h-full bg-midnight font-body text-white overflow-auto">
   <div class="min-h-full flex flex-col">
@@ -730,7 +729,7 @@
                   <p class="text-silver text-sm mb-6">What customizations are you interested in?</p>
                 </div>
                 <div class="grid sm:grid-cols-2 gap-4">
-                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="wrap" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Wrap</span><span class="text-silver text-xs">Full or partial vehicle wrap</span></div></label>
+                  <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="wraps" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Wrap</span><span class="text-silver text-xs">Full or partial vehicle wrap</span></div></label>
                   <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="audio" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Audio System</span><span class="text-silver text-xs">Custom sound installation</span></div></label>
                   <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="lighting" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Lighting</span><span class="text-silver text-xs">Interior &amp; exterior lighting</span></div></label>
                   <label class="flex items-start gap-3 glass-panel p-4 rounded-lg cursor-pointer"><input type="checkbox" name="services" value="fabrication" class="mt-1 h-5 w-5 rounded border-silver/30 text-teal focus:ring-teal" /><div><span class="block text-white">Custom Fabrication</span><span class="text-silver text-xs">Panels, enclosures &amp; builds</span></div></label>
@@ -748,7 +747,8 @@
               <form id="step3Form" class="space-y-6">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="image-plus" class="w-6 h-6 text-magenta"></i> Upload Photos</h3>
-                  <p class="text-silver text-sm mb-6">Share images of your vehicle so we can assess the project</p>
+                  <p class="text-silver text-sm mb-2">Share images of your vehicle so we can assess the project</p>
+                  <p class="text-xs text-amber-300/90 mb-6">Photos are preview-only right now and are not submitted with your request yet.</p>
                 </div>
                 <div class="group relative cursor-pointer rounded-xl border-2 border-dashed border-magenta/30 p-8 text-center transition-colors hover:border-magenta/50 glass-panel" onclick="document.getElementById('photoInput').click()">
                   <input type="file" id="photoInput" name="photos" multiple accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
@@ -835,7 +835,7 @@
               <p class="text-silver text-lg mb-8">Thank you for choosing Gotta Know It Customs. We've received your build request and will review it shortly.</p>
               <div class="glass-panel rounded-xl p-6 mb-8">
                 <p class="text-sm text-silver mb-2">Your Order Number</p>
-                <p id="confirmationOrderNumber" class="font-heading text-3xl font-bold text-teal neon-text">GKI-2024-0847</p>
+                <p id="confirmationOrderNumber" class="font-heading text-3xl font-bold text-teal neon-text">GKI-2026-0000</p>
                 <p class="text-xs text-silver mt-2">Save this number to check your order status</p>
               </div>
               <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -859,12 +859,12 @@
               <form id="orderSearchForm" class="flex flex-col sm:flex-row gap-4">
                 <div class="flex-1">
                   <label for="orderNumber" class="sr-only">Order Number</label>
-                  <input type="text" id="orderNumber" name="orderNumber" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 text-center sm:text-left font-heading text-lg" placeholder="Enter order number (e.g., GKI-2024-0847)" />
+                  <input type="text" id="orderNumber" name="orderNumber" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 text-center sm:text-left font-heading text-lg" placeholder="Enter order number (e.g., GKI-2026-5363)" />
                 </div>
                 <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Check Status</button>
               </form>
             </div>
-            <div id="orderStatusResult" class="hidden glass-panel rounded-2xl p-8">Order found. Typical human miracle.</div>
+            <div id="orderStatusResult" class="hidden glass-panel rounded-2xl p-8"></div>
             <div id="orderNotFound" class="hidden glass-panel rounded-2xl p-12 text-center">
               <i data-lucide="search-x" class="w-16 h-16 text-silver/50 mx-auto mb-4"></i>
               <h3 class="font-heading text-xl font-bold text-white mb-2">Order Not Found</h3>
@@ -926,31 +926,31 @@
               <div class="glass-panel rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
                   <div class="w-12 h-12 rounded-lg bg-teal/20 flex items-center justify-center"><i data-lucide="inbox" class="w-6 h-6 text-teal"></i></div>
-                  <span class="text-teal text-sm font-semibold">+3 new</span>
+                  <span id="dashboardPendingDelta" class="text-teal text-sm font-semibold">Live</span>
                 </div>
-                <p class="text-3xl font-heading font-bold text-white">12</p>
+                <p id="dashboardPendingCount" class="text-3xl font-heading font-bold text-white">0</p>
                 <p class="text-silver text-sm">Pending Requests</p>
               </div>
               <div class="glass-panel rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
                   <div class="w-12 h-12 rounded-lg bg-purple/20 flex items-center justify-center"><i data-lucide="wrench" class="w-6 h-6 text-purple"></i></div>
                 </div>
-                <p class="text-3xl font-heading font-bold text-white">8</p>
+                <p id="dashboardInProgressCount" class="text-3xl font-heading font-bold text-white">0</p>
                 <p class="text-silver text-sm">In Progress</p>
               </div>
               <div class="glass-panel rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
                   <div class="w-12 h-12 rounded-lg bg-magenta/20 flex items-center justify-center"><i data-lucide="check-circle" class="w-6 h-6 text-magenta"></i></div>
                 </div>
-                <p class="text-3xl font-heading font-bold text-white">547</p>
+                <p id="dashboardCompletedCount" class="text-3xl font-heading font-bold text-white">0</p>
                 <p class="text-silver text-sm">Completed</p>
               </div>
               <div class="glass-panel rounded-xl p-6">
                 <div class="flex items-center justify-between mb-4">
                   <div class="w-12 h-12 rounded-lg bg-silver/20 flex items-center justify-center"><i data-lucide="dollar-sign" class="w-6 h-6 text-silver"></i></div>
                 </div>
-                <p class="text-3xl font-heading font-bold text-white">$24.5K</p>
-                <p class="text-silver text-sm">This Month</p>
+                <p id="dashboardRevenueCount" class="text-3xl font-heading font-bold text-white">$0</p>
+                <p id="dashboardTotalOrdersLabel" class="text-silver text-sm">Total Orders: 0</p>
               </div>
             </div>
 
@@ -959,13 +959,14 @@
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <h2 class="font-heading text-xl font-bold text-white">Recent Orders</h2>
                   <div class="flex items-center gap-3">
-                    <select class="form-input px-4 py-2 rounded-lg text-white text-sm">
-                      <option>All Status</option>
-                      <option>Completed</option>
-                      <option>In Progress</option>
-                      <option>Pending</option>
+                    <select id="dashboardStatusFilter" class="form-input px-4 py-2 rounded-lg text-white text-sm">
+                      <option value="">All Status</option>
+                      <option value="completed">Completed</option>
+                      <option value="in_progress">In Progress</option>
+                      <option value="pending">Pending</option>
+                      <option value="received">Received</option>
                     </select>
-                    <button class="btn-secondary px-4 py-2 rounded-lg text-teal text-sm flex items-center gap-2"><i data-lucide="filter" class="w-4 h-4"></i> Filter</button>
+                    <button type="button" onclick="loadOrders(document.getElementById('dashboardStatusFilter') && document.getElementById('dashboardStatusFilter').value || '', 25)" class="btn-secondary px-4 py-2 rounded-lg text-teal text-sm flex items-center gap-2"><i data-lucide="filter" class="w-4 h-4"></i> Filter</button>
                   </div>
                 </div>
               </div>
@@ -981,30 +982,9 @@
                       <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-teal/10">
-                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0847')">
-                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0847</span><p class="text-xs text-silver">Dec 15, 2024</p></td>
-                      <td class="px-6 py-4"><p class="text-white">John Doe</p><p class="text-xs text-silver">john@example.com</p></td>
-                      <td class="px-6 py-4"><p class="text-white">2024 Dodge Challenger</p></td>
-                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-teal/20 text-teal text-xs">Wrap</span><span class="px-2 py-0.5 rounded bg-purple/20 text-purple text-xs">Audio</span></div></td>
-                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-purple/20 text-purple text-xs"><span class="w-1.5 h-1.5 rounded-full bg-purple"></span> In Progress</span></td>
-                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
-                    </tr>
-                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0846')">
-                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0846</span><p class="text-xs text-silver">Dec 14, 2024</p></td>
-                      <td class="px-6 py-4"><p class="text-white">Sarah Johnson</p><p class="text-xs text-silver">sarah@example.com</p></td>
-                      <td class="px-6 py-4"><p class="text-white">2023 Ford Mustang</p></td>
-                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-purple/20 text-purple text-xs">Audio</span></div></td>
-                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-teal/20 text-teal text-xs"><span class="w-1.5 h-1.5 rounded-full bg-teal"></span> Pending</span></td>
-                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
-                    </tr>
-                    <tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail('GKI-2024-0845')">
-                      <td class="px-6 py-4"><span class="font-heading font-semibold text-teal">GKI-2024-0845</span><p class="text-xs text-silver">Dec 12, 2024</p></td>
-                      <td class="px-6 py-4"><p class="text-white">Mike Chen</p><p class="text-xs text-silver">mike@example.com</p></td>
-                      <td class="px-6 py-4"><p class="text-white">2022 Chevy Camaro</p></td>
-                      <td class="px-6 py-4"><div class="flex flex-wrap gap-1"><span class="px-2 py-0.5 rounded bg-teal/20 text-teal text-xs">Wrap</span><span class="px-2 py-0.5 rounded bg-magenta/20 text-magenta text-xs">Lighting</span></div></td>
-                      <td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Completed</span></td>
-                      <td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td>
+                  <tbody id="dashboardOrdersTableBody" class="divide-y divide-teal/10">
+                    <tr>
+                      <td colspan="6" class="px-6 py-10 text-center text-silver">Loading live orders...</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1018,85 +998,23 @@
         <div class="min-h-screen py-12">
           <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <button onclick="navigateTo('dashboard')" class="flex items-center gap-2 text-silver hover:text-teal transition-colors mb-8"><i data-lucide="arrow-left" class="w-5 h-5"></i><span>Back to Dashboard</span></button>
-            <div class="glass-panel rounded-2xl p-8 mb-8">
+            <div id="orderDetailHeader" class="glass-panel rounded-2xl p-8 mb-8">
               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div>
-                  <div class="flex items-center gap-3 mb-2"><span class="font-heading text-3xl font-bold text-teal">GKI-2024-0847</span><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple/20 text-purple text-sm font-semibold"><span class="w-2 h-2 rounded-full bg-purple"></span> In Progress</span></div>
-                  <p class="text-silver">Submitted December 15, 2024</p>
-                </div>
-                <div class="flex flex-wrap gap-3">
-                  <button class="btn-secondary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> Email Customer</button>
-                  <button class="btn-primary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="edit" class="w-4 h-4"></i> Update Status</button>
+                  <div class="flex items-center gap-3 mb-2 flex-wrap"><span class="font-heading text-3xl font-bold text-teal">Select an order</span></div>
+                  <p class="text-silver">Live order detail will render here.</p>
                 </div>
               </div>
             </div>
             <div class="grid lg:grid-cols-3 gap-8">
-              <div class="lg:col-span-2 space-y-8">
+              <div id="orderDetailMain" class="lg:col-span-2 space-y-8">
                 <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="user" class="w-5 h-5 text-teal"></i> Customer Information</h3>
-                  <div class="grid sm:grid-cols-2 gap-4">
-                    <div><p class="text-xs text-silver mb-1">Name</p><p class="text-white font-medium">John Doe</p></div>
-                    <div><p class="text-xs text-silver mb-1">Email</p><p class="text-white font-medium">john@example.com</p></div>
-                    <div><p class="text-xs text-silver mb-1">Phone</p><p class="text-white font-medium">(555) 123-4567</p></div>
-                  </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="car" class="w-5 h-5 text-purple"></i> Vehicle Details</h3>
-                  <div class="grid sm:grid-cols-3 gap-4">
-                    <div><p class="text-xs text-silver mb-1">Year</p><p class="text-white font-medium">2024</p></div>
-                    <div><p class="text-xs text-silver mb-1">Make</p><p class="text-white font-medium">Dodge</p></div>
-                    <div><p class="text-xs text-silver mb-1">Model</p><p class="text-white font-medium">Challenger Hellcat</p></div>
-                  </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="settings" class="w-5 h-5 text-magenta"></i> Requested Services</h3>
-                  <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full bg-teal/20 text-teal text-sm">Custom Wrap</span><span class="px-3 py-1 rounded-full bg-purple/20 text-purple text-sm">Audio System</span><span class="px-3 py-1 rounded-full bg-magenta/20 text-magenta text-sm">Custom Lighting</span></div>
-                  <div>
-                    <p class="text-xs text-silver mb-2">Project Description</p>
-                    <p class="text-white">Captain America themed build. Full blue/red wrap with star graphics, competition-grade audio system with custom subwoofer enclosure, and underglow lighting with interior accent LEDs.</p>
-                  </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="message-square" class="w-5 h-5 text-teal"></i> Internal Notes</h3>
-                  <div class="space-y-4">
-                    <div class="glass-panel rounded-lg p-4">
-                      <div class="flex items-center justify-between mb-2"><span class="text-teal text-sm font-semibold">Admin</span><span class="text-silver text-xs">Dec 18, 2024</span></div>
-                      <p class="text-white text-sm">Customer approved the quote. Starting wrap installation tomorrow.</p>
-                    </div>
-                    <textarea class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 resize-none" rows="2" placeholder="Add a note..."></textarea>
-                    <button class="btn-secondary px-4 py-2 rounded-lg text-sm">Add Note</button>
-                  </div>
+                  <p class="text-silver">Choose an order from the dashboard to load details.</p>
                 </div>
               </div>
-              <div class="space-y-6">
+              <div id="orderDetailSidebar" class="space-y-6">
                 <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4">Update Status</h3>
-                  <select class="form-input w-full px-4 py-3 rounded-lg text-white mb-4">
-                    <option>Pending Review</option>
-                    <option>Quote Sent</option>
-                    <option>Quote Approved</option>
-                    <option selected>In Progress</option>
-                    <option>Final Details</option>
-                    <option>Ready for Pickup</option>
-                    <option>Completed</option>
-                  </select>
-                  <button class="btn-primary w-full py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider">Update</button>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4">Project Info</h3>
-                  <div class="space-y-4">
-                    <div class="flex justify-between"><span class="text-silver text-sm">Budget</span><span class="text-white font-semibold">$5,000 - $10,000</span></div>
-                    <div class="flex justify-between"><span class="text-silver text-sm">Timeline</span><span class="text-white font-semibold">2-3 months</span></div>
-                    <div class="flex justify-between"><span class="text-silver text-sm">Days in Queue</span><span class="text-white font-semibold">12 days</span></div>
-                  </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                  <h3 class="font-heading text-lg font-bold text-white mb-4">Activity Log</h3>
-                  <div class="space-y-3">
-                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-purple mt-2"></div><div><p class="text-white text-sm">Status changed to In Progress</p><p class="text-silver text-xs">Dec 20, 2024</p></div></div>
-                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-teal mt-2"></div><div><p class="text-white text-sm">Quote approved by customer</p><p class="text-silver text-xs">Dec 18, 2024</p></div></div>
-                    <div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-teal mt-2"></div><div><p class="text-white text-sm">Build request received</p><p class="text-silver text-xs">Dec 15, 2024</p></div></div>
-                  </div>
+                  <p class="text-silver">Status tools will appear here once an order is loaded.</p>
                 </div>
               </div>
             </div>
@@ -1680,8 +1598,28 @@ These terms may be updated by the business from time to time.`;
       });
     }
 
+    function getOperatorAuthToken() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlToken = urlParams.get('token') || urlParams.get('authToken') || '';
+      return (localStorage.getItem('operatorAuthToken') || sessionStorage.getItem('operatorAuthToken') || urlToken || '').trim();
+    }
+
     function isOperatorLoggedIn() {
-      return localStorage.getItem('operatorLoggedIn') === 'true';
+      return localStorage.getItem('operatorLoggedIn') === 'true' || Boolean(getOperatorAuthToken());
+    }
+
+    function getAuthHeaders(includeJson = true) {
+      const token = getOperatorAuthToken();
+      const headers = { Accept: 'application/json' };
+      if (includeJson) headers['Content-Type'] = 'application/json';
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      return headers;
+    }
+
+    function requireOperatorAuth() {
+      if (getOperatorAuthToken()) return true;
+      navigateTo('dashboard-login');
+      return false;
     }
 
     function navigateTo(page) {
@@ -1710,6 +1648,8 @@ These terms may be updated by the business from time to time.`;
     function logoutOperator() {
       localStorage.removeItem('operatorLoggedIn');
       localStorage.removeItem('operatorMagicLinkEmail');
+      localStorage.removeItem('operatorAuthToken');
+      sessionStorage.removeItem('operatorAuthToken');
       navigateTo('home');
     }
 
@@ -1808,10 +1748,14 @@ These terms may be updated by the business from time to time.`;
       navigateTo('project-detail');
     }
 
-    function viewOrderDetail(orderId) {
-      const titleTarget = document.querySelector('#page-order-detail .font-heading.text-3xl');
-      if (titleTarget) titleTarget.textContent = orderId;
-      navigateTo('order-detail');
+    async function viewOrderDetail(orderId) {
+      if (!requireOperatorAuth()) return;
+      try {
+        await loadOrderDetail(orderId);
+        navigateTo('order-detail');
+      } catch (error) {
+        alert(error.message || 'Unable to load order detail.');
+      }
     }
 
     function resetLegalText(type) {
@@ -2060,39 +2004,420 @@ These terms may be updated by the business from time to time.`;
       });
     }
 
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function collectSelectedServices() {
+      return Array.from(document.querySelectorAll('input[name="services"]:checked')).map((input) => input.value);
+    }
+
+    function buildRequestPayload() {
+      const firstName = document.getElementById('firstName')?.value.trim() || '';
+      const lastName = document.getElementById('lastName')?.value.trim() || '';
+      const email = document.getElementById('email')?.value.trim() || '';
+      const phone = document.getElementById('phone')?.value.trim() || '';
+      const projectDescription = document.getElementById('projectDescription')?.value.trim() || '';
+      const vehicleMake = document.getElementById('vehicleMake')?.value.trim() || '';
+      const vehicleModel = document.getElementById('vehicleModel')?.value.trim() || '';
+      const vehicleYear = Number(document.getElementById('vehicleYear')?.value.trim() || '0');
+
+      return {
+        customer: {
+          email,
+          name: `${firstName} ${lastName}`.trim(),
+          phone
+        },
+        project_notes: projectDescription,
+        services: collectSelectedServices(),
+        vehicle: {
+          make: vehicleMake,
+          model: vehicleModel,
+          year: vehicleYear
+        }
+      };
+    }
+
+    function renderOrderStatusResult(data) {
+      const result = document.getElementById('orderStatusResult');
+      if (!result) return;
+
+      const customerName = data.customer_name || data.customer?.name || 'Unknown customer';
+      const notes = data.project_notes || 'No project notes provided.';
+      const orderNumber = data.order_number || 'Unavailable';
+      const rawStatus = data.status_label || data.status || 'Unknown';
+      const updatedAt = data.updated_at || data.created_at || 'Unavailable';
+      const services = Array.isArray(data.services) ? data.services : [];
+      const vehicle = data.vehicle || {};
+      const vehicleLabel = [vehicle.year, vehicle.make, vehicle.model].filter(Boolean).join(' ') || 'Vehicle unavailable';
+
+      result.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-teal">Live Order Status</p>
+              <h3 class="mt-2 font-heading text-2xl text-white">${escapeHtml(orderNumber)}</h3>
+            </div>
+            <span class="inline-flex w-fit items-center gap-2 rounded-full bg-teal/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal">${escapeHtml(rawStatus)}</span>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="glass-panel rounded-xl p-4">
+              <p class="text-xs text-silver mb-1">Customer</p>
+              <p class="text-white font-medium">${escapeHtml(customerName)}</p>
+            </div>
+            <div class="glass-panel rounded-xl p-4">
+              <p class="text-xs text-silver mb-1">Vehicle</p>
+              <p class="text-white font-medium">${escapeHtml(vehicleLabel)}</p>
+            </div>
+            <div class="glass-panel rounded-xl p-4 sm:col-span-2">
+              <p class="text-xs text-silver mb-1">Services</p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                ${services.length ? services.map((service) => `<span class="rounded-full bg-purple/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-purple">${escapeHtml(service)}</span>`).join('') : '<span class="text-silver text-sm">No services listed.</span>'}
+              </div>
+            </div>
+            <div class="glass-panel rounded-xl p-4 sm:col-span-2">
+              <p class="text-xs text-silver mb-1">Project Notes</p>
+              <p class="text-white">${escapeHtml(notes)}</p>
+            </div>
+            <div class="glass-panel rounded-xl p-4 sm:col-span-2">
+              <p class="text-xs text-silver mb-1">Last Updated</p>
+              <p class="text-white font-medium">${escapeHtml(updatedAt)}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function submitBuildRequest() {
+      const payload = buildRequestPayload();
+      const response = await fetch('/api/build-requests', {
+        method: 'POST',
+        headers: getAuthHeaders(true),
+        body: JSON.stringify(payload)
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (error) {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Failed to submit build request.');
+      }
+
+      return data;
+    }
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('en-US', { currency: 'USD', maximumFractionDigits: 0, style: 'currency' }).format(Number(value || 0));
+    }
+
+    function formatDateTime(value) {
+      if (!value) return 'Unavailable';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return date.toLocaleString();
+    }
+
+    function humanizeService(service) {
+      const map = {
+        audio: 'Audio',
+        fabrication: 'Fabrication',
+        lighting: 'Lighting',
+        other: 'Other',
+        tint: 'Tint',
+        wraps: 'Wraps'
+      };
+      return map[String(service || '').toLowerCase()] || String(service || '');
+    }
+
+    function normalizeStatusValue(status) {
+      return String(status || '').toLowerCase().split(' ').join('_');
+    }
+
+    function statusBadgeClass(status) {
+      const normalized = normalizeStatusValue(status);
+      if (normalized.indexOf('complete') !== -1) return 'bg-green-500/20 text-green-400';
+      if (normalized.indexOf('progress') !== -1) return 'bg-purple/20 text-purple';
+      if (normalized.indexOf('pending') !== -1 || normalized.indexOf('received') !== -1 || normalized.indexOf('review') !== -1) return 'bg-teal/20 text-teal';
+      if (normalized.indexOf('pickup') !== -1) return 'bg-magenta/20 text-magenta';
+      return 'bg-silver/20 text-silver';
+    }
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options || {});
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (error) {
+        data = {};
+      }
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Request failed.');
+      }
+
+      return data;
+    }
+
+    async function lookupOrderStatus(orderNumber) {
+      const response = await fetch(`/api/status-lookup/${encodeURIComponent(orderNumber)}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (error) {
+        data = {};
+      }
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || 'Failed to look up order status.');
+      }
+
+      return data;
+    }
+
+    function renderDashboardSummary(data) {
+      const pending = document.getElementById('dashboardPendingCount');
+      const inProgress = document.getElementById('dashboardInProgressCount');
+      const completed = document.getElementById('dashboardCompletedCount');
+      const revenue = document.getElementById('dashboardRevenueCount');
+      const total = document.getElementById('dashboardTotalOrdersLabel');
+      if (pending) pending.textContent = String(data && data.pending || 0);
+      if (inProgress) inProgress.textContent = String(data && data.in_progress || 0);
+      if (completed) completed.textContent = String(data && data.completed || 0);
+      if (revenue) revenue.textContent = formatCurrency(data && data.revenue_collected || 0);
+      if (total) total.textContent = 'Total Orders: ' + String(data && data.total_orders || 0);
+    }
+
+    async function loadDashboardSummary() {
+      if (!requireOperatorAuth()) return;
+      const data = await fetchJson('/api/dashboard-summary', {
+        headers: getAuthHeaders(false),
+        method: 'GET'
+      });
+      if (data) renderDashboardSummary(data);
+      return data;
+    }
+
+    function renderOrdersTable(items) {
+      const tbody = document.getElementById('dashboardOrdersTableBody');
+      if (!tbody) return;
+
+      if (!Array.isArray(items) || !items.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-10 text-center text-silver">No orders found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = items.map(function(item) {
+        const orderNumber = escapeHtml(item.order_number || 'Unavailable');
+        const createdAt = escapeHtml(formatDateTime(item.created_at));
+        const customerName = escapeHtml(item.customer_name || 'Unknown');
+        const customerEmail = escapeHtml(item.customer_email || '');
+        const vehicle = escapeHtml([item.vehicle && item.vehicle.year, item.vehicle && item.vehicle.make, item.vehicle && item.vehicle.model].filter(Boolean).join(' ') || 'Unavailable');
+        const statusLabel = item.status_label || item.status || 'Unknown';
+        const badgeClass = statusBadgeClass(statusLabel);
+        const services = Array.isArray(item.services) && item.services.length ? item.services.map(function(service) {
+          return '<span class="px-2 py-0.5 rounded bg-teal/20 text-teal text-xs">' + escapeHtml(humanizeService(service)) + '</span>';
+        }).join('') : '<span class="text-silver text-xs">None</span>';
+
+        return '<tr class="hover:bg-teal/5 transition-colors cursor-pointer" onclick="viewOrderDetail(\'' + orderNumber + '\')"><td class="px-6 py-4"><span class="font-heading font-semibold text-teal">' + orderNumber + '</span><p class="text-xs text-silver">' + createdAt + '</p></td><td class="px-6 py-4"><p class="text-white">' + customerName + '</p><p class="text-xs text-silver">' + customerEmail + '</p></td><td class="px-6 py-4"><p class="text-white">' + vehicle + '</p></td><td class="px-6 py-4"><div class="flex flex-wrap gap-1">' + services + '</div></td><td class="px-6 py-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded-full ' + badgeClass + ' text-xs"><span class="w-1.5 h-1.5 rounded-full bg-current"></span>' + escapeHtml(statusLabel) + '</span></td><td class="px-6 py-4"><button class="p-2 rounded-lg hover:bg-teal/10 text-silver hover:text-teal transition-colors"><i data-lucide="chevron-right" class="w-5 h-5"></i></button></td></tr>';
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    async function loadOrders(status, limit) {
+      if (!requireOperatorAuth()) return;
+      const params = new URLSearchParams();
+      if (limit) params.set('limit', String(limit));
+      if (status) params.set('status', normalizeStatusValue(status));
+      const query = params.toString() ? '?' + params.toString() : '';
+      const data = await fetchJson('/api/orders' + query, {
+        headers: getAuthHeaders(false),
+        method: 'GET'
+      });
+      renderOrdersTable(data && data.items || []);
+      return data;
+    }
+
+    function renderOrderDetail(data) {
+      const customer = data && data.customer || {};
+      const vehicle = data && data.vehicle || {};
+      const services = Array.isArray(data && data.services) ? data.services : [];
+      const notes = Array.isArray(data && data.notes) ? data.notes : [];
+      const activityLog = Array.isArray(data && data.activity_log) ? data.activity_log : [];
+      const statusLabel = data && (data.status_label || data.status) || 'Unknown';
+      const badgeClass = statusBadgeClass(statusLabel);
+      const header = document.getElementById('orderDetailHeader');
+      const main = document.getElementById('orderDetailMain');
+      const sidebar = document.getElementById('orderDetailSidebar');
+      if (!header || !main || !sidebar) return;
+
+      header.innerHTML = '<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6"><div><div class="flex items-center gap-3 mb-2 flex-wrap"><span class="font-heading text-3xl font-bold text-teal">' + escapeHtml(data.order_number || 'Unavailable') + '</span><span class="inline-flex items-center gap-2 px-3 py-1 rounded-full ' + badgeClass + ' text-sm font-semibold"><span class="w-2 h-2 rounded-full bg-current"></span>' + escapeHtml(statusLabel) + '</span></div><p class="text-silver">Submitted ' + escapeHtml(formatDateTime(data.created_at)) + '</p><p class="text-silver text-sm mt-1">Last updated ' + escapeHtml(formatDateTime(data.updated_at)) + '</p></div><div class="flex flex-wrap gap-3"><a href="mailto:' + escapeHtml(customer.email || '') + '" class="btn-secondary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> Email Customer</a><button type="button" onclick="submitStatusUpdate()" class="btn-primary px-4 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="edit" class="w-4 h-4"></i> Update Status</button></div></div>';
+
+      main.innerHTML = '<div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="user" class="w-5 h-5 text-teal"></i> Customer Information</h3><div class="grid sm:grid-cols-2 gap-4"><div><p class="text-xs text-silver mb-1">Name</p><p class="text-white font-medium">' + escapeHtml(customer.name || 'Unknown') + '</p></div><div><p class="text-xs text-silver mb-1">Email</p><p class="text-white font-medium">' + escapeHtml(customer.email || '') + '</p></div><div><p class="text-xs text-silver mb-1">Phone</p><p class="text-white font-medium">' + escapeHtml(customer.phone || '') + '</p></div></div></div><div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="car" class="w-5 h-5 text-purple"></i> Vehicle Details</h3><div class="grid sm:grid-cols-3 gap-4"><div><p class="text-xs text-silver mb-1">Year</p><p class="text-white font-medium">' + escapeHtml(vehicle.year || '') + '</p></div><div><p class="text-xs text-silver mb-1">Make</p><p class="text-white font-medium">' + escapeHtml(vehicle.make || '') + '</p></div><div><p class="text-xs text-silver mb-1">Model</p><p class="text-white font-medium">' + escapeHtml(vehicle.model || '') + '</p></div></div></div><div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="settings" class="w-5 h-5 text-magenta"></i> Requested Services</h3><div class="flex flex-wrap gap-2 mb-4">' + (services.length ? services.map(function(service) { return '<span class="px-3 py-1 rounded-full bg-teal/20 text-teal text-sm">' + escapeHtml(humanizeService(service)) + '</span>'; }).join('') : '<span class="text-silver text-sm">No services listed.</span>') + '</div><div class="space-y-4"><div><p class="text-xs text-silver mb-2">Project Description</p><p class="text-white">' + escapeHtml(data.project_notes || 'No project notes provided.') + '</p></div><div><p class="text-xs text-silver mb-2">Customer Visible Notes</p><p class="text-white">' + escapeHtml(data.customer_visible_notes || 'No customer-visible notes yet.') + '</p></div><div><p class="text-xs text-silver mb-2">Operator Notes</p><p class="text-white">' + escapeHtml(data.operator_notes || 'No operator notes yet.') + '</p></div></div></div><div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="message-square" class="w-5 h-5 text-teal"></i> Internal Notes</h3><div id="orderDetailNotesList" class="space-y-4 mb-4">' + (notes.length ? notes.map(function(note) { return '<div class="glass-panel rounded-lg p-4"><div class="flex items-center justify-between mb-2"><span class="text-teal text-sm font-semibold">' + escapeHtml(note.author || 'Admin') + '</span><span class="text-silver text-xs">' + escapeHtml(formatDateTime(note.created_at)) + '</span></div><p class="text-white text-sm">' + escapeHtml(note.note || '') + '</p><p class="text-xs text-silver mt-2 uppercase tracking-wide">' + escapeHtml(note.visibility || 'internal') + '</p></div>'; }).join('') : '<p class="text-silver text-sm">No internal notes yet.</p>') + '</div><textarea id="orderNoteInput" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 resize-none" rows="2" placeholder="Add a note..."></textarea><button type="button" onclick="submitOrderNote()" class="btn-secondary px-4 py-2 rounded-lg text-sm mt-4">Add Note</button></div>';
+
+      sidebar.innerHTML = '<div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4">Update Status</h3><select id="orderStatusSelect" class="form-input w-full px-4 py-3 rounded-lg text-white mb-4">' + ['Completed', 'Final Details', 'In Progress', 'Pending Review', 'Quote Approved', 'Quote Sent', 'Ready for Pickup', 'Received'].map(function(status) { return '<option value="' + escapeHtml(status) + '" ' + (status === statusLabel ? 'selected' : '') + '>' + escapeHtml(status) + '</option>'; }).join('') + '</select><textarea id="customerVisibleNotesInput" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 resize-none mb-4" rows="3" placeholder="Customer-visible update...">' + escapeHtml(data.customer_visible_notes || '') + '</textarea><textarea id="operatorNotesInput" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 resize-none mb-4" rows="3" placeholder="Internal operator update...">' + escapeHtml(data.operator_notes || '') + '</textarea><button type="button" onclick="submitStatusUpdate()" class="btn-primary w-full py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider">Update</button></div><div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4">Project Info</h3><div class="space-y-4"><div class="flex justify-between"><span class="text-silver text-sm">Estimate</span><span class="text-white font-semibold">' + escapeHtml(data.estimate ? JSON.stringify(data.estimate) : 'Not Requested') + '</span></div><div class="flex justify-between"><span class="text-silver text-sm">Payment Request</span><span class="text-white font-semibold">' + escapeHtml(data.payment_request ? JSON.stringify(data.payment_request) : 'Not Requested') + '</span></div><div class="flex justify-between"><span class="text-silver text-sm">Uploads</span><span class="text-white font-semibold">' + escapeHtml((data.uploads || []).length) + '</span></div><div class="flex justify-between"><span class="text-silver text-sm">Updated</span><span class="text-white font-semibold">' + escapeHtml(formatDateTime(data.updated_at)) + '</span></div></div></div><div class="glass-panel rounded-2xl p-6"><h3 class="font-heading text-lg font-bold text-white mb-4">Activity Log</h3><div id="orderActivityLog" class="space-y-3">' + (activityLog.length ? activityLog.map(function(entry) { return '<div class="flex gap-3"><div class="w-2 h-2 rounded-full bg-purple mt-2"></div><div><p class="text-white text-sm">' + escapeHtml(entry.action || 'update') + '</p><p class="text-silver text-xs">' + escapeHtml(formatDateTime(entry.created_at)) + '</p></div></div>'; }).join('') : '<p class="text-silver text-sm">No activity logged yet.</p>') + '</div></div>';
+
+      window.currentOrderDetail = data;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    async function loadOrderDetail(orderNumber) {
+      if (!requireOperatorAuth()) return;
+      const data = await fetchJson('/api/orders/' + encodeURIComponent(orderNumber), {
+        headers: getAuthHeaders(false),
+        method: 'GET'
+      });
+      if (!data) throw new Error('Order not found.');
+      renderOrderDetail(data);
+      return data;
+    }
+
+    async function submitStatusUpdate() {
+      const current = window.currentOrderDetail;
+      if (!current || !current.order_number || !requireOperatorAuth()) return;
+      const status = document.getElementById('orderStatusSelect') && document.getElementById('orderStatusSelect').value || '';
+      const customerVisibleNotes = document.getElementById('customerVisibleNotesInput') && document.getElementById('customerVisibleNotesInput').value.trim() || '';
+      const operatorNotes = document.getElementById('operatorNotesInput') && document.getElementById('operatorNotesInput').value.trim() || '';
+
+      await fetchJson('/api/orders/' + encodeURIComponent(current.order_number) + '/status', {
+        method: 'PATCH',
+        headers: getAuthHeaders(true),
+        body: JSON.stringify({
+          customer_visible_notes: customerVisibleNotes,
+          operator_notes: operatorNotes,
+          status: status
+        })
+      });
+
+      await loadDashboardSummary();
+      await loadOrders(document.getElementById('dashboardStatusFilter') && document.getElementById('dashboardStatusFilter').value || '', 25);
+      await loadOrderDetail(current.order_number);
+    }
+
+    async function submitOrderNote() {
+      const current = window.currentOrderDetail;
+      const input = document.getElementById('orderNoteInput');
+      const note = input && input.value.trim() || '';
+      if (!current || !current.order_number || !note || !requireOperatorAuth()) return;
+
+      await fetchJson('/api/orders/' + encodeURIComponent(current.order_number) + '/notes', {
+        method: 'POST',
+        headers: getAuthHeaders(true),
+        body: JSON.stringify({
+          author: 'Admin',
+          note: note,
+          visibility: 'internal'
+        })
+      });
+
+      if (input) input.value = '';
+      await loadOrderDetail(current.order_number);
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       const operatorLoginPageForm = document.getElementById('operatorLoginPageForm');
       const orderSearchForm = document.getElementById('orderSearchForm');
       const step4Form = document.getElementById('step4Form');
 
       if (operatorLoginPageForm) {
-        operatorLoginPageForm.addEventListener('submit', (e) => {
+        operatorLoginPageForm.addEventListener('submit', async (e) => {
           e.preventDefault();
           const emailInput = document.getElementById('operatorEmailPage');
           const email = emailInput ? emailInput.value.trim() : '';
           localStorage.setItem('operatorMagicLinkEmail', email);
+
+          if (!getOperatorAuthToken()) {
+            alert('Operator token not found. Save operatorAuthToken in localStorage, sessionStorage, or the login redirect URL before opening the dashboard.');
+            return;
+          }
+
           localStorage.setItem('operatorLoggedIn', 'true');
           navigateTo('dashboard');
+          try {
+            await loadDashboardSummary();
+            await loadOrders(document.getElementById('dashboardStatusFilter') && document.getElementById('dashboardStatusFilter').value || '', 25);
+          } catch (error) {
+            alert(error.message || 'Unable to load dashboard.');
+          }
         });
       }
 
       if (orderSearchForm) {
-        orderSearchForm.addEventListener('submit', (e) => {
+        orderSearchForm.addEventListener('submit', async (e) => {
           e.preventDefault();
           const orderNumber = document.getElementById('orderNumber')?.value.trim().toUpperCase() || '';
-          const found = orderNumber.includes('GKI');
-          document.getElementById('orderStatusResult')?.classList.toggle('hidden', !found);
-          document.getElementById('orderNotFound')?.classList.toggle('hidden', found);
+          const result = document.getElementById('orderStatusResult');
+          const notFound = document.getElementById('orderNotFound');
+          if (!orderNumber) return;
+
+          try {
+            const data = await lookupOrderStatus(orderNumber);
+            if (!data) {
+              result?.classList.add('hidden');
+              notFound?.classList.remove('hidden');
+              return;
+            }
+
+            renderOrderStatusResult(data);
+            result?.classList.remove('hidden');
+            notFound?.classList.add('hidden');
+          } catch (error) {
+            if (result) {
+              result.innerHTML = `<p class="text-sm text-red-300">${escapeHtml(error.message || 'Unable to load order status.')}</p>`;
+              result.classList.remove('hidden');
+            }
+            notFound?.classList.add('hidden');
+          }
         });
       }
 
       if (step4Form) {
-        step4Form.addEventListener('submit', (e) => {
+        step4Form.addEventListener('submit', async (e) => {
           e.preventDefault();
-          const orderNumber = `GKI-2024-${String(Math.floor(Math.random() * 9000) + 1000)}`;
+          const submitButton = step4Form.querySelector('button[type="submit"]');
           const target = document.getElementById('confirmationOrderNumber');
-          if (target) target.textContent = orderNumber;
-          navigateTo('build-confirmation');
+
+          try {
+            if (submitButton) {
+              submitButton.disabled = true;
+              submitButton.textContent = 'Submitting...';
+            }
+
+            const data = await submitBuildRequest();
+            if (target) target.textContent = data.order_number || 'GKI-2026-0000';
+            navigateTo('build-confirmation');
+          } catch (error) {
+            alert(error.message || 'Unable to submit build request.');
+          } finally {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i> Submit Request';
+              if (window.lucide) lucide.createIcons();
+            }
+          }
         });
       }
 
@@ -2124,6 +2449,15 @@ These terms may be updated by the business from time to time.`;
 
       setActiveNav('home');
       if (window.lucide) lucide.createIcons();
+
+      if (getOperatorAuthToken()) {
+        localStorage.setItem('operatorLoggedIn', 'true');
+      }
+
+      if (isOperatorLoggedIn()) {
+        loadDashboardSummary().catch((error) => console.error('Dashboard summary load failed', error));
+        loadOrders(document.getElementById('dashboardStatusFilter') && document.getElementById('dashboardStatusFilter').value || '', 25).catch((error) => console.error('Orders load failed', error));
+      }
 
       console.assert(typeof getOperatorProfileSlug === 'function', 'getOperatorProfileSlug should be defined');
       console.assert(typeof loadOperatorData === 'function', 'loadOperatorData should be defined');
