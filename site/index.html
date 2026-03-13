@@ -213,6 +213,67 @@
       animation: text-glow 2s ease-in-out infinite;
     }
 
+    .hero-glow-orbit {
+      animation: hero-glow-orbit 7s ease-in-out infinite;
+    }
+
+    .hero-shadow-drift {
+      animation: hero-shadow-drift 4s ease-in-out infinite;
+    }
+
+    .hero-car-main {
+      animation: hero-car-float 4s ease-in-out infinite;
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.45));
+    }
+
+    .operator-portrait-float {
+      animation: portrait-float 5s ease-in-out infinite;
+      filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.35));
+    }
+
+    .project-image {
+      filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.45));
+      transition: transform 0.45s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: translateY(-8px) scale(1.03);
+    }
+
+    .project-glow {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .project-card:hover .project-glow {
+      opacity: 0.95;
+      transform: scale(1.08);
+    }
+
+    .vehicle-option {
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .vehicle-option:hover {
+      transform: translateY(-6px);
+    }
+
+    .vehicle-option.is-selected {
+      border-color: rgba(0, 212, 170, 0.85);
+      box-shadow: 0 0 0 1px rgba(0, 212, 170, 0.35), 0 18px 40px rgba(0, 212, 170, 0.18);
+    }
+
+    .vehicle-option img[data-vehicle-image] {
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.4));
+      transition: transform 0.35s ease;
+    }
+
+    .vehicle-option:hover img[data-vehicle-image],
+    .vehicle-option.is-selected img[data-vehicle-image] {
+      transform: translateY(-6px) scale(1.03);
+    }
+
     @keyframes equalize {
       0%, 100% { height: 8px; }
       50% { height: 24px; }
@@ -251,6 +312,26 @@
     @keyframes text-glow {
       0%, 100% { text-shadow: 0 0 20px rgba(0, 212, 170, 0.5), 0 0 40px rgba(0, 212, 170, 0.3); }
       50% { text-shadow: 0 0 30px rgba(0, 212, 170, 0.8), 0 0 60px rgba(0, 212, 170, 0.45); }
+    }
+
+    @keyframes hero-car-float {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-14px) rotate(0deg); }
+    }
+
+    @keyframes hero-shadow-drift {
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.5; }
+      50% { transform: translateY(8px) scale(0.96); opacity: 0.72; }
+    }
+
+    @keyframes hero-glow-orbit {
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-8px) scale(1.08); opacity: 0.95; }
+    }
+
+    @keyframes portrait-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
@@ -351,46 +432,13 @@
               </div>
 
               <div class="relative hero-image-container">
-                <div class="glass-panel rounded-2xl p-2 neon-glow floating-car">
-                  <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-navy to-midnight flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-br from-teal/10 via-transparent to-magenta/10"></div>
-                    <svg viewBox="0 0 400 300" class="w-full h-full">
-                      <defs>
-                        <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style="stop-color:#101729" />
-                          <stop offset="100%" style="stop-color:#0a0e1a" />
-                        </linearGradient>
-                        <linearGradient id="carBody" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" style="stop-color:#1e40af" />
-                          <stop offset="50%" style="stop-color:#dc2626" />
-                          <stop offset="100%" style="stop-color:#1e40af" />
-                        </linearGradient>
-                        <linearGradient id="chrome" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" style="stop-color:#e2e8f0" />
-                          <stop offset="50%" style="stop-color:#94a3b8" />
-                          <stop offset="100%" style="stop-color:#e2e8f0" />
-                        </linearGradient>
-                      </defs>
-                      <rect fill="url(#heroBg)" width="400" height="300" />
-                      <ellipse cx="200" cy="260" rx="160" ry="20" fill="rgba(0,212,170,0.1)" />
-                      <path d="M60 180 Q80 140 120 130 L280 130 Q320 140 340 180 L350 200 Q350 210 340 215 L60 215 Q50 210 50 200 Z" fill="url(#carBody)" />
-                      <rect x="185" y="130" width="30" height="85" fill="#e2e8f0" opacity="0.9" />
-                      <circle cx="200" cy="170" r="20" fill="#1e40af" stroke="#e2e8f0" stroke-width="2" />
-                      <polygon points="200,155 204,165 215,165 206,172 210,182 200,175 190,182 194,172 185,165 196,165" fill="#e2e8f0" />
-                      <rect x="170" y="135" width="60" height="15" rx="3" fill="#0f172a" />
-                      <path d="M130 130 L140 100 L260 100 L270 130 Z" fill="#1e293b" opacity="0.8" />
-                      <rect x="70" y="175" width="40" height="12" rx="2" fill="#fef3c7" />
-                      <rect x="290" y="175" width="40" height="12" rx="2" fill="#fef3c7" />
-                      <rect x="150" y="185" width="100" height="20" rx="3" fill="#0f172a" />
-                      <circle cx="100" cy="215" r="30" fill="#1f2937" />
-                      <circle cx="100" cy="215" r="20" fill="#374151" />
-                      <circle cx="100" cy="215" r="8" fill="url(#chrome)" />
-                      <circle cx="300" cy="215" r="30" fill="#1f2937" />
-                      <circle cx="300" cy="215" r="20" fill="#374151" />
-                      <circle cx="300" cy="215" r="8" fill="url(#chrome)" />
-                      <rect x="80" y="240" width="240" height="4" rx="2" fill="#00d4aa" opacity="0.8" />
-                    </svg>
-                    <div class="absolute bottom-4 left-4 glass-panel rounded-lg px-3 py-2">
+                <div class="glass-panel rounded-[2rem] p-3 neon-glow floating-car">
+                  <div class="relative aspect-[4/3] rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-navy via-[#111a31] to-midnight flex items-center justify-center">
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit absolute inset-x-[8%] bottom-[8%] w-[84%] opacity-80 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="hero-glow-orbit absolute inset-x-[14%] top-[10%] w-[72%] opacity-50 pointer-events-none select-none" style="animation-delay: 0.8s;" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-shadow.png" alt="" aria-hidden="true" class="hero-shadow-drift absolute bottom-[10%] left-1/2 w-[78%] -translate-x-1/2 opacity-70 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/hero/captain-america-challenger-main.png" alt="Captain America Challenger custom build" data-home-hero-image class="hero-car-main relative z-10 w-[88%] max-w-[42rem] object-contain pointer-events-none select-none" />
+                    <div class="absolute bottom-4 left-4 z-20 glass-panel rounded-lg px-3 py-2">
                       <span class="text-xs text-teal font-semibold">FEATURED BUILD</span>
                       <p class="text-white font-heading text-sm">Captain America Challenger</p>
                     </div>
@@ -416,38 +464,80 @@
             <div class="text-center mb-16">
               <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">OUR SERVICES</span>
               <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">What We <span class="text-teal">Build</span></h2>
-              <p class="text-silver max-w-2xl mx-auto">From head-turning wraps to earth-shaking sound systems, we transform vehicles into rolling works of art.</p>
+              <p class="text-silver max-w-2xl mx-auto">From wraps and lighting to full custom statements, these are the kinds of builds that keep the brand loud and the parking lot interesting.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
-                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-teal/20 to-teal/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="palette" class="w-8 h-8 text-teal"></i></div>
-                <h3 id="service1Title" class="font-heading text-2xl font-bold text-white mb-3">Custom Wraps</h3>
-                <p class="text-silver mb-6">Full and partial wraps, color changes, graphics, and protective films. Premium 3M and Avery materials.</p>
-                <ul class="space-y-2 text-sm text-silver">
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Full Color Change</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Custom Graphics</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal"></i> Paint Protection</li>
-                </ul>
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-teal/10" onclick="viewProject('challenger')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#101729] via-[#0f162b] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_001_v1.png" alt="Captain America Challenger service card" data-service-project-image="challenger" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">WRAPS</span>
+                  <h3 id="service1Title" class="font-heading text-xl font-bold text-white mb-1">Custom Wraps</h3>
+                  <p class="text-silver text-sm">Full color changes, themed graphics, and bold exterior identity work.</p>
+                </div>
               </div>
-              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
-                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple/20 to-purple/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="volume-2" class="w-8 h-8 text-purple"></i></div>
-                <h3 id="service2Title" class="font-heading text-2xl font-bold text-white mb-3">Audio &amp; Electronics</h3>
-                <p class="text-silver mb-6">Competition-grade audio systems, custom enclosures, amplifiers, and full electrical upgrades.</p>
-                <ul class="space-y-2 text-sm text-silver">
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> Custom Subwoofer Boxes</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> Amplifier Installation</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-purple"></i> LED Lighting Systems</li>
-                </ul>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-purple/10" onclick="viewProject('mustang')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#121126] via-[#16142d] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_002_v1.png" alt="Midnight Mustang service card" data-service-project-image="mustang" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO</span>
+                  <h3 id="service2Title" class="font-heading text-xl font-bold text-white mb-1">Audio &amp; Electronics</h3>
+                  <p class="text-silver text-sm">Competition sound, clean installs, and the kind of output people hear first.</p>
+                </div>
               </div>
-              <div class="glass-panel rounded-2xl p-8 card-hover gradient-border group service-card-animated">
-                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-magenta/20 to-magenta/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"><i data-lucide="drill" class="w-8 h-8 text-magenta"></i></div>
-                <h3 id="service3Title" class="font-heading text-2xl font-bold text-white mb-3">Custom Fabrication</h3>
-                <p class="text-silver mb-6">One-of-a-kind builds, custom interior panels, trunk setups, and specialty automotive fabrication.</p>
-                <ul class="space-y-2 text-sm text-silver">
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Custom Enclosures</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Interior Builds</li>
-                  <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-magenta"></i> Show Vehicle Prep</li>
-                </ul>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-magenta/10" onclick="viewProject('camaro')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#17111d] via-[#1a1420] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_003_v1.png" alt="Neon Nights Camaro service card" data-service-project-image="camaro" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">FABRICATION</span>
+                  <h3 id="service3Title" class="font-heading text-xl font-bold text-white mb-1">Custom Fabrication</h3>
+                  <p class="text-silver text-sm">Interior panels, enclosure work, and custom solutions that do not come off a shelf.</p>
+                </div>
+              </div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-magenta/10" onclick="viewProject('camaro')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#17111d] via-[#1a1420] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/neon-nights-camaro.png" alt="Neon Nights Camaro service showcase" data-service-project-image="camaro-gallery" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">LIGHTING</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">Accent Lighting</h3>
+                  <p class="text-silver text-sm">Underglow, accent zones, and color-driven detail work that reads at night.</p>
+                </div>
+              </div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-teal/10" onclick="viewProject('charger')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#101729] via-[#0f162b] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/teal-terror-charger.png" alt="Teal Terror Charger service showcase" data-service-project-image="charger-gallery" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">SHOW BUILDS</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">Statement Builds</h3>
+                  <p class="text-silver text-sm">Exterior presence, custom details, and cohesive builds designed to turn heads.</p>
+                </div>
+              </div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-purple/10" onclick="viewProject('corvette')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#121126] via-[#16142d] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/red-rocket-corvette.png" alt="Red Rocket Corvette service showcase" data-service-project-image="corvette-gallery" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">PREMIUM</span>
+                  <h3 class="font-heading text-xl font-bold text-white mb-1">High-End Finishes</h3>
+                  <p class="text-silver text-sm">Refined visuals, aggressive stance, and premium presentation for top-tier builds.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -464,24 +554,36 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('challenger')">
-                <div class="aspect-[4/3] bg-gradient-to-br from-blue-900 via-red-600 to-blue-900 relative"></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-teal/10" onclick="viewProject('challenger')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#101729] via-[#0f162b] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_001_v1.png" alt="Captain America Challenger completed project card" data-home-project-image="challenger" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
                   <span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">FULL BUILD</span>
                   <h3 class="font-heading text-xl font-bold text-white mb-1">Captain America Challenger</h3>
                   <p class="text-silver text-sm">Full wrap, audio system, custom lighting</p>
                 </div>
               </div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('mustang')">
-                <div class="aspect-[4/3] bg-gradient-to-br from-violet-950 via-purple-700 to-navy relative"></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-purple/10" onclick="viewProject('mustang')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#121126] via-[#16142d] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_002_v1.png" alt="Midnight Mustang completed project card" data-home-project-image="mustang" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
                   <span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO BUILD</span>
                   <h3 class="font-heading text-xl font-bold text-white mb-1">Midnight Mustang</h3>
                   <p class="text-silver text-sm">Competition audio, purple underglow</p>
                 </div>
               </div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated" onclick="viewProject('camaro')">
-                <div class="aspect-[4/3] bg-gradient-to-br from-zinc-900 via-slate-800 to-pink-700 relative"></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group project-card-animated glass-panel border border-magenta/10" onclick="viewProject('camaro')">
+                <div class="relative aspect-[4/3] bg-gradient-to-br from-[#17111d] via-[#1a1420] to-[#090d19]">
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" />
+                  <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_003_v1.png" alt="Neon Nights Camaro completed project card" data-home-project-image="camaro" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" />
+                </div>
                 <div class="absolute bottom-0 left-0 right-0 p-6 z-10">
                   <span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">CUSTOM WRAP</span>
                   <h3 class="font-heading text-xl font-bold text-white mb-1">Neon Nights Camaro</h3>
@@ -545,7 +647,63 @@
               <form id="step1Form" class="space-y-6">
                 <div>
                   <h3 class="font-heading text-2xl font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="car" class="w-6 h-6 text-teal"></i> Choose Your Vehicle</h3>
-                  <p class="text-silver text-sm mb-6">Start by telling us about your vehicle</p>
+                  <p class="text-silver text-sm mb-6">Pick a vehicle style to prefill the build form, or enter the details manually because humans enjoy options.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5" id="vehicleOptionsGrid">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Camaro" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/chevrolet-camaro-select.png" alt="Chevrolet Camaro selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Chevrolet Camaro</p>
+                    <p class="text-sm text-silver mt-1">Sport coupe platform</p>
+                  </button>
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Corvette" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/chevrolet-corvette-select.png" alt="Chevrolet Corvette selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Chevrolet Corvette</p>
+                    <p class="text-sm text-silver mt-1">Performance flagship</p>
+                  </button>
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Challenger" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/dodge-challenger-select.png" alt="Dodge Challenger selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Dodge Challenger</p>
+                    <p class="text-sm text-silver mt-1">Muscle coupe platform</p>
+                  </button>
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Charger" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/dodge-charger-select.png" alt="Dodge Charger selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Dodge Charger</p>
+                    <p class="text-sm text-silver mt-1">Four-door performance</p>
+                  </button>
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Ford" data-vehicle-model="Mustang" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/ford-mustang-select.png" alt="Ford Mustang selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Ford Mustang</p>
+                    <p class="text-sm text-silver mt-1">Street and show favorite</p>
+                  </button>
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Ram" data-vehicle-model="1500" onclick="selectVehicleOption(this)">
+                    <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
+                      <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/vehicles/ram-1500-select.png" alt="Ram 1500 selection" data-vehicle-image class="absolute inset-x-[8%] bottom-[12%] w-[84%] object-contain pointer-events-none select-none" />
+                    </div>
+                    <p class="font-heading text-xl text-white">Ram 1500</p>
+                    <p class="text-sm text-silver mt-1">Truck and fabrication base</p>
+                  </button>
                 </div>
                 <div class="grid sm:grid-cols-3 gap-6">
                   <div>
@@ -1228,19 +1386,28 @@ repository_url = ""</pre>
 
             <div class="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-start">
               <div class="glass-panel rounded-3xl p-8 sm:p-10 neon-glow">
-                <div class="flex items-center gap-4 mb-6">
-                  <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal/20 via-purple/20 to-magenta/20 flex items-center justify-center">
-                    <i data-lucide="user-circle-2" class="w-9 h-9 text-teal"></i>
+                <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] items-center">
+                  <div class="relative">
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[8%] bottom-[10%] w-[84%] opacity-80 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] top-[8%] w-[76%] opacity-55 pointer-events-none select-none" />
+                    <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/operator/home/williams_ralph_v1.png" alt="Ralph Williams" data-operator-portrait class="operator-portrait-float relative z-10 mx-auto w-full max-w-[26rem] object-contain" />
                   </div>
                   <div>
-                    <p class="font-heading text-2xl text-white">Ralph Williams</p>
-                    <p id="aboutOperatorRole" class="text-silver text-sm uppercase tracking-[0.2em]">Operator • Gotta Know It Customs</p>
+                    <div class="flex items-center gap-4 mb-6">
+                      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal/20 via-purple/20 to-magenta/20 flex items-center justify-center">
+                        <i data-lucide="user-circle-2" class="w-9 h-9 text-teal"></i>
+                      </div>
+                      <div>
+                        <p class="font-heading text-2xl text-white">Ralph Williams</p>
+                        <p id="aboutOperatorRole" class="text-silver text-sm uppercase tracking-[0.2em]">Operator • Gotta Know It Customs</p>
+                      </div>
+                    </div>
+                    <div class="space-y-5 text-silver leading-7">
+                      <p>Ralph Williams is building Gotta Know It Customs around the kind of custom work people actually remember. His approach leans into strong visual identity, customer connection, and builds that are meant to stand out on sight and hold attention when they pull up.</p>
+                      <p>Based in Minneapolis, he is shaping the brand with a practical operator mindset and an eye for presentation. The focus is not just on getting work done, but on helping customers create a ride that feels like theirs, from wraps and lighting to audio-driven upgrades and full custom direction.</p>
+                      <p>At the center of it is a straightforward idea: make the process easier to start, make the result worth talking about, and keep the business personal enough that customers feel like they are dealing with a real operator instead of a generic shop account.</p>
+                    </div>
                   </div>
-                </div>
-                <div class="space-y-5 text-silver leading-7">
-                  <p>Ralph Williams is building Gotta Know It Customs around the kind of custom work people actually remember. His approach leans into strong visual identity, customer connection, and builds that are meant to stand out on sight and hold attention when they pull up.</p>
-                  <p>Based in Minneapolis, he is shaping the brand with a practical operator mindset and an eye for presentation. The focus is not just on getting work done, but on helping customers create a ride that feels like theirs, from wraps and lighting to audio-driven upgrades and full custom direction.</p>
-                  <p>At the center of it is a straightforward idea: make the process easier to start, make the result worth talking about, and keep the business personal enough that customers feel like they are dealing with a real operator instead of a generic shop account.</p>
                 </div>
               </div>
 
@@ -1286,12 +1453,12 @@ repository_url = ""</pre>
               <button class="px-6 py-2 rounded-full glass-panel text-silver hover:text-teal font-semibold text-sm transition-colors">Wraps</button>
             </div>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('challenger')"><div class="aspect-[4/3] bg-gradient-to-br from-blue-900 via-red-600 to-blue-900"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Captain America Challenger</h3><p class="text-silver text-sm">2024 Dodge Challenger • Full wrap, audio, lighting</p></div></div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('mustang')"><div class="aspect-[4/3] bg-gradient-to-br from-violet-950 via-purple-700 to-navy"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Midnight Mustang</h3><p class="text-silver text-sm">2023 Ford Mustang • Competition audio, underglow</p></div></div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('camaro')"><div class="aspect-[4/3] bg-gradient-to-br from-zinc-900 via-slate-800 to-pink-700"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">CUSTOM WRAP</span><h3 class="font-heading text-xl font-bold text-white mb-1">Neon Nights Camaro</h3><p class="text-silver text-sm">2022 Chevy Camaro • Matte wrap, accent lighting</p></div></div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('charger')"><div class="aspect-[4/3] bg-gradient-to-br from-teal-950 via-slate-800 to-navy"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">LIGHTING</span><h3 class="font-heading text-xl font-bold text-white mb-1">Teal Terror Charger</h3><p class="text-silver text-sm">2023 Dodge Charger • Full lighting package</p></div></div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('truck')"><div class="aspect-[4/3] bg-gradient-to-br from-slate-800 via-gray-700 to-purple-800"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">FABRICATION</span><h3 class="font-heading text-xl font-bold text-white mb-1">Custom Show Truck</h3><p class="text-silver text-sm">2024 Ram 1500 • Custom fabrication, show build</p></div></div>
-              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group" onclick="viewProject('corvette')"><div class="aspect-[4/3] bg-gradient-to-br from-red-800 via-rose-700 to-slate-900"></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Red Rocket Corvette</h3><p class="text-silver text-sm">2024 Chevy Corvette • Full custom package</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-teal/10" onclick="viewProject('challenger')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#101729] via-[#0f162b] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/captain-america-challenger.png" alt="Captain America Challenger gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Captain America Challenger</h3><p class="text-silver text-sm">2024 Dodge Challenger • Full wrap, audio, lighting</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-purple/10" onclick="viewProject('mustang')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#121126] via-[#16142d] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/home/williams_ralph_custom_002_v1.png" alt="Midnight Mustang gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">AUDIO BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Midnight Mustang</h3><p class="text-silver text-sm">2023 Ford Mustang • Competition audio, underglow</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-magenta/10" onclick="viewProject('camaro')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#17111d] via-[#1a1420] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/neon-nights-camaro.png" alt="Neon Nights Camaro gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">CUSTOM WRAP</span><h3 class="font-heading text-xl font-bold text-white mb-1">Neon Nights Camaro</h3><p class="text-silver text-sm">2022 Chevy Camaro • Matte wrap, accent lighting</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-teal/10" onclick="viewProject('charger')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#101729] via-[#0f162b] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/teal-terror-charger.png" alt="Teal Terror Charger gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-teal text-xs font-semibold mb-2">LIGHTING</span><h3 class="font-heading text-xl font-bold text-white mb-1">Teal Terror Charger</h3><p class="text-silver text-sm">2023 Dodge Charger • Full lighting package</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-purple/10" onclick="viewProject('truck')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#121126] via-[#16142d] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/custom-show-truck.png" alt="Custom Show Truck gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-purple text-xs font-semibold mb-2">FABRICATION</span><h3 class="font-heading text-xl font-bold text-white mb-1">Custom Show Truck</h3><p class="text-silver text-sm">2024 Ram 1500 • Custom fabrication, show build</p></div></div>
+              <div class="project-card rounded-2xl overflow-hidden card-hover cursor-pointer group glass-panel border border-magenta/10" onclick="viewProject('corvette')"><div class="relative aspect-[4/3] bg-gradient-to-br from-[#17111d] via-[#1a1420] to-[#090d19]"><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="project-glow absolute inset-x-[10%] bottom-[8%] w-[80%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[10%] w-[76%] opacity-75 pointer-events-none select-none" /><img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/projects/gallery/red-rocket-corvette.png" alt="Red Rocket Corvette gallery image" class="project-image absolute inset-x-[6%] bottom-[11%] w-[88%] object-contain pointer-events-none select-none" /></div><div class="absolute bottom-0 left-0 right-0 p-6 z-10"><span class="inline-block px-3 py-1 rounded-full glass-panel text-magenta text-xs font-semibold mb-2">FULL BUILD</span><h3 class="font-heading text-xl font-bold text-white mb-1">Red Rocket Corvette</h3><p class="text-silver text-sm">2024 Chevy Corvette • Full custom package</p></div></div>
             </div>
           </div>
         </div>
@@ -1628,6 +1795,19 @@ These terms may be updated by the business from time to time.`;
       });
 
       if (window.lucide) lucide.createIcons();
+    }
+
+    function selectVehicleOption(button) {
+      document.querySelectorAll('[data-vehicle-option]').forEach((option) => {
+        option.classList.remove('is-selected');
+      });
+
+      button.classList.add('is-selected');
+
+      const makeField = document.getElementById('vehicleMake');
+      const modelField = document.getElementById('vehicleModel');
+      if (makeField) makeField.value = button.dataset.vehicleMake || '';
+      if (modelField) modelField.value = button.dataset.vehicleModel || '';
     }
 
     function viewProject(projectId) {
@@ -1974,6 +2154,12 @@ These terms may be updated by the business from time to time.`;
       console.assert(document.getElementById('page-about'), 'About page section should exist');
       console.assert(document.getElementById('page-order-detail'), 'Order detail page should exist');
       console.assert(document.getElementById('operatorSetupForm'), 'Operator setup form should exist');
+      console.assert(document.querySelector('[data-home-hero-image]'), 'Home hero PNG should exist');
+      console.assert(document.querySelector('[data-home-project-image="challenger"]'), 'Home challenger project PNG should exist');
+      console.assert(document.querySelector('[data-operator-portrait]'), 'Operator portrait PNG should exist');
+      console.assert(document.querySelectorAll('[data-vehicle-option]').length === 6, 'Six vehicle selection cards should exist');
+      console.assert(document.querySelectorAll('[data-service-project-image]').length === 6, 'Six service showcase image cards should exist');
+      console.assert(document.querySelectorAll('[data-home-project-image]').length === 3, 'Three completed project image cards should exist');
     });
   </script>
 </body>
