@@ -1,6 +1,6 @@
 {
   "contract": "operator-home.v1",
-  "description": "Operator profile, platform configuration, legal text, and business identity for a Gotta Know It operator site.",
+  "description": "Canonical operator record containing public profile, operator settings, and platform control fields for a Gotta Know It operator site.",
   "fields": {
     "analytics_owner": "string",
     "backup_location": "string",
@@ -8,9 +8,12 @@
     "billing_contact_email": "string",
     "billing_instructions": "string",
     "business_address": "string",
+    "business_city": "string",
+    "business_email": "string",
     "business_hours": "string",
     "business_name": "string",
     "business_phone": "string",
+    "business_state": "string",
 
     "default_deposit_percentage": "number",
     "default_labor_rate": "number",
@@ -30,11 +33,16 @@
     "handoff_tax_docs": "boolean",
     "handoff_vendor_access": "boolean",
 
+    "hero_headline": "string",
+    "hero_tagline": "string",
+
     "hosting_account": "string",
 
     "notification_email": "string",
 
     "operator_bio": "string",
+    "operator_id": "string",
+    "operator_image": "string",
     "operator_name": "string",
 
     "payment_instructions": "string",
@@ -44,6 +52,9 @@
     "primary_domain": "string",
     "profile_slug": "string",
     "profile_type": "string",
+    "projects_featured": "array",
+    "projects_gallery": "array",
+    "public_contact_name": "string",
 
     "registrar": "string",
     "registrar_login_owner": "string",
@@ -51,11 +62,16 @@
     "repository_url": "string",
 
     "secrets_confirmed": "boolean",
+    "stripe_publishable_key": "string",
+    "stripe_secret_key": "string",
+    "stripe_webhook_secret": "string",
     "support_email": "string",
 
     "terms_of_service_text": "string",
     "transfer_notes": "string",
 
-    "updated_at": "timestamp"
+    "updated_at": "timestamp",
+
+    "website": "string"
   }
 }

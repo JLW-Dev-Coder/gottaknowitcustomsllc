@@ -2,6 +2,7 @@
   "contract": "operator-public-profile.v1",
   "description": "Public operator profile used for site rendering.",
   "fields": {
+    "business_address": "string",
     "business_city": "string",
     "business_email": "string",
     "business_name": "string",

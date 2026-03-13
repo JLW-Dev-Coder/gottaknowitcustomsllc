@@ -1,402 +1,260 @@
-const JSON_HEADERS = {
-  'content-type': 'application/json; charset=utf-8',
-  'cache-control': 'no-store'
-};
-
-const PUBLIC_OPERATOR_FIELDS = [
-  'business_address',
-  'business_hours',
-  'business_name',
-  'business_phone',
-  'operator_bio',
-  'operator_name',
-  'profile_slug',
-  'profile_type',
-  'support_email',
-  'updated_at'
-];
-
 export default {
-  async fetch(request, env, ctx) {
-    try {
-      const url = new URL(request.url);
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+    const method = request.method;
 
-      if (!url.pathname.startsWith('/api/')) {
-        return env.ASSETS.fetch(request);
-      }
-
-      if (url.pathname === '/api/health' && request.method === 'GET') {
-        return jsonResponse({
-          ok: true,
-          service: 'gki-operator-api',
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      if (url.pathname === '/api/operators' && request.method === 'GET') {
-        return handleListOperators(request, env);
-      }
-
-      const operatorMatch = url.pathname.match(/^\/api\/operators\/([a-z0-9_-]+)$/i);
-      if (operatorMatch) {
-        const profileSlug = operatorMatch[1];
-
-        if (request.method === 'GET') {
-          return handleGetOperator(request, env, profileSlug);
-        }
-
-        if (request.method === 'PUT') {
-          return handlePutOperator(request, env, profileSlug);
-        }
-      }
-
-      return jsonResponse(
-        {
-          error: 'Not found',
-          path: url.pathname
-        },
-        404
-      );
-    } catch (error) {
-      console.error('Worker error:', error);
-      return jsonResponse(
-        {
-          error: 'Internal server error',
-          message: error instanceof Error ? error.message : 'Unknown error'
-        },
-        500
-      );
+    if (path === "/api/health") {
+      return json({
+        hasAssets: !!env.ASSETS,
+        hasDb: !!env.DB,
+        hasR2: !!env.OPERATOR_BLOBS,
+        ok: true,
+        service: "gottaknowitcustomsllc"
+      });
     }
+
+    const operatorMatch = path.match(
+      /^\/api\/operators\/([^\/]+)\/?(public-profile|settings|platform-control)?$/
+    );
+
+    if (!operatorMatch) {
+      return json({ error: "Not found" }, 404);
+    }
+
+    const profileSlug = operatorMatch[1];
+    const slice = operatorMatch[2] || "public-profile";
+
+    if (method === "GET") {
+      return handleGet(profileSlug, slice, env);
+    }
+
+    if (method === "POST") {
+      const auth = await requireAuth(request, env);
+      if (auth) return auth;
+
+      return handleWrite(profileSlug, slice, request, env);
+    }
+
+    return json({ error: "Method not allowed" }, 405);
   }
 };
 
-async function handleGetOperator(request, env, profileSlug) {
-  const url = new URL(request.url);
-  const view = (url.searchParams.get('view') || 'full').toLowerCase();
+async function handleGet(profileSlug, slice, env) {
+  const data = await loadOperator(profileSlug, env);
 
-  const operator = await getOperatorRecord(env, profileSlug);
-
-  if (!operator) {
-    return jsonResponse(
-      {
-        error: 'Operator not found',
-        profile_slug: profileSlug
-      },
-      404
-    );
+  if (!data) {
+    return json({ error: "Operator not found" }, 404);
   }
 
-  const payload = view === 'public' ? toPublicOperatorPayload(operator) : operator;
+  if (slice === "public-profile") {
+    return json(publicProfile(data));
+  }
 
-  return jsonResponse({
+  if (slice === "settings") {
+    return json(settingsProfile(data));
+  }
+
+  if (slice === "platform-control") {
+    return json(platformProfile(data));
+  }
+
+  return json({ error: "Invalid slice" }, 400);
+}
+
+async function handleWrite(profileSlug, slice, request, env) {
+  const body = await request.json();
+
+  const existing = (await loadOperator(profileSlug, env)) || {};
+
+  const merged = {
+    ...existing,
+    ...body,
+    profile_slug: profileSlug,
+    updated_at: new Date().toISOString()
+  };
+
+  await saveOperator(profileSlug, merged, env);
+
+  await updateD1Summary(merged, env);
+
+  await logAudit(profileSlug, body, env);
+
+  return json({
     ok: true,
     profile_slug: profileSlug,
-    source: operator._source || 'unknown',
-    data: payload
+    updated_at: merged.updated_at
   });
 }
 
-async function handleListOperators(request, env) {
-  requireBinding(env, 'DB');
+async function loadOperator(profileSlug, env) {
+  const key = `operators/${profileSlug}/current.json`;
 
-  const url = new URL(request.url);
-  const q = (url.searchParams.get('q') || '').trim();
-  const limit = clampInt(url.searchParams.get('limit'), 1, 100, 25);
+  const object = await env.OPERATOR_BLOBS.get(key);
 
-  let statement;
-  if (q) {
-    const like = `%${q}%`;
-    statement = env.DB.prepare(`
-      SELECT
-        profile_slug,
-        profile_type,
-        operator_name,
-        business_name,
-        business_phone,
-        support_email,
-        business_address,
-        updated_at
-      FROM operators
-      WHERE business_name LIKE ?1
-         OR operator_name LIKE ?1
-         OR profile_slug LIKE ?1
-      ORDER BY updated_at DESC
-      LIMIT ?2
-    `).bind(like, limit);
-  } else {
-    statement = env.DB.prepare(`
-      SELECT
-        profile_slug,
-        profile_type,
-        operator_name,
-        business_name,
-        business_phone,
-        support_email,
-        business_address,
-        updated_at
-      FROM operators
-      ORDER BY updated_at DESC
-      LIMIT ?1
-    `).bind(limit);
-  }
+  if (!object) return null;
 
-  const result = await statement.all();
-
-  return jsonResponse({
-    ok: true,
-    count: result.results.length,
-    operators: result.results
-  });
+  return await object.json();
 }
 
-async function handlePutOperator(request, env, profileSlug) {
-  requireBinding(env, 'DB');
-  requireBinding(env, 'OPERATOR_BLOBS');
-
-  await requireApiToken(request, env);
-
-  const body = await parseJsonBody(request);
-  const payload = normalizeOperatorPayload(body, profileSlug);
-
-  validateOperatorPayload(payload);
-
+async function saveOperator(profileSlug, data, env) {
   const now = new Date().toISOString();
-  payload.updated_at = now;
 
-  const latestKey = getLatestBlobKey(profileSlug);
-  const versionedKey = getVersionedBlobKey(profileSlug, now);
+  const currentKey = `operators/${profileSlug}/current.json`;
+  const versionKey = `operators/${profileSlug}/versions/${now}.json`;
 
-  await env.OPERATOR_BLOBS.put(latestKey, JSON.stringify(payload, null, 2), {
-    httpMetadata: { contentType: 'application/json' }
-  });
+  const payload = JSON.stringify(data, null, 2);
 
-  await env.OPERATOR_BLOBS.put(versionedKey, JSON.stringify(payload, null, 2), {
-    httpMetadata: { contentType: 'application/json' }
-  });
+  await env.OPERATOR_BLOBS.put(currentKey, payload);
+  await env.OPERATOR_BLOBS.put(versionKey, payload);
+}
 
+async function updateD1Summary(data, env) {
   await env.DB.prepare(`
     INSERT INTO operators (
-      profile_slug,
-      profile_type,
-      operator_name,
+      business_address,
       business_name,
       business_phone,
+      operator_name,
+      profile_slug,
+      profile_type,
       support_email,
-      business_address,
       updated_at
     )
-    VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ON CONFLICT(profile_slug) DO UPDATE SET
-      profile_type = excluded.profile_type,
-      operator_name = excluded.operator_name,
-      business_name = excluded.business_name,
-      business_phone = excluded.business_phone,
-      support_email = excluded.support_email,
-      business_address = excluded.business_address,
-      updated_at = excluded.updated_at
-  `).bind(
-    payload.profile_slug,
-    payload.profile_type || 'operator',
-    payload.operator_name || '',
-    payload.business_name || '',
-    payload.business_phone || '',
-    payload.support_email || '',
-    payload.business_address || '',
-    payload.updated_at
-  ).run();
+      business_address=excluded.business_address,
+      business_name=excluded.business_name,
+      business_phone=excluded.business_phone,
+      operator_name=excluded.operator_name,
+      support_email=excluded.support_email,
+      updated_at=excluded.updated_at
+  `)
+    .bind(
+      data.business_address || "",
+      data.business_name || "",
+      data.business_phone || "",
+      data.operator_name || "",
+      data.profile_slug,
+      data.profile_type || "operator",
+      data.support_email || "",
+      data.updated_at
+    )
+    .run();
+}
 
-  const actor = getActorFromRequest(request);
-
+async function logAudit(profileSlug, payload, env) {
   await env.DB.prepare(`
     INSERT INTO audit_log (
       action,
       actor,
-      profile_slug,
+      created_at,
       payload_json,
-      created_at
+      profile_slug
     )
-    VALUES (?1, ?2, ?3, ?4, ?5)
-  `).bind(
-    'operator.upsert',
-    actor,
-    payload.profile_slug,
-    JSON.stringify(payload),
-    now
-  ).run();
-
-  return jsonResponse({
-    ok: true,
-    message: 'Operator saved',
-    profile_slug: payload.profile_slug,
-    latest_blob_key: latestKey,
-    versioned_blob_key: versionedKey,
-    updated_at: now
-  });
+    VALUES (?, ?, ?, ?, ?)
+  `)
+    .bind(
+      "operator_update",
+      "api",
+      new Date().toISOString(),
+      JSON.stringify(payload),
+      profileSlug
+    )
+    .run();
 }
 
-async function getOperatorRecord(env, profileSlug) {
-  const fromR2 = await getOperatorFromR2(env, profileSlug);
-  if (fromR2) {
-    return {
-      ...fromR2,
-      _source: 'r2'
-    };
+function publicProfile(data) {
+  return {
+    business_address: data.business_address,
+    business_city: data.business_city,
+    business_email: data.business_email,
+    business_name: data.business_name,
+    business_phone: data.business_phone,
+    business_state: data.business_state,
+    hero_headline: data.hero_headline,
+    hero_tagline: data.hero_tagline,
+    operator_bio: data.operator_bio,
+    operator_image: data.operator_image,
+    operator_name: data.operator_name,
+    profile_slug: data.profile_slug,
+    projects_featured: data.projects_featured,
+    projects_gallery: data.projects_gallery,
+    support_email: data.support_email,
+    updated_at: data.updated_at,
+    website: data.website
+  };
+}
+
+function settingsProfile(data) {
+  return {
+    analytics_owner: data.analytics_owner,
+    backup_location: data.backup_location,
+    billing_instructions: data.billing_instructions,
+    business_address: data.business_address,
+    business_hours: data.business_hours,
+    default_deposit_percentage: data.default_deposit_percentage,
+    deposit_policy_text: data.deposit_policy_text,
+    notification_email: data.notification_email,
+    operator_id: data.operator_id,
+    payment_instructions: data.payment_instructions,
+    privacy_policy_text: data.privacy_policy_text,
+    profile_slug: data.profile_slug,
+    public_contact_name: data.public_contact_name,
+    payout_note: data.payout_note,
+    stripe_publishable_key: data.stripe_publishable_key,
+    stripe_secret_key: data.stripe_secret_key,
+    stripe_webhook_secret: data.stripe_webhook_secret,
+    terms_of_service_text: data.terms_of_service_text,
+    updated_at: data.updated_at
+  };
+}
+
+function platformProfile(data) {
+  return {
+    analytics_owner: data.analytics_owner,
+    backup_location: data.backup_location,
+    dns_notes: data.dns_notes,
+    dns_provider: data.dns_provider,
+    edge_platform: data.edge_platform,
+    git_provider: data.git_provider,
+    handoff_brand_assets: data.handoff_brand_assets,
+    handoff_email_accounts: data.handoff_email_accounts,
+    handoff_recovery_codes: data.handoff_recovery_codes,
+    handoff_subscriptions: data.handoff_subscriptions,
+    handoff_tax_docs: data.handoff_tax_docs,
+    handoff_vendor_access: data.handoff_vendor_access,
+    hosting_account: data.hosting_account,
+    primary_domain: data.primary_domain,
+    profile_slug: data.profile_slug,
+    registrar: data.registrar,
+    registrar_login_owner: data.registrar_login_owner,
+    repo_admin_username: data.repo_admin_username,
+    repository_url: data.repository_url,
+    secrets_confirmed: data.secrets_confirmed,
+    transfer_notes: data.transfer_notes,
+    updated_at: data.updated_at
+  };
+}
+
+async function requireAuth(request, env) {
+  const header = request.headers.get("authorization") || "";
+  const token = header.replace("Bearer ", "");
+
+  if (!env.OPERATOR_API_TOKEN) {
+    return json({ error: "Server auth not configured" }, 500);
   }
 
-  const fromStatic = await getOperatorFromStaticJson(env, profileSlug);
-  if (fromStatic) {
-    return {
-      ...fromStatic,
-      _source: 'static-json'
-    };
+  if (token !== env.OPERATOR_API_TOKEN) {
+    return json({ error: "Unauthorized" }, 401);
   }
 
   return null;
 }
 
-async function getOperatorFromR2(env, profileSlug) {
-  if (!env.OPERATOR_BLOBS) return null;
-
-  const key = getLatestBlobKey(profileSlug);
-  const object = await env.OPERATOR_BLOBS.get(key);
-  if (!object) return null;
-
-  try {
-    return await object.json();
-  } catch (error) {
-    console.error(`Failed to parse R2 JSON for ${profileSlug}:`, error);
-    return null;
-  }
-}
-
-async function getOperatorFromStaticJson(env, profileSlug) {
-  if (!env.ASSETS) return null;
-
-  const candidates = [
-    `/assets/operator/home/${profileSlug}/data.json`,
-    '/assets/operator/home/sample/data.json'
-  ];
-
-  for (const path of candidates) {
-    const assetRequest = new Request(`https://internal${path}`, {
-      method: 'GET'
-    });
-
-    const response = await env.ASSETS.fetch(assetRequest);
-    if (!response.ok) continue;
-
-    try {
-      return await response.json();
-    } catch (error) {
-      console.error(`Failed to parse static JSON at ${path}:`, error);
-    }
-  }
-
-  return null;
-}
-
-function normalizeOperatorPayload(input, profileSlug) {
-  const payload = isPlainObject(input) ? { ...input } : {};
-
-  payload.profile_slug = profileSlug;
-  payload.profile_type = typeof payload.profile_type === 'string' && payload.profile_type.trim()
-    ? payload.profile_type.trim()
-    : 'operator';
-
-  return payload;
-}
-
-function validateOperatorPayload(payload) {
-  if (!payload.profile_slug || !/^[a-z0-9_-]+$/i.test(payload.profile_slug)) {
-    throw new Error('Invalid profile_slug');
-  }
-
-  const requiredStringFields = [
-    'business_name',
-    'operator_name'
-  ];
-
-  for (const field of requiredStringFields) {
-    if (typeof payload[field] !== 'string' || !payload[field].trim()) {
-      throw new Error(`Missing required field: ${field}`);
-    }
-  }
-}
-
-function toPublicOperatorPayload(payload) {
-  const result = {};
-  for (const key of PUBLIC_OPERATOR_FIELDS) {
-    if (key in payload) {
-      result[key] = payload[key];
-    }
-  }
-  return result;
-}
-
-async function requireApiToken(request, env) {
-  const configuredToken = env.OPERATOR_API_TOKEN;
-  if (!configuredToken) {
-    throw new Error('Missing OPERATOR_API_TOKEN secret');
-  }
-
-  const authHeader = request.headers.get('authorization') || '';
-  const token = authHeader.startsWith('Bearer ')
-    ? authHeader.slice('Bearer '.length).trim()
-    : '';
-
-  if (!token || token !== configuredToken) {
-    const error = new Error('Unauthorized');
-    error.status = 401;
-    throw error;
-  }
-}
-
-function getActorFromRequest(request) {
-  return (
-    request.headers.get('x-operator-actor') ||
-    request.headers.get('cf-access-authenticated-user-email') ||
-    'api-token'
-  );
-}
-
-async function parseJsonBody(request) {
-  try {
-    return await request.json();
-  } catch {
-    const error = new Error('Request body must be valid JSON');
-    error.status = 400;
-    throw error;
-  }
-}
-
-function getLatestBlobKey(profileSlug) {
-  return `operators/${profileSlug}/latest.json`;
-}
-
-function getVersionedBlobKey(profileSlug, isoTimestamp) {
-  const safeTimestamp = isoTimestamp.replaceAll(':', '-');
-  return `operators/${profileSlug}/versions/${safeTimestamp}.json`;
-}
-
-function clampInt(value, min, max, fallback) {
-  const parsed = Number.parseInt(String(value || ''), 10);
-  if (Number.isNaN(parsed)) return fallback;
-  return Math.max(min, Math.min(max, parsed));
-}
-
-function jsonResponse(payload, status = 200) {
-  return new Response(JSON.stringify(payload, null, 2), {
-    status,
-    headers: JSON_HEADERS
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data, null, 2), {
+    headers: { "Content-Type": "application/json" },
+    status
   });
-}
-
-function isPlainObject(value) {
-  return value !== null && typeof value === 'object' && !Array.isArray(value);
-}
-
-function requireBinding(env, key) {
-  if (!env[key]) {
-    throw new Error(`Missing required binding: ${key}`);
-  }
 }
