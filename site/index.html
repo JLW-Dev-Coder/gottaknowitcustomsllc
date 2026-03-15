@@ -421,19 +421,19 @@
 
           <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 w-full">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div class="space-y-8 hero-content">
+              <div class="space-y-8 hero-content text-center lg:text-left">
                 <div class="space-y-4">
                   <h1 id="heroHeadline" class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"><span class="text-white">Custom Builds.</span><br /><span class="text-teal neon-text text-glow-animate">Sound Systems.</span><br /><span class="text-white">Vehicle Wraps.</span></h1>
                   <h2 id="heroSubheadline" class="font-heading text-xl sm:text-2xl text-purple font-semibold tracking-wide">Gotta Know It Customs LLC</h2>
-                  <p id="heroTagline" class="text-lg sm:text-xl text-silver max-w-lg"><span class="block text-center lg:text-left">Where Performance Meets Style.</span></p>
+                  <p id="heroTagline" class="text-lg sm:text-xl text-silver max-w-lg mx-auto lg:mx-0">Where Performance Meets Style.</p>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <button onclick="navigateTo('build-request')" class="btn-primary px-8 py-4 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="wrench" class="w-5 h-5"></i> Start Your Build</button>
                   <button onclick="navigateTo('order-status')" class="btn-secondary px-8 py-4 rounded-lg font-heading font-semibold text-teal uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Check Order Status</button>
                 </div>
 
-                <div class="flex items-center gap-6 pt-4">
+                <div class="flex flex-wrap items-center justify-center gap-6 pt-4 lg:justify-start">
                   <div class="flex items-center gap-2"><i data-lucide="star" class="w-5 h-5 text-teal fill-teal"></i><span class="text-silver text-sm">5.0 Rating</span></div>
                   <div class="flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-purple"></i><span class="text-silver text-sm">500+ Builds</span></div>
                   <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-5 h-5 text-magenta"></i><span class="text-silver text-sm">Certified</span></div>
@@ -647,7 +647,7 @@
           <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
               <span class="inline-block px-4 py-1 rounded-full glass-panel text-teal text-sm font-semibold mb-4">4-STEP WIZARD</span>
-              <h1 class="text-center lg:text-left font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Start Your <span class="text-teal neon-text">Build</span></h1>
+              <h1 class="text-center lg:text-center md:text-left font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Start Your <span class="text-teal neon-text">Build</span></h1>
               <p class="text-silver max-w-2xl mx-auto">Follow these 4 simple steps to submit your custom build request.</p>
             </div>
 
@@ -673,7 +673,7 @@
                   <p class="text-silver text-sm mb-6">Pick a vehicle style to prefill the build form, or enter the details manually because humans enjoy options.</p>
                 </div>
                 <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5" id="vehicleOptionsGrid">
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Camaro" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Camaro" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -682,7 +682,7 @@
                     <p class="font-heading text-xl text-white">Chevrolet Camaro</p>
                     <p class="text-sm text-silver mt-1">Sport coupe platform</p>
                   </button>
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Corvette" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Chevrolet" data-vehicle-model="Corvette" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-magenta-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -691,7 +691,7 @@
                     <p class="font-heading text-xl text-white">Chevrolet Corvette</p>
                     <p class="text-sm text-silver mt-1">Performance flagship</p>
                   </button>
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Challenger" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Challenger" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -700,7 +700,7 @@
                     <p class="font-heading text-xl text-white">Dodge Challenger</p>
                     <p class="text-sm text-silver mt-1">Muscle coupe platform</p>
                   </button>
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Charger" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Dodge" data-vehicle-model="Charger" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-teal-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -709,7 +709,7 @@
                     <p class="font-heading text-xl text-white">Dodge Charger</p>
                     <p class="text-sm text-silver mt-1">Four-door performance</p>
                   </button>
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Ford" data-vehicle-model="Mustang" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Ford" data-vehicle-model="Mustang" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -718,7 +718,7 @@
                     <p class="font-heading text-xl text-white">Ford Mustang</p>
                     <p class="text-sm text-silver mt-1">Street and show favorite</p>
                   </button>
-                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-left" data-vehicle-option data-vehicle-make="Ram" data-vehicle-model="1500" onclick="selectVehicleOption(this)">
+                  <button type="button" class="vehicle-option glass-panel rounded-2xl p-4 border border-white/5 text-center md:text-left" data-vehicle-option data-vehicle-make="Ram" data-vehicle-model="1500" onclick="selectVehicleOption(this)">
                     <div class="relative aspect-[16/10] rounded-xl overflow-hidden bg-gradient-to-br from-[#151826] to-[#0a0e1a] mb-4">
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/glow-purple-underlay.png" alt="" aria-hidden="true" class="absolute inset-x-[12%] bottom-[12%] w-[76%] opacity-75 pointer-events-none select-none" />
                       <img src="https://gottaknowitcustomsllc.jamie-williams.workers.dev/assets/images/cars/shared/card-shadow-soft.png" alt="" aria-hidden="true" class="absolute inset-x-[14%] bottom-[10%] w-[72%] opacity-70 pointer-events-none select-none" />
@@ -889,7 +889,7 @@
               <form id="orderSearchForm" class="flex flex-col sm:flex-row gap-4">
                 <div class="flex-1">
                   <label for="orderNumber" class="sr-only">Order Number</label>
-                  <input type="text" id="orderNumber" name="orderNumber" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 text-center sm:text-left font-heading text-lg" placeholder="Enter order number (e.g., GKI-2026-5363)" />
+                  <input type="text" id="orderNumber" name="orderNumber" class="form-input w-full px-4 py-3 rounded-lg text-white placeholder-silver/50 text-center sm:text-center md:text-left font-heading text-lg" placeholder="Enter order number (e.g., GKI-2026-5363)" />
                 </div>
                 <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-heading font-semibold text-midnight uppercase tracking-wider flex items-center justify-center gap-2"><i data-lucide="search" class="w-5 h-5"></i> Check Status</button>
               </form>
@@ -952,7 +952,7 @@
                 <h1 class="font-heading text-3xl sm:text-4xl font-bold text-white">Dashboard</h1>
               </div>
               <div class="flex items-center gap-4 mt-4 sm:mt-0">
-                <button onclick="navigateTo('operator-setup')" class="text-left text-silver text-sm hover:text-teal transition-colors"><span class="text-white">Welcome, Admin.</span> <span class="underline underline-offset-4">Click here to get started</span></button>
+                <button onclick="navigateTo('operator-setup')" class="text-center md:text-left text-silver text-sm hover:text-teal transition-colors"><span class="text-white">Welcome, Admin.</span> <span class="underline underline-offset-4">Click here to get started</span></button>
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple to-magenta flex items-center justify-center"><i data-lucide="user" class="w-5 h-5 text-white"></i></div>
                 <button onclick="logoutOperator()" class="btn-secondary px-3 py-2 rounded-lg text-sm flex items-center gap-2"><i data-lucide="log-out" class="w-4 h-4"></i> Logout</button>
               </div>
@@ -1010,12 +1010,12 @@
                 <table class="w-full">
                   <thead>
                     <tr class="border-b border-teal/10">
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Order</th>
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Customer</th>
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Vehicle</th>
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Services</th>
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Status</th>
-                      <th class="text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Actions</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Order</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Customer</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Vehicle</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Services</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Status</th>
+                      <th class="text-center md:text-left px-6 py-4 text-xs font-semibold text-silver uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody id="dashboardOrdersTableBody" class="divide-y divide-teal/10">
@@ -2533,5 +2533,4 @@ These terms may be updated by the business from time to time.`;
   </script>
 </body>
 </html>
-
 
