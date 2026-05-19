@@ -298,6 +298,72 @@
       text-transform: uppercase;
     }
 
+    .photo-card {
+      background-position: center;
+      background-size: cover;
+      border: 1px solid rgba(201, 150, 45, 0.38);
+      border-radius: 24px;
+      inset: 24px;
+      overflow: hidden;
+      position: absolute;
+    }
+
+    .photo-card::before,
+    .gallery-item::before {
+      background:
+        linear-gradient(180deg, rgba(5,5,5,0.08), rgba(5,5,5,0.72)),
+        radial-gradient(circle at 78% 18%, rgba(240,182,60,0.22), transparent 34%);
+      content: "";
+      inset: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .photo-label {
+      background: rgba(5,5,5,0.78);
+      border: 1px solid rgba(201, 150, 45, 0.48);
+      border-radius: 999px;
+      bottom: 18px;
+      color: var(--gold-2);
+      font-size: 11px;
+      font-weight: 900;
+      left: 18px;
+      letter-spacing: 0.12em;
+      padding: 10px 14px;
+      position: absolute;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .hero-photo {
+      background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=85');
+    }
+
+    .event-photo {
+      background-image: url('https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1100&q=85');
+      inset: 0;
+    }
+
+    .gallery-before {
+      background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1000&q=85');
+    }
+
+    .gallery-builds {
+      background-image: url('https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=800&q=85');
+    }
+
+    .gallery-events {
+      background-image: url('https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=85');
+    }
+
+    .gallery-vendors {
+      background-image: url('https://images.unsplash.com/photo-1555992336-fb0d29498b13?auto=format&fit=crop&w=800&q=85');
+    }
+
+    .gallery-team {
+      background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=85');
+    }
+
     .hero-badge {
       background: #070707;
       border: 1px solid rgba(201, 150, 45, 0.55);
@@ -501,6 +567,77 @@
       text-transform: uppercase;
     }
 
+    .promo-team {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 34px;
+    }
+
+    .promo-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025)),
+        radial-gradient(circle at 50% 12%, rgba(240,182,60,0.22), transparent 42%);
+      border: 1px solid rgba(201,150,45,0.34);
+      border-radius: 26px;
+      min-height: 330px;
+      overflow: hidden;
+      padding: 18px;
+      position: relative;
+    }
+
+    .promo-card::before {
+      background:
+        linear-gradient(180deg, rgba(5,5,5,0.04), rgba(5,5,5,0.7)),
+        repeating-linear-gradient(-18deg, rgba(201,150,45,0.12) 0 2px, transparent 2px 18px);
+      content: "";
+      inset: 0;
+      position: absolute;
+    }
+
+    .promo-silhouette {
+      background:
+        radial-gradient(circle at 50% 15%, rgba(245,245,245,0.44) 0 13%, transparent 14%),
+        linear-gradient(180deg, rgba(245,245,245,0.26), rgba(201,150,45,0.12));
+      border: 1px solid rgba(245,245,245,0.16);
+      border-radius: 44% 44% 28px 28px;
+      bottom: 66px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.34);
+      height: 190px;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 118px;
+      z-index: 1;
+    }
+
+    .promo-card h3 {
+      bottom: 48px;
+      color: var(--white);
+      font-size: 26px;
+      left: 18px;
+      position: absolute;
+      right: 18px;
+      z-index: 2;
+    }
+
+    .promo-card p {
+      bottom: 18px;
+      color: var(--silver);
+      font-size: 13px;
+      left: 18px;
+      position: absolute;
+      right: 18px;
+      z-index: 2;
+    }
+
+    .promo-note {
+      color: var(--silver);
+      font-size: 13px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
     .gallery-grid {
       display: grid;
       gap: 16px;
@@ -508,8 +645,10 @@
     }
 
     .gallery-item {
-      background: rgba(255,255,255,0.05);
-      border: 1px dashed rgba(201,150,45,0.38);
+      background-color: rgba(255,255,255,0.05);
+      background-position: center;
+      background-size: cover;
+      border: 1px solid rgba(201,150,45,0.38);
       border-radius: 24px;
       min-height: 220px;
       overflow: hidden;
@@ -522,17 +661,23 @@
     }
 
     .gallery-item::after {
-      color: rgba(245,245,245,0.62);
+      background: rgba(5,5,5,0.72);
+      border: 1px solid rgba(201,150,45,0.42);
+      border-radius: 999px;
+      bottom: 18px;
+      color: var(--gold-2);
       content: attr(data-label);
-      font-size: 13px;
+      display: inline-grid;
+      font-size: 11px;
       font-weight: 900;
-      inset: 0;
-      letter-spacing: 0.16em;
+      left: 18px;
+      letter-spacing: 0.12em;
+      padding: 10px 14px;
       place-items: center;
       position: absolute;
       text-align: center;
       text-transform: uppercase;
-      display: grid;
+      z-index: 2;
     }
 
     .sponsor-wrap {
@@ -755,7 +900,8 @@
 
       .feature-strip,
       .form-grid,
-      .gallery-grid {
+      .gallery-grid,
+      .promo-team {
         grid-template-columns: 1fr;
       }
 
@@ -817,8 +963,10 @@
             </div>
           </div>
 
-          <div class="hero-card" aria-label="Hero image placeholder">
-            <div class="image-placeholder">Hero car wash image placeholder</div>
+          <div class="hero-card" aria-label="Custom car wash hero image">
+            <div class="photo-card hero-photo">
+              <div class="photo-label">Custom Car Wash Energy</div>
+            </div>
             <div class="hero-badge">
               <span>Not Your Average Car Wash</span>
               <strong>Cars · Culture · Community</strong>
@@ -868,7 +1016,9 @@
         <div class="container">
           <div class="event-panel">
             <div class="event-art">
-              <div class="image-placeholder">Event flyer or car image placeholder</div>
+              <div class="photo-card event-photo">
+                <div class="photo-label">Night Meet · Wash Down · Pull Up</div>
+              </div>
             </div>
 
             <div class="event-copy">
@@ -893,10 +1043,6 @@
             <div class="feature-pill">Clean Cars</div>
             <div class="feature-pill">Custom Builds</div>
             <div class="feature-pill">Food & Drinks</div>
-            <div class="feature-pill">Live DJ</div>
-            <div class="feature-pill">Raffles</div>
-            <div class="feature-pill">Vendors</div>
-          </div>
         </div>
       </section>
 
@@ -909,11 +1055,11 @@
           </div>
 
           <div class="gallery-grid">
-            <div class="gallery-item large" data-label="Before & After"></div>
-            <div class="gallery-item" data-label="Cars & Builds"></div>
-            <div class="gallery-item" data-label="Events"></div>
-            <div class="gallery-item" data-label="Food & Vendors"></div>
-            <div class="gallery-item" data-label="Wash Team"></div>
+            <div class="gallery-item gallery-before large" data-label="Foam & Detail"></div>
+            <div class="gallery-item gallery-builds" data-label="Cars & Builds"></div>
+            <div class="gallery-item gallery-events" data-label="Event Energy"></div>
+            <div class="gallery-item gallery-vendors" data-label="Food & Vendors"></div>
+            <div class="gallery-item gallery-team" data-label="Wash Team"></div>
           </div>
         </div>
       </section>
