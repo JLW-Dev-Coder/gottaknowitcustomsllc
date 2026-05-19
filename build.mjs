@@ -19,6 +19,7 @@ async function build() {
   await mkdir(DIST, { recursive: true });
 
   await cp(path.join(SITE, 'index.html'), path.join(DIST, 'index.html'));
+  await cp(path.join(__dirname, 'carwash.html'), path.join(DIST, 'carwash.html'));
   await cp(ASSETS, path.join(DIST, 'assets'), { recursive: true });
   await cp(PARTIALS, path.join(DIST, 'partials'), { recursive: true });
   await cp(STYLES, path.join(DIST, 'styles'), { recursive: true });
